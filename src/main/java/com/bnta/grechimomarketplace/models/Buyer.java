@@ -28,8 +28,7 @@ public class Buyer {
     @JsonIgnoreProperties({"buyer"})
     private List<Order> orders;
 
-    public Buyer(long id, String name, String emailAddress, String password, long balance, List<Order> orders) {
-        this.id = id;
+    public Buyer(String name, String emailAddress, String password, long balance, List<Order> orders) {
         this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;

@@ -13,8 +13,7 @@ public class GCMBMarketplace {
     @Column
     private String address;
 
-    public GCMBMarketplace(long id, long balance, String address) {
-        this.id = id;
+    public GCMBMarketplace(long balance, String address) {
         this.balance = balance;
         this.address = address;
     }

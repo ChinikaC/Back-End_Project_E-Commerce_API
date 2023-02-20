@@ -29,8 +29,7 @@ public class Product {
     @Column
     private boolean fulfilled;
 
-    public Product(Long id, String name, long price, String description, Seller seller, boolean listed, boolean fulfilled) {
-        this.id = id;
+    public Product(String name, long price, String description, Seller seller, boolean listed, boolean fulfilled) {
         this.name = name;
         this.price = price;
         this.description = description;

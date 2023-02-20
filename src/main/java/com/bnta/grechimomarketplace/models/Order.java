@@ -20,10 +20,7 @@ public class Order {
     @JsonIgnoreProperties({"orders"})
     private Buyer buyer;
 
-    public Order(long id, long order_value, String address, Buyer buyer) {
-        this.id = id;
-        this.order_value = order_value;
-        this.address = address;
+    public Order(Buyer buyer) {
         this.buyer = buyer;
     }
 
