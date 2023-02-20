@@ -21,18 +21,18 @@ public class Buyer {
     @Column
     private String password;
 
-    @Column
-    private long balance;
+    @OneToOne
+    private BankCard card;
 
     @OneToMany(mappedBy = "buyer")
     @JsonIgnoreProperties({"buyer"})
     private List<Order> orders;
 
-    public Buyer(String name, String emailAddress, String password, long balance, List<Order> orders) {
+    public Buyer(String name, String emailAddress, String password, BankCard card, List<Order> orders) {
         this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;
-        this.balance = balance;
+        this.card = card;
         this.orders = orders;
     }
     
@@ -72,19 +72,19 @@ public class Buyer {
         this.password = password;
     }
 
-    public long getBalance() {
-        return balance;
-    }
-
-    public void setBalance(long balance) {
-        this.balance = balance;
-    }
-
     public List<Order> getOrders() {
         return orders;
     }
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public BankCard getCard() {
+        return card;
+    }
+
+    public void setCard(BankCard card) {
+        this.card = card;
     }
 }

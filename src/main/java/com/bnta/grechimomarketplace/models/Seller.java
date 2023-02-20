@@ -11,10 +11,12 @@ public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long balance;
 
     @Column
     private String name;
+
+    @OneToOne
+    private BankCard card;
 
     @Column
     private String emailAddress;
@@ -26,14 +28,14 @@ public class Seller {
     @JsonIgnoreProperties({"seller"})
     private List<Product> products;
 
-    public Seller(long balance, String name, String emailAddress, String password, List<Product> products) {
-        this.balance = balance;
+    public Seller(BankCard card, String name, String emailAddress, String password, List<Product> products) {
+        this.card = card;
         this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;
         this.products = products;
     }
-    
+
     public Seller(){
         
     }
@@ -44,14 +46,6 @@ public class Seller {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getBalance() {
-        return balance;
-    }
-
-    public void setBalance(long balance) {
-        this.balance = balance;
     }
 
     public String getName() {
@@ -84,5 +78,13 @@ public class Seller {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public BankCard getCard() {
+        return card;
+    }
+
+    public void setCard(BankCard card) {
+        this.card = card;
     }
 }

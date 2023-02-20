@@ -28,18 +28,28 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     SellerRepository sellerRepository;
 
+    @Autowired
+    BankCardRepository bankCardRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
         // Load 10 Buyers
         for (long i = 1; i <= 10; i++) {
-            Buyer buyer = new Buyer("Buyer " + i, "buyer" + i + "@bnta.com", "password" + i, 1000, new ArrayList<>());
+            BankCard card = new BankCard(1000l);
+            bankCardRepository.save(card);
+            Buyer buyer = new Buyer("Buyer " + i, "buyer" + i + "@bnta.com", "password" + i, card, new ArrayList<>());
+            card.setAccountName(buyer.getName());
+            bankCardRepository.save(card);
             buyerRepository.save(buyer);
         }
 
         // Load 10 Products
         for (long i = 1; i <= 10; i++) {
-            Seller seller = new Seller(1000, "Seller " + i, "seller" + i + "@bnta.com", "password" + i, new ArrayList<>());
+            BankCard card = new BankCard(1000l);
+            Seller seller = new Seller(card, "Seller " + i, "seller" + i + "@bnta.com", "password" + i, new ArrayList<>());
+            card.setAccountName(seller.getName());
+            bankCardRepository.save(card);
             sellerRepository.save(seller);
             Product product = new Product("Product " + i, i * 100, "Description " + i, seller, true, false);
             productRepository.save(product);
