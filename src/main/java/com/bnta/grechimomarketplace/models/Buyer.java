@@ -3,6 +3,7 @@ package com.bnta.grechimomarketplace.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "buyers")
@@ -17,12 +18,15 @@ public class Buyer {
 
     @Column
     private String email;
-    
+
     @Column
     private String address;
 
     @Column
     private String password;
+    
+    @Transient
+    private List<Product> cart;
 
     @OneToOne
     private BankCard card;
@@ -31,13 +35,14 @@ public class Buyer {
     @JsonIgnoreProperties({"buyer"})
     private List<Order> orders;
 
-    public Buyer(String name, String email, String address, String password, BankCard card, List<Order> orders) {
+    public Buyer(String name, String email, String address, String password, BankCard card) {
         this.name = name;
         this.email = email;
         this.address = address;
         this.password = password;
+        this.cart = new ArrayList<>();
         this.card = card;
-        this.orders = orders;
+        this.orders = new ArrayList<>();
     }
 
     public Buyer(){
@@ -99,4 +104,12 @@ public class Buyer {
     public void setAddress(String address) {
         this.address = address;
     }
+
+//    public List<Product> getCart() {
+//        return cart;
+//    }
+//
+//    public void setCart(List<Product> cart) {
+//        this.cart = cart;
+//    }
 }

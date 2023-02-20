@@ -15,12 +15,19 @@ public class ProductController {
 
     // createProduct (post mapping) --> to create & add a new product to the seller's inventory
 
+    // searchProduct
+    // @GetMapping --> add multiple request params in
+    // 1 request param for a fuzzy match of the product name (derived query)
+    // 1 request param for a fuzzy match of the product category (EXTENSION)
+
+
     // addProductToCart
-    // @PostMapping --> copy product from seller's inventory to cart so buyer can purchase it
+    // @PostMapping --> add product from seller's inventory to cart so buyer can purchase it
 
+    // viewCart() --> return shopping cart DTO    
 
-
-
+    // checkOut
+    // 
 
 
 }

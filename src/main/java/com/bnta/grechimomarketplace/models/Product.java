@@ -2,6 +2,7 @@ package com.bnta.grechimomarketplace.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "products")
@@ -30,7 +31,7 @@ public class Product {
 
     @Column
     private boolean fulfilled;
-    
+
     @Column
     private long stock;
 

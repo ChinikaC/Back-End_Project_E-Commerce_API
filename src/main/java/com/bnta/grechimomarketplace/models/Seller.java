@@ -41,7 +41,7 @@ public class Seller {
         this.products = products;
     }
 
-    public Seller(){
+    public Seller() {
     }
 
     public long getId() {

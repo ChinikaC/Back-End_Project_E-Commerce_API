@@ -38,7 +38,7 @@ public class DataLoader implements ApplicationRunner {
         for (long i = 1; i <= 10; i++) {
             BankCard card = new BankCard(1000l);
             bankCardRepository.save(card);
-            Buyer buyer = new Buyer("Buyer " + i, "buyer" + i + "@bnta.com", i + " Fake Street", "password" + i, card, new ArrayList<>());
+            Buyer buyer = new Buyer("Buyer " + i, "buyer" + i + "@bnta.com", i + " Fake Street", "password" + i, card);
             card.setAccountName(buyer.getName());
             bankCardRepository.save(card);
             buyerRepository.save(buyer);
