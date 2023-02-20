@@ -2,6 +2,8 @@ package com.bnta.grechimomarketplace.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity(name = "products")
 public class Product {
 
@@ -28,6 +30,10 @@ public class Product {
 
     @Column
     private boolean fulfilled;
+
+    @ManyToMany(mappedBy = "products")
+    @JsonIgnoreProperties("products")
+    private List<Order> orders;
 
     public Product(String name, long price, String description, Seller seller, boolean listed, boolean fulfilled) {
         this.name = name;
@@ -96,5 +102,13 @@ public class Product {
 
     public void setFulfilled(boolean fulfilled) {
         this.fulfilled = fulfilled;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

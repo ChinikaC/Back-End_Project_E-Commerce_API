@@ -37,15 +37,8 @@ public class DataLoader implements ApplicationRunner {
             buyerRepository.save(buyer);
         }
 
-        // Load 10 Orders
+        // Load 10 Products
         for (long i = 1; i <= 10; i++) {
-            Buyer buyer = buyerRepository.findById(i).get();
-            Order order = new Order(buyer);
-            orderRepository.save(order);
-        }
-
-        // Load 100 Products
-        for (long i = 1; i <= 100; i++) {
             Seller seller = new Seller(1000, "Seller " + i, "seller" + i + "@bnta.com", "password" + i, new ArrayList<>());
             sellerRepository.save(seller);
             Product product = new Product("Product " + i, i * 100, "Description " + i, seller, true, false);
@@ -54,13 +47,24 @@ public class DataLoader implements ApplicationRunner {
             sellerRepository.save(seller);
         }
 
-        // Load 10 Sellers
+        // Load 10 Orders
         for (long i = 1; i <= 10; i++) {
-            Seller seller = new Seller(1000, "Seller " + i, "seller" + i + "@bnta.com", "password" + i, new ArrayList<>());
-            sellerRepository.save(seller);
+            Buyer buyer = buyerRepository.findById(i).get();
+            Order order = new Order(buyer, i + " Fake Street, London");
+            orderRepository.save(order);
         }
 
-        GCMBMarketplace gcmbMarketplace = new GCMBMarketplace();
+        // Add Products to Orders
+        for (long i = 1; i <= 10; i++) {
+            Product product = productRepository.findById(i).get();
+            Order order = orderRepository.findById(i).get();
+            order.getProducts().add(product);
+            orderRepository.save(order);
+        }
+        
+
+        GCMBMarketplace gcmbMarketplace = new GCMBMarketplace(10000000, "5th floor, 80 Middlesex St, London E1 7EZ");
+        gcmbRepository.save(gcmbMarketplace);
 
     }
 

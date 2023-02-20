@@ -2,6 +2,8 @@ package com.bnta.grechimomarketplace.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity(name = "orders")
 public class Order {
@@ -20,8 +22,22 @@ public class Order {
     @JsonIgnoreProperties({"orders"})
     private Buyer buyer;
 
-    public Order(Buyer buyer) {
+//    @ManyToMany(fetch = FetchType.EAGER) // fetch type added to resolve issue on line 80 of FlightController
+//    @JoinTable(name = "flights_passengers", // specifies the name of the linking table that will be used to store the associations between the two entities
+//            joinColumns = @JoinColumn(name = "flight_id"),
+//            inverseJoinColumns = @JoinColumn(name = "passenger_id"))
+//    @JsonIgnoreProperties("flights")
+    
+    @ManyToMany
+    @JoinTable(name = "orders_products",
+    joinColumns = @JoinColumn(name = "order_id"),
+    inverseJoinColumns = @JoinColumn(name = "product_id"))
+    @JsonIgnoreProperties("orders")
+    private List<Product> products;
+
+    public Order(Buyer buyer, String address) {
         this.buyer = buyer;
+        this.address = address;
     }
 
     public Order(){
@@ -58,5 +74,13 @@ public class Order {
 
     public void setBuyer(Buyer buyer) {
         this.buyer = buyer;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
