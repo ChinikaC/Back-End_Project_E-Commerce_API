@@ -10,10 +10,15 @@ public class BuyerController {
     // register
 
 
+
+
     // view all orders
 
 
-    // update your details
+
+
+    // update your 
+
 
 
 }

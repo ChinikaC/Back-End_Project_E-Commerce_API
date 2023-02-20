@@ -38,7 +38,7 @@ public class DataLoader implements ApplicationRunner {
         for (long i = 1; i <= 10; i++) {
             BankCard card = new BankCard(1000l);
             bankCardRepository.save(card);
-            Buyer buyer = new Buyer("Buyer " + i, "buyer" + i + "@bnta.com", "password" + i, card, new ArrayList<>());
+            Buyer buyer = new Buyer("Buyer " + i, "buyer" + i + "@bnta.com", i + " Fake Street", "password" + i, card, new ArrayList<>());
             card.setAccountName(buyer.getName());
             bankCardRepository.save(card);
             buyerRepository.save(buyer);
@@ -47,7 +47,7 @@ public class DataLoader implements ApplicationRunner {
         // Load 10 Products
         for (long i = 1; i <= 10; i++) {
             BankCard card = new BankCard(1000l);
-            Seller seller = new Seller(card, "Seller " + i, "seller" + i + "@bnta.com", "password" + i, new ArrayList<>());
+            Seller seller = new Seller("Seller " + i, card, "seller" + i + "@bnta.com", i + " Fake Street", "password" + i, new ArrayList<>());
             card.setAccountName(seller.getName());
             bankCardRepository.save(card);
             sellerRepository.save(seller);
@@ -60,15 +60,17 @@ public class DataLoader implements ApplicationRunner {
         // Load 10 Orders
         for (long i = 1; i <= 10; i++) {
             Buyer buyer = buyerRepository.findById(i).get();
-            Order order = new Order(buyer, i + " Fake Street, London");
+            Order order = new Order(buyer, i + " Fake Street, Fake City");
             orderRepository.save(order);
         }
 
         // Add Products to Orders
-        for (long i = 1; i <= 10; i++) {
+        for (long i = 1; i <= 10; i += 2) {
             Product product = productRepository.findById(i).get();
+            Product product2 = productRepository.findById(i+1).get();
             Order order = orderRepository.findById(i).get();
             order.getProducts().add(product);
+            order.getProducts().add(product2);
             orderRepository.save(order);
         }
         

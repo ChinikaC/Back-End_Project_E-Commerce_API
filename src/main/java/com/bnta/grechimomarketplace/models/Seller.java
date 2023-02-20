@@ -19,7 +19,10 @@ public class Seller {
     private BankCard card;
 
     @Column
-    private String emailAddress;
+    private String email;
+
+    @Column
+    private String address;
 
     @Column
     private String password;
@@ -28,16 +31,17 @@ public class Seller {
     @JsonIgnoreProperties({"seller"})
     private List<Product> products;
 
-    public Seller(BankCard card, String name, String emailAddress, String password, List<Product> products) {
-        this.card = card;
+    public Seller(String name, BankCard card, String email, String address, String password,
+                  List<Product> products) {
         this.name = name;
-        this.emailAddress = emailAddress;
+        this.card = card;
+        this.email = email;
+        this.address = address;
         this.password = password;
         this.products = products;
     }
 
     public Seller(){
-        
     }
 
     public long getId() {
@@ -54,14 +58,6 @@ public class Seller {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
     }
 
     public String getPassword() {
@@ -86,5 +82,21 @@ public class Seller {
 
     public void setCard(BankCard card) {
         this.card = card;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
