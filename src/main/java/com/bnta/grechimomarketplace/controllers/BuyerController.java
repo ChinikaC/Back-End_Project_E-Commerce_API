@@ -8,17 +8,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class BuyerController {
 
     // register
-
+    // would use the @PostMapping function to add a new user
 
 
 
     // view all orders
+    // @GetMapping to view all orders
 
 
 
+    // update your details
+    // use @PatchMapping (probably)
+    //USE REQUESTBODY - make sure you can either update some or all fields
+    // update email
+    // update address
+    // update card details
 
-    // update your 
 
-
+    // replace card
+    // @PutMapping
 
 }
