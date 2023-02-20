@@ -21,12 +21,6 @@ public class Order {
     @JoinColumn(name = "buyer_id")
     @JsonIgnoreProperties({"orders"})
     private Buyer buyer;
-
-//    @ManyToMany(fetch = FetchType.EAGER) // fetch type added to resolve issue on line 80 of FlightController
-//    @JoinTable(name = "flights_passengers", // specifies the name of the linking table that will be used to store the associations between the two entities
-//            joinColumns = @JoinColumn(name = "flight_id"),
-//            inverseJoinColumns = @JoinColumn(name = "passenger_id"))
-//    @JsonIgnoreProperties("flights")
     
     @ManyToMany
     @JoinTable(name = "orders_products",
