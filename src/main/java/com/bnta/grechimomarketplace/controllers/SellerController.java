@@ -1,15 +1,30 @@
 package com.bnta.grechimomarketplace.controllers;
 
+import com.bnta.grechimomarketplace.models.Seller;
+import com.bnta.grechimomarketplace.services.SellerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/seller")
+@RequestMapping(value = "/sellers")
 public class SellerController {
+
+    @Autowired
+    SellerService sellerService;
 
 
     // register
     // would use the @PostMapping function to add a new user
+    @PostMapping
+    public ResponseEntity<Seller> addNewSeller (@RequestBody Seller seller){
+        Seller savedSeller = sellerService.addNewSeller(seller);
+        return new ResponseEntity<>(seller, HttpStatus.CREATED);
+    }
 
     // createProduct (post mapping) --> to create & add a new product to the seller's inventory
 
