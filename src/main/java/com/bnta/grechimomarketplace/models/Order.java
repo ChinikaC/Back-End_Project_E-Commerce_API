@@ -2,6 +2,8 @@ package com.bnta.grechimomarketplace.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+
+@Entity(name = "orders")
 public class Order {
 
 

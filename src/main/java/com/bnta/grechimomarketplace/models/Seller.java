@@ -22,8 +22,8 @@ public class Seller {
     @Column
     private String password;
 
-    @OneToMany(mappedBy = "seller_id")
-    @JsonIgnoreProperties({"seller_id"})
+    @OneToMany(mappedBy = "seller")
+    @JsonIgnoreProperties({"seller"})
     private List<Product> products;
 
     public Seller(long id, long balance, String name, String emailAddress, String password, List<Product> products) {
