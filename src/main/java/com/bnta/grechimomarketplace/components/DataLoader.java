@@ -51,7 +51,7 @@ public class DataLoader implements ApplicationRunner {
             card.setAccountName(seller.getName());
             bankCardRepository.save(card);
             sellerRepository.save(seller);
-            Product product = new Product("Product " + i, i * 100, "Description " + i, seller, true, false);
+            Product product = new Product("Product " + i, i * 100, "Description " + i, seller, 10l, true, false);
             productRepository.save(product);
             seller.getProducts().add(product);
             sellerRepository.save(seller);

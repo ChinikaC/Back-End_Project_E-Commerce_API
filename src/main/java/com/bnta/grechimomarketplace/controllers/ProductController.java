@@ -12,8 +12,15 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
-  
+
+    // createProduct (post mapping) --> to create & add a new product to the seller's inventory
+
     // addProductToCart
-    
-    
+    // @PostMapping --> copy product from seller's inventory to cart so buyer can purchase it
+
+
+
+
+
+
 }

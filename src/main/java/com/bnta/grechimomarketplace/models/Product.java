@@ -30,18 +30,22 @@ public class Product {
 
     @Column
     private boolean fulfilled;
+    
+    @Column
+    private long stock;
 
     @ManyToMany(mappedBy = "products")
     @JsonIgnoreProperties("products")
     private List<Order> orders;
 
-    public Product(String name, long price, String description, Seller seller, boolean listed, boolean fulfilled) {
+    public Product(String name, long price, String description, Seller seller, long stock, boolean listed, boolean fulfilled) {
         this.name = name;
         this.price = price;
         this.description = description;
         this.seller = seller;
         this.listed = listed;
         this.fulfilled = fulfilled;
+        this.stock = stock;
     }
 
     public Product(){
@@ -110,5 +114,13 @@ public class Product {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public long getStock() {
+        return stock;
+    }
+
+    public void setStock(long stock) {
+        this.stock = stock;
     }
 }
