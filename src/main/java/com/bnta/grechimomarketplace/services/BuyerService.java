@@ -33,6 +33,10 @@ public class BuyerService {
         return buyer;
     }
 
+    public List<Order> getAllOrders(){
+        return orderRepository.findAll();
+    }
+
 
     public ShoppingCartDTO addProductToCart(long buyerId, long productId) {
         Product product = productRepository.findById(productId).get();
