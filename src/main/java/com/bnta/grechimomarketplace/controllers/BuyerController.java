@@ -1,14 +1,12 @@
 package com.bnta.grechimomarketplace.controllers;
 
+import com.bnta.grechimomarketplace.models.Order;
 import com.bnta.grechimomarketplace.models.ShoppingCartDTO;
 import com.bnta.grechimomarketplace.services.BuyerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/buyers")
@@ -52,10 +50,10 @@ public class BuyerController {
 
     // viewCart() --> return shopping cart DTO --> move to buyer
 
-
-
-
-
+    @GetMapping(value = "/{buyerId}/cart")
+    public ResponseEntity<ShoppingCartDTO> viewCart(@PathVariable Long buyerId) {
+        return new ResponseEntity<>(buyerService.getCart(buyerId), HttpStatus.OK);
+    }
 
     // checkOut
     // @PostMapping
@@ -66,5 +64,10 @@ public class BuyerController {
     // transfer money from buyer card to sellerS CardsS
     //deduct quantity of items from seller
 
+    @PostMapping(value = "/{buyerId}")
+    public ResponseEntity<Order> placeOrder(@PathVariable Long buyerId,
+                                            @RequestParam String address) {
+        return new ResponseEntity<>(buyerService.placeOrder(buyerId, address), HttpStatus.OK);
+    }
 
 }
