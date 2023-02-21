@@ -38,13 +38,24 @@ public class BuyerController {
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
-
     // update your details
     // use @PatchMapping (probably)
-    //USE REQUESTBODY - make sure you can either update some or all fields
-    // update email
-    // update address
-    // update card details
+    @PatchMapping(value = "{buyerId}")
+    public ResponseEntity<Buyer> updateBuyerDetails(@PathVariable Long buyerId, @RequestBody Buyer buyer){
+        Buyer updateBuyer = buyerService.getBuyerById(buyerId);
+        updateBuyer = buyer;
+        return new ResponseEntity<>(updateBuyer, HttpStatus.OK);
+    }
+
+//    @PatchMapping(value = "name/{buyerId}")
+//    public ResponseEntity<Buyer> updateBuyerName(@PathVariable Long id, @RequestBody Buyer buyer){
+//        Buyer updateBuyer = buyerService.getBuyerById(id);
+//        updateBuyer.setName(buyer.getName());
+//        return new ResponseEntity<>(updateBuyer, HttpStatus.OK);
+//    }
+
+
+    // to be able to update all at once
 
 
     // replace card
@@ -55,8 +66,6 @@ public class BuyerController {
         buyer.setCard(newBankCard);
         return new ResponseEntity<>(buyer.getCard(), HttpStatus.CREATED);
     }
-
-
 
 
     @PatchMapping(value = "/{buyerId}/product/{productId}")
