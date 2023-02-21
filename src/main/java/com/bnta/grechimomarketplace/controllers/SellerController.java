@@ -38,9 +38,9 @@ public class SellerController {
     // createProduct (post mapping) --> to create & add a new product to the seller's inventory
 
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<Product> addProductToSellersInventory(@PathVariable long id,
+    public ResponseEntity<Product> addNewProductToSellersInventory(@PathVariable long id,
                                                                @RequestBody Product product){
-        sellerService.addProductToSellersInventory(id, product);
+        sellerService.addNewProductToSellersInventory(id, product);
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
 
