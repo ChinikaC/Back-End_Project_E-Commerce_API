@@ -54,8 +54,8 @@ public class SellerController {
 //        List<Product> products;
 //        if (product.equals() == ){
 //
-//        }
-//    }
+//        } ternary operator???
+//
 
     //deleteProduct (@DeleteMapping)
 
