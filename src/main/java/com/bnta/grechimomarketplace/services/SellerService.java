@@ -23,7 +23,7 @@ public class SellerService {
         return seller;
     }
 
-    public Product addProductToSellersInventory(long sellerId, Product product) {
+    public Product addNewProductToSellersInventory(long sellerId, Product product) {
         Seller seller = sellerRepository.findById(sellerId).get();
         List<Product> products = seller.getProducts();
         products.add(product);
