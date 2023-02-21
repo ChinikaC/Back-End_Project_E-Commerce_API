@@ -2,6 +2,7 @@ package com.bnta.grechimomarketplace.controllers;
 
 import com.bnta.grechimomarketplace.models.Product;
 import com.bnta.grechimomarketplace.models.Seller;
+import com.bnta.grechimomarketplace.repositories.ProductRepository;
 import com.bnta.grechimomarketplace.services.ProductService;
 import com.bnta.grechimomarketplace.services.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,12 @@ public class SellerController {
     @Autowired
     SellerService sellerService;
 
+    @Autowired
+    ProductService productService;
+
+    @Autowired
+    ProductRepository productRepository;
+
 
     // register
     // would use the @PostMapping function to add a new user
@@ -28,19 +35,12 @@ public class SellerController {
     }
 
     // createProduct (post mapping) --> to create & add a new product to the seller's inventory
-//    @PostMapping(value ="/{sellerId}/product/")
-//    public ResponseEntity<Product> addProductToSellersInventory (@PathVariable Long sellerId,
-//                                                                 @RequestBody Product product){
-//        Product newProduct = productService.addNewProduct(product);
-//        return new ResponseEntity<>(product, HttpStatus.CREATED);
-//    }
-
 
     @PatchMapping(value = "/{id}")
     public ResponseEntity<Product> addProductToSellersInventory(@PathVariable long id,
                                                                @RequestBody Product product){
         sellerService.addProductToSellersInventory(id, product);
-        return new ResponseEntity<>(product, HttpStatus.OK);
+        return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
 
     // /seller/list/{id}
@@ -48,29 +48,35 @@ public class SellerController {
     // Changing product listing from false to true
     //Have a @requestparam which will take in true or false depending on whether it is listed or not
 
-//    @PatchMapping(value = "/{id}")
-//    public ResponseEntity<Product> changeProductListing(@RequestParam (required = false, name = "listing")
-//                                                            Boolean listing){
-//        List<Product> products;
-//        if (product.equals() == ){
-//
-//        } ternary operator???
-//
+    @PatchMapping(value = "product/{productId}/list")
+    public ResponseEntity<Product> changingListingToTrue(@PathVariable long productId){
+        Product product = sellerService.getProductById(productId);
+        product.setListed(true);
+        productRepository.save(product);
+        return new ResponseEntity<>(product, HttpStatus.OK);
 
-    //deleteProduct (@DeleteMapping)
+    }
 
+    @PatchMapping(value = "product/{productId}/delist")
+    public ResponseEntity<Product> changingListingToFalse(@PathVariable long productId){
+        Product product = sellerService.getProductById(productId);
+        product.setListed(false);
+        productRepository.save(product);
+        return new ResponseEntity<>(product, HttpStatus.OK);
 
+    }
 
-    // /seller/update/{id}
-    // updateProduct (@PatchMapping) --> multiple optional requestparams OR requestBody
-    // (BUT requestBody would have to allow both updating just one variable or all variables at once)
-
-    // displayOrders (@GetMapping)
-    // get all orders
-    // use id to get the id for the specific seller who's orders we want to get
-
+        //deleteProduct (@DeleteMapping)
 
 
-    // extension fulfilOrder
+        // /seller/update/{id}
+        // updateProduct (@PatchMapping) --> multiple optional requestparams OR requestBody
+        // (BUT requestBody would have to allow both updating just one variable or all variables at once)
 
+        // displayOrders (@GetMapping)
+        // get all orders
+        // use id to get the id for the specific seller who's orders we want to get
+
+
+        // extension fulfilOrder
 }
