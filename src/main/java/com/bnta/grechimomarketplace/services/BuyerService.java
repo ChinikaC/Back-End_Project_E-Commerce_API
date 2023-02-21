@@ -37,6 +37,7 @@ public class BuyerService {
         Product product = productRepository.findById(productId).get();
         Buyer buyer = buyerRepository.findById(buyerId).get();
         buyer.getCart().add(product);
+        buyerRepository.save(buyer);
         return new ShoppingCartDTO(buyer.getCart(), buyer.getCartTotalValue(), buyer.getCart().size());
     }
 
