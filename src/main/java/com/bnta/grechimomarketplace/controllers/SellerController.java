@@ -26,7 +26,6 @@ public class SellerController {
     ProductRepository productRepository;
 
 
-
     // register
     // would use the @PostMapping function to add a new user
     @PostMapping
@@ -35,11 +34,21 @@ public class SellerController {
         return new ResponseEntity<>(seller, HttpStatus.CREATED);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Seller>> getAllSellers(){
+        return new ResponseEntity(sellerService.findAllSellers(), HttpStatus.OK);
+    }
+
+    // Update user details
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<Seller> updateSeller(@PathVariable Long id, @RequestBody Seller seller){
+        seller.setId(id);
+        Seller updatedSeller = sellerService.updateSeller(seller);
+        return new ResponseEntity<>(updatedSeller, updatedSeller != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    }
 
 
-        // /seller/update/{id}
-        // updateProduct (@PatchMapping) --> multiple optional requestparams OR requestBody
-        // (BUT requestBody would have to allow both updating just one variable or all variables at once)
+
 
         // displayOrders (@GetMapping)
         // get all orders
