@@ -62,23 +62,10 @@ public class BuyerController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-
-
-    // viewCart() --> return shopping cart DTO --> move to buyer
-
     @GetMapping(value = "/{buyerId}/cart")
     public ResponseEntity<ShoppingCartDTO> viewCart(@PathVariable Long buyerId) {
         return new ResponseEntity<>(buyerService.getCart(buyerId), HttpStatus.OK);
     }
-
-    // checkOut
-    // @PostMapping
-    // buyer cart to be transferred to new Order object
-    // Order order = new Order();
-    // order.getProducts.set(cart)
-    // set cart to empty arraylist
-    // transfer money from buyer card to sellerS CardsS
-    //deduct quantity of items from seller
 
     @PostMapping(value = "/{buyerId}")
     public ResponseEntity<Order> placeOrder(@PathVariable Long buyerId,
