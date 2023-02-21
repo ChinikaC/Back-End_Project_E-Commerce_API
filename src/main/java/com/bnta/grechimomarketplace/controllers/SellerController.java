@@ -54,10 +54,18 @@ public class SellerController {
         return new ResponseEntity<>(updatedSeller, updatedSeller != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity deleteSellerAccount(@PathVariable Long id){
+        sellerService.deleteAccount(id);
+        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+    }
 
 
 
-        // displayOrders (@GetMapping)
+
+
+
+    // displayOrders (@GetMapping)
         // get all orders
         // use id to get the id for the specific seller who's orders we want to get
 

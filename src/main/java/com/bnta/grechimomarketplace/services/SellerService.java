@@ -55,6 +55,11 @@ public class SellerService {
         return null;
     }
 
+    public void deleteAccount(Long id){
+        sellerRepository.deleteById(id);
+
+    }
+
 
 
 
