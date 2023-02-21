@@ -1,11 +1,13 @@
 package com.bnta.grechimomarketplace.controllers;
 
+
 import com.bnta.grechimomarketplace.models.Order;
 import com.bnta.grechimomarketplace.models.Buyer;
 import com.bnta.grechimomarketplace.models.Order;
 import com.bnta.grechimomarketplace.models.Seller;
 import com.bnta.grechimomarketplace.models.ShoppingCartDTO;
 import com.bnta.grechimomarketplace.services.BuyerService;
+import com.bnta.grechimomarketplace.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ public class BuyerController {
 
     @Autowired
     BuyerService buyerService;
+    OrderService orderService;
 
     // register
     // would use the @PostMapping function to add a new user
@@ -31,13 +34,12 @@ public class BuyerController {
 
     // view all orders
     // @GetMapping to view all orders
-//    @GetMapping
-//    public ResponseEntity<List<Order>> getAllOrders(){
-//        List<Order> orders = orderService.getAllOrders();
-//        return new ResponseEntity<>(orders, HttpStatus.OK);
-//    }
 
-
+    @GetMapping
+    public ResponseEntity<List<Order>> getAllOrders(){
+        List<Order> orders = orderService.getAllOrders();
+        return new ResponseEntity<>(orders, HttpStatus.OK);
+    }
 
 
     // update your details

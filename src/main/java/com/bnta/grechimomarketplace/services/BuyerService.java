@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 
+
 @Service
 public class BuyerService {
 
@@ -34,6 +35,10 @@ public class BuyerService {
     public Buyer addNewBuyer(Buyer buyer){
         buyerRepository.save(buyer);
         return buyer;
+    }
+
+    public List<Order> getAllOrders(){
+        return orderRepository.findAll();
     }
 
 
