@@ -30,6 +30,32 @@ public class SellerService {
 //    }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void deleteAccount(Long id){
+        sellerRepository.deleteById(id);
+
+    }
+
     }
 
 

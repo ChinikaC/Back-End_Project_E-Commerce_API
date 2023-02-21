@@ -37,9 +37,28 @@ public class SellerController {
 
 
 
-        // /seller/update/{id}
-        // updateProduct (@PatchMapping) --> multiple optional requestparams OR requestBody
-        // (BUT requestBody would have to allow both updating just one variable or all variables at once)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Delete Seller
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity deleteSellerAccount(@PathVariable Long id){
+        sellerService.deleteAccount(id);
+        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+    }
+
+
 
         // displayOrders (@GetMapping)
         // get all orders
