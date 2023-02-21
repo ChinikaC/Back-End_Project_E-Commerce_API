@@ -1,11 +1,8 @@
 package com.bnta.grechimomarketplace.controllers;
 
 
+import com.bnta.grechimomarketplace.models.*;
 import com.bnta.grechimomarketplace.models.Order;
-import com.bnta.grechimomarketplace.models.Buyer;
-import com.bnta.grechimomarketplace.models.Order;
-import com.bnta.grechimomarketplace.models.Seller;
-import com.bnta.grechimomarketplace.models.ShoppingCartDTO;
 import com.bnta.grechimomarketplace.services.BuyerService;
 import com.bnta.grechimomarketplace.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +49,13 @@ public class BuyerController {
 
     // replace card
     // @PutMapping
+    @PutMapping(value = "/{buyerId}")
+    public ResponseEntity<BankCard> replaceBankCard(@PathVariable Long buyerId, @RequestBody BankCard newBankCard ){
+        Buyer buyer = buyerService.getBuyerById(buyerId);
+        buyer.setCard(newBankCard);
+        return new ResponseEntity<>(buyer.getCard(), HttpStatus.CREATED);
+    }
+
 
 
 
