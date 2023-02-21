@@ -59,6 +59,13 @@ public class BuyerService {
     public Order placeOrder(long buyerId, String address) {
         Optional<Buyer> buyer = buyerRepository.findById(buyerId);
         List<Product> buyerCart = buyer.get().getCart();
+        BankCard buyerCard = buyer.get().getCard();
+        for (Product product : buyerCart) {
+            long productValue = product.getPrice();
+            BankCard sellerCard = product.getSeller().getCard();
+            buyerCard.addMoney(productValue);
+            sellerCard.reduceMoney(productValue);
+        }
         Order order = new Order(buyer.get(), address);
         orderRepository.save(order);
         return order;

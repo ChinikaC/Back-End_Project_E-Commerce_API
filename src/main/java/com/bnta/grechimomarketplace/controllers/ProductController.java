@@ -24,8 +24,6 @@ public class ProductController {
     @Autowired
     private BuyerService buyerService;
 
-
-    // return all products OR search for a specific product
     // 1 request param for a fuzzy match of the product category (EXTENSION)
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getAllProducts(@RequestParam Optional<String> searchQuery) {
@@ -45,7 +43,6 @@ public class ProductController {
             }
         }
     }
-    // TURN THIS INTO A DTO
 
 
 }

@@ -43,4 +43,12 @@ public class BankCard {
     public void setAccountBalance(long accountBalance) {
         this.accountBalance = accountBalance;
     }
+
+    public void addMoney(long money) {
+      this.accountBalance += money;
+    }
+
+    public void reduceMoney(long money) {
+      this.accountBalance -= money;
+    }
 }
