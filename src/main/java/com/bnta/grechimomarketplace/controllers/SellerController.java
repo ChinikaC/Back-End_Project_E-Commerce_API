@@ -44,7 +44,7 @@ public class SellerController {
     public ResponseEntity<Seller> getSellerById(@PathVariable Long id){
         Seller seller = sellerService.getSellerById(id);
         return new ResponseEntity(seller, seller != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
-    }
+    } // Find out why the not_found isn't working
 
     // Update user details
     @PatchMapping(value = "/{id}")
