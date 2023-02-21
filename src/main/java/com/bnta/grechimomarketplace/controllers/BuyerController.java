@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/buyers")
@@ -20,53 +21,35 @@ public class BuyerController {
     BuyerService buyerService;
     OrderService orderService;
 
-    // register
-    // would use the @PostMapping function to add a new user
-
     @PostMapping
     public ResponseEntity<Buyer> addNewBuyer (@RequestBody Buyer buyer){
         Buyer savedBuyer = buyerService.addNewBuyer(buyer);
         return new ResponseEntity<>(buyer, HttpStatus.CREATED);
     }
 
-    // view all orders
-    // @GetMapping to view all orders
 
-    @GetMapping
-    public ResponseEntity<List<Order>> getAllOrders(){
-        List<Order> orders = orderService.getAllOrders();
-        return new ResponseEntity<>(orders, HttpStatus.OK);
-    }
-
-    // update your details
-    // use @PatchMapping (probably)
     @PatchMapping(value = "{buyerId}")
-    public ResponseEntity<Buyer> updateBuyerDetails(@PathVariable Long buyerId, @RequestBody Buyer buyer){
-        Buyer updateBuyer = buyerService.getBuyerById(buyerId);
-        updateBuyer = buyer;
-        return new ResponseEntity<>(updateBuyer, HttpStatus.OK);
+    public ResponseEntity<Buyer> updateBuyerDetails(@PathVariable Long buyerId,
+                                                    @RequestParam Optional<String> name,
+                                                    @RequestParam Optional<String> email,
+                                                    @RequestParam Optional<String> address,
+                                                    @RequestParam Optional<String> password
+    ){
+        Buyer buyer = buyerService.getBuyerById(buyerId);
+        if (buyer == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (name.isPresent()) buyer.setName(name.get());
+        if (email.isPresent()) buyer.setEmail(email.get());
+        if (address.isPresent()) buyer.setAddress(address.get());
+        if (password.isPresent()) buyer.setPassword(name.get());
+        return new ResponseEntity<>(buyer, HttpStatus.OK);
     }
 
-//    @PatchMapping(value = "name/{buyerId}")
-//    public ResponseEntity<Buyer> updateBuyerName(@PathVariable Long id, @RequestBody Buyer buyer){
-//        Buyer updateBuyer = buyerService.getBuyerById(id);
-//        updateBuyer.setName(buyer.getName());
-//        return new ResponseEntity<>(updateBuyer, HttpStatus.OK);
-//    }
-
-
-    // to be able to update all at once
-
-
-    // replace card
-    // @PutMapping
     @PutMapping(value = "/{buyerId}")
     public ResponseEntity<BankCard> replaceBankCard(@PathVariable Long buyerId, @RequestBody BankCard newBankCard ){
         Buyer buyer = buyerService.getBuyerById(buyerId);
         buyer.setCard(newBankCard);
         return new ResponseEntity<>(buyer.getCard(), HttpStatus.CREATED);
     }
-
 
     @PatchMapping(value = "/{buyerId}/product/{productId}")
     public ResponseEntity<ShoppingCartDTO> addProductToCart(@PathVariable Long buyerId,
