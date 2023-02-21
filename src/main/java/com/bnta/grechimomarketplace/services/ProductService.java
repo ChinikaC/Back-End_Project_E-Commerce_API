@@ -5,7 +5,11 @@ import com.bnta.grechimomarketplace.repositories.BuyerRepository;
 import com.bnta.grechimomarketplace.repositories.ProductRepository;
 import com.bnta.grechimomarketplace.repositories.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +22,9 @@ public class ProductService {
 ProductRepository productRepository;
 
 @Autowired
-BuyerRepository buyerRepository;
+SellerRepository sellerRepository;
+
+
 
     public List<ProductDTO> getAllProducts() {
         List<Product> products = productRepository.findByListedTrue();
@@ -36,6 +42,26 @@ BuyerRepository buyerRepository;
             productDTOs.add(new ProductDTO(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getSeller().getName()));
         }
         return productDTOs;
+    }
+
+    public Product addNewProductToSellersInventory(long sellerId, Product product) {
+        Seller seller = sellerRepository.findById(sellerId).get();
+        List<Product> products = seller.getProducts();
+        products.add(product);
+        product.setSeller(seller);
+        productRepository.save(product);
+//        sellerRepository.save(seller);
+        return product;
+    }
+
+    public Product updateListing(long productId, boolean isListed){
+        Product product = productRepository.findById(productId).get();
+        product.setListed(isListed);
+        return productRepository.save(product);
+    }
+
+    public Product getProductById(long productId){
+        return productRepository.findById(productId).get();
     }
 
 

@@ -44,5 +44,28 @@ public class ProductController {
         }
     }
 
+    @PostMapping
+    public ResponseEntity<Product> addNewProductToSellersInventory(@RequestParam long sellerId,
+                                                                   @RequestBody Product product){
+        productService.addNewProductToSellersInventory(sellerId, product);
+        return new ResponseEntity<>(product, HttpStatus.CREATED);
+    }
+
+    @PatchMapping(value = "/{productId}")
+    public ResponseEntity<Product> changeListing(@PathVariable long productId,
+                                                         @RequestParam boolean isListed){
+        Product product = productService.updateListing(productId, isListed);
+        return new ResponseEntity<>(product, HttpStatus.OK);
+
+    }
+
+    //deleteProduct (@DeleteMapping)
+//    @DeleteMapping(value = "/{id}")
+//    public ResponseEntity deleteProduct(@PathVariable Long id){
+//        sellerService.deleteProductById(id);
+//        return new ResponseEntity(null, HttpStatus.NO_CONTENT);
+//    }
+
+
 
 }
