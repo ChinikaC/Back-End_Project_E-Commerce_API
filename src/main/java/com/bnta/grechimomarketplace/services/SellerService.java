@@ -23,19 +23,11 @@ public class SellerService {
         return seller;
     }
 
-    public Product addNewProductToSellersInventory(long sellerId, Product product) {
-        Seller seller = sellerRepository.findById(sellerId).get();
-        List<Product> products = seller.getProducts();
-        products.add(product);
-        product.setSeller(seller);
-        productRepository.save(product);
-        sellerRepository.save(seller);
-        return product;
-    }
 
-    public Product getProductById(long productId){
-       return productRepository.findById(productId).get();
-    }
+//    public Product deleteProductById(long id){
+//        sellerRepository.deleteById(id);
+//
+//    }
 
 
     }

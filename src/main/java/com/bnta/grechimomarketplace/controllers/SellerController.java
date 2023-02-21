@@ -35,40 +35,6 @@ public class SellerController {
         return new ResponseEntity<>(seller, HttpStatus.CREATED);
     }
 
-    // createProduct (post mapping) --> to create & add a new product to the seller's inventory
-
-    @PatchMapping(value = "/{id}")
-    public ResponseEntity<Product> addNewProductToSellersInventory(@PathVariable long id,
-                                                               @RequestBody Product product){
-        sellerService.addNewProductToSellersInventory(id, product);
-        return new ResponseEntity<>(product, HttpStatus.CREATED);
-    }
-
-    // /seller/list/{id}
-    // listProduct (@patchmapping)
-    // Changing product listing from false to true
-    //Have a @requestparam which will take in true or false depending on whether it is listed or not
-    // have a delist and list link
-
-
-    @PatchMapping(value = "product/{productId}/list")
-    public ResponseEntity<Product> changingListingToTrue(@PathVariable long productId){
-        Product product = sellerService.getProductById(productId);
-        product.setListed(true);
-        productRepository.save(product);
-        return new ResponseEntity<>(product, HttpStatus.OK);
-
-    }
-
-    @PatchMapping(value = "product/{productId}/delist")
-    public ResponseEntity<Product> changingListingToFalse(@PathVariable long productId){
-        Product product = sellerService.getProductById(productId);
-        product.setListed(false);
-        productRepository.save(product);
-        return new ResponseEntity<>(product, HttpStatus.OK);
-    }
-
-        //deleteProduct (@DeleteMapping)
 
 
         // /seller/update/{id}
