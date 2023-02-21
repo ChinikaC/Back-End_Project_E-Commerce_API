@@ -72,15 +72,9 @@ public class BuyerService {
             sellerCard.addMoney(productValue);
         }
         Order order = new Order(buyer.get(), address);
+        buyer.get().emptyCart();
         orderRepository.save(order);
         return order;
-    }
-
-    public void distributeOrders() {
-        List<Order> orders = orderRepository.findAll();
-        for (Order order : orders) {
-
-        }
     }
 
 }

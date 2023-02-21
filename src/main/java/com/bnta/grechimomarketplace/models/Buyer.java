@@ -53,6 +53,10 @@ public class Buyer {
         
     }
 
+    public void emptyCart() {
+        cart.clear();
+    }
+
     public long getCartTotalValue() {
         long totalValue = 0l;
         if (!cart.isEmpty()) {
