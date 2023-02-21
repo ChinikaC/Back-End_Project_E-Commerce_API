@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/sellers")
@@ -37,6 +38,12 @@ public class SellerController {
     @GetMapping
     public ResponseEntity<List<Seller>> getAllSellers(){
         return new ResponseEntity(sellerService.findAllSellers(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Seller> getSellerById(@PathVariable Long id){
+        Seller seller = sellerService.getSellerById(id);
+        return new ResponseEntity(seller, seller != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
     // Update user details

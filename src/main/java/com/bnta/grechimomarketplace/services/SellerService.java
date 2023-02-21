@@ -24,8 +24,12 @@ public class SellerService {
         return seller;
     }
 
-    public List<Seller> findAllSellers (){
+    public List<Seller> findAllSellers(){
         return sellerRepository.findAll();
+    }
+
+    public Seller getSellerById(long id){
+        return sellerRepository.findById(id).get();
     }
 
     public Seller updateSeller(Seller updateSellerDetails){
