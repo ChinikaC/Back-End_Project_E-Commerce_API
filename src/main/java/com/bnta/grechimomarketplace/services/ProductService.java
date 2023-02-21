@@ -20,12 +20,23 @@ ProductRepository productRepository;
 @Autowired
 BuyerRepository buyerRepository;
 
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<ProductDTO> getAllProducts() {
+        List<Product> products = productRepository.findAll();
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        return generateProductDTOs(products);
     }
 
-    public List<Product> getAllProductsContainingString(String string) {
-        return productRepository.findByNameContainingIgnoreCase(string);
+    public List<ProductDTO> getAllProductsContainingString(String string) {
+        List<Product> products = productRepository.findByNameContainingIgnoreCase(string);
+        return generateProductDTOs(products);
+    }
+
+    public List<ProductDTO> generateProductDTOs(List<Product> products) {
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        for (Product product : products) {
+            productDTOs.add(new ProductDTO(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getSeller().getName()));
+        }
+        return productDTOs;
     }
 
 
