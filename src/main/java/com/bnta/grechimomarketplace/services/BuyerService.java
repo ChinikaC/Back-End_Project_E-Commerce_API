@@ -27,6 +27,10 @@ public class BuyerService {
 
     @Autowired
     OrderRepository orderRepository;
+
+    @Autowired
+    ProductService productService;
+
     public Buyer addNewBuyer(Buyer buyer){
         buyerRepository.save(buyer);
         return buyer;
@@ -39,13 +43,7 @@ public class BuyerService {
         buyer.getCart().add(product);
         buyerRepository.save(buyer);
 
-        List<Product> products = buyer.getCart();
-
-        List<ProductDTO> productDTOs = new ArrayList<>();
-        for (Product p : products) {
-            productDTOs.add(new ProductDTO(p.getId(), p.getName(), p.getPrice(), p.getDescription(), p.getSeller().getName()));
-        }
-
+        List<ProductDTO> productDTOs = productService.generateProductDTOs(buyer.getCart());
 
         return new ShoppingCartDTO(productDTOs, buyer.getCartTotalValue(), buyer.getCart().size());
     }
@@ -53,13 +51,7 @@ public class BuyerService {
     public ShoppingCartDTO getCart(long buyerId) {
         Buyer buyer = buyerRepository.findById(buyerId).get();
 
-        List<Product> products = buyer.getCart();
-
-        List<ProductDTO> productDTOs = new ArrayList<>();
-        for (Product p : products) {
-            productDTOs.add(new ProductDTO(p.getId(), p.getName(), p.getPrice(), p.getDescription(), p.getSeller().getName()));
-        }
-
+        List<ProductDTO> productDTOs = productService.generateProductDTOs(buyer.getCart());
 
         return new ShoppingCartDTO(productDTOs, buyer.getCartTotalValue(), buyer.getCart().size());
     }

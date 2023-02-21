@@ -23,14 +23,15 @@ BuyerRepository buyerRepository;
     public List<ProductDTO> getAllProducts() {
         List<Product> products = productRepository.findAll();
         List<ProductDTO> productDTOs = new ArrayList<>();
-        for (Product product : products) {
-            productDTOs.add(new ProductDTO(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getSeller().getName()));
-        }
-        return productDTOs;
+        return generateProductDTOs(products);
     }
 
     public List<ProductDTO> getAllProductsContainingString(String string) {
         List<Product> products = productRepository.findByNameContainingIgnoreCase(string);
+        return generateProductDTOs(products);
+    }
+
+    public List<ProductDTO> generateProductDTOs(List<Product> products) {
         List<ProductDTO> productDTOs = new ArrayList<>();
         for (Product product : products) {
             productDTOs.add(new ProductDTO(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getSeller().getName()));
