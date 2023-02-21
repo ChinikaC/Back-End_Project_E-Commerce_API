@@ -37,8 +37,6 @@ public class SellerController {
     // Changing product listing from false to true
     //Have a @requestparam which will take in true or false depending on whether it is listed or not
 
-//    @PatchMapping(value = "/{id}")
-//    public ResponseEntity<Product>
 
 
 
