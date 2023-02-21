@@ -33,40 +33,13 @@ public class SellerController {
 //        return new ResponseEntity<>(product, HttpStatus.CREATED);
 //    }
 
-//    @PatchMapping(value = "/{id}")
-//    public ResponseEntity<Seller> addProductToSellersInventory(@PathVariable long id,
-//                                                               @RequestBody Product product){
-//        long sellerId = product.getId();
-//        Seller updatedInventory = sellerService.addProductToSellersInventory(id, sellerId);
-//        return new ResponseEntity<>(updatedInventory, HttpStatus.OK);
-//    }
 
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<Product> addProductToSellersInventory(@PathVariable long id,
+                                                               @RequestBody Product product){
+        sellerService.addProductToSellersInventory(id, product);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
-
-
-
-
-//    @PatchMapping(value = "/{id}")
-//    public ResponseEntity<Seller> addProductToSellersInventory( @RequestBody Product product, @PathVariable long id){
-//        long sellerId = product.getId();
-//        Seller updatedInventory = sellerService.addProductToSellersInventory(id, product);
-//        return new ResponseEntity<>(updatedInventory, HttpStatus.OK);
-//    }
-
-//    @PatchMapping(value = "/{id}")
-//    public ResponseEntity<Seller> addProductToSellersInventory(@PathVariable long id,
-//                                                               @RequestBody Product product){
-//        Seller seller = sellerService.addProductToSellersInventory(id, product);
-//        return new ResponseEntity<>(seller, HttpStatus.OK);
-//    }
-
-
-
-
-
-
-
-
 
     // /seller/list/{id}
     // listProduct (@patchmapping)
@@ -74,6 +47,8 @@ public class SellerController {
     //Have a @requestparam which will take in true or false depending on whether it is listed or not
 
     //deleteProduct (@DeleteMapping)
+
+
 
     // /seller/update/{id}
     // updateProduct (@PatchMapping) --> multiple optional requestparams OR requestBody
@@ -86,7 +61,5 @@ public class SellerController {
 
 
     // extension fulfilOrder
-
-
 
 }

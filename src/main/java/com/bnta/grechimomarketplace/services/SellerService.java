@@ -14,7 +14,26 @@ public class SellerService {
 
     @Autowired
     SellerRepository sellerRepository;
+
     @Autowired
     ProductRepository productRepository;
+
+    public Seller addNewSeller(Seller seller){
+        sellerRepository.save(seller);
+        return seller;
+    }
+
+    public Product addProductToSellersInventory(long sellerId, Product product) {
+        Seller seller = sellerRepository.findById(sellerId).get();
+        List<Product> products = seller.getProducts();
+        products.add(product);
+        product.setSeller(seller);
+        productRepository.save(product);
+        sellerRepository.save(seller);
+        return product;
+    }
+
+
+    }
 
 
