@@ -64,4 +64,11 @@ public class BuyerService {
         return order;
     }
 
+    public void distributeOrders() {
+        List<Order> orders = orderRepository.findAll();
+        for (Order order : orders) {
+
+        }
+    }
+
 }
