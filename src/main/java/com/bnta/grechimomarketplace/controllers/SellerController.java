@@ -1,5 +1,6 @@
 package com.bnta.grechimomarketplace.controllers;
 
+import com.bnta.grechimomarketplace.models.Product;
 import com.bnta.grechimomarketplace.models.Seller;
 import com.bnta.grechimomarketplace.services.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,26 @@ public class SellerController {
     }
 
     // createProduct (post mapping) --> to create & add a new product to the seller's inventory
+
+
+//    @PatchMapping(value = "/{id}")
+//    public ResponseEntity<Seller> addProductToSellersInventory( @RequestBody Product product, @PathVariable long id){
+//        long sellerId = product.getId();
+//        Seller updatedInventory = sellerService.addProductToSellersInventory(id, product);
+//        return new ResponseEntity<>(updatedInventory, HttpStatus.OK);
+//    }
+
+//    @PatchMapping(value = "/{id}")
+//    public ResponseEntity<Seller> addProductToSellersInventory(@PathVariable long id,
+//                                                               @RequestBody Product product){
+//        Seller seller = sellerService.addProductToSellersInventory(id, product);
+//        return new ResponseEntity<>(seller, HttpStatus.OK);
+//    }
+
+
+
+
+
 
 
 
