@@ -1,14 +1,13 @@
 package com.bnta.grechimomarketplace.controllers;
 
+import com.bnta.grechimomarketplace.models.Product;
 import com.bnta.grechimomarketplace.models.Seller;
+import com.bnta.grechimomarketplace.services.ProductService;
 import com.bnta.grechimomarketplace.services.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/sellers")
@@ -27,6 +26,29 @@ public class SellerController {
     }
 
     // createProduct (post mapping) --> to create & add a new product to the seller's inventory
+//    @PostMapping(value ="/{sellerId}/product/")
+//    public ResponseEntity<Product> addProductToSellersInventory (@PathVariable Long sellerId,
+//                                                                 @RequestBody Product product){
+//        Product newProduct = productService.addNewProduct(product);
+//        return new ResponseEntity<>(product, HttpStatus.CREATED);
+//    }
+
+//    @PatchMapping(value = "/{id}")
+//    public ResponseEntity<Seller> addProductToSellersInventory(@PathVariable long id,
+//                                                               @RequestBody Product product){
+//        long sellerId = product.getId();
+//        Seller updatedInventory = sellerService.addProductToSellersInventory(id, sellerId);
+//        return new ResponseEntity<>(updatedInventory, HttpStatus.OK);
+//    }
+
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<Seller> addProductToSellersInventory(@PathVariable long id,
+                                                               @RequestBody Product product){
+            Seller seller = sellerService.addProductToSellersInventory(id, id);
+            return new ResponseEntity<>(seller, HttpStatus.OK);
+    }
+
+
 
     // /seller/list/{id}
     // listProduct (@patchmapping)
