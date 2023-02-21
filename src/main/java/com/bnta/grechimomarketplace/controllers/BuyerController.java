@@ -1,11 +1,8 @@
 package com.bnta.grechimomarketplace.controllers;
 
 
+import com.bnta.grechimomarketplace.models.*;
 import com.bnta.grechimomarketplace.models.Order;
-import com.bnta.grechimomarketplace.models.Buyer;
-import com.bnta.grechimomarketplace.models.Order;
-import com.bnta.grechimomarketplace.models.Seller;
-import com.bnta.grechimomarketplace.models.ShoppingCartDTO;
 import com.bnta.grechimomarketplace.services.BuyerService;
 import com.bnta.grechimomarketplace.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,18 +38,34 @@ public class BuyerController {
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
-
     // update your details
     // use @PatchMapping (probably)
-    //USE REQUESTBODY - make sure you can either update some or all fields
-    // update email
-    // update address
-    // update card details
+    @PatchMapping(value = "{buyerId}")
+    public ResponseEntity<Buyer> updateBuyerDetails(@PathVariable Long buyerId, @RequestBody Buyer buyer){
+        Buyer updateBuyer = buyerService.getBuyerById(buyerId);
+        updateBuyer = buyer;
+        return new ResponseEntity<>(updateBuyer, HttpStatus.OK);
+    }
+
+//    @PatchMapping(value = "name/{buyerId}")
+//    public ResponseEntity<Buyer> updateBuyerName(@PathVariable Long id, @RequestBody Buyer buyer){
+//        Buyer updateBuyer = buyerService.getBuyerById(id);
+//        updateBuyer.setName(buyer.getName());
+//        return new ResponseEntity<>(updateBuyer, HttpStatus.OK);
+//    }
+
+
+    // to be able to update all at once
 
 
     // replace card
     // @PutMapping
-
+    @PutMapping(value = "/{buyerId}")
+    public ResponseEntity<BankCard> replaceBankCard(@PathVariable Long buyerId, @RequestBody BankCard newBankCard ){
+        Buyer buyer = buyerService.getBuyerById(buyerId);
+        buyer.setCard(newBankCard);
+        return new ResponseEntity<>(buyer.getCard(), HttpStatus.CREATED);
+    }
 
 
     @PatchMapping(value = "/{buyerId}/product/{productId}")

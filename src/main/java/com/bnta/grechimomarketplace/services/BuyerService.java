@@ -41,6 +41,11 @@ public class BuyerService {
         return orderRepository.findAll();
     }
 
+    public Buyer getBuyerById(long buyerId){
+        return buyerRepository.findById(buyerId).get();
+
+    }
+
 
     public ShoppingCartDTO addProductToCart(long buyerId, long productId) {
         Product product = productRepository.findById(productId).get();
