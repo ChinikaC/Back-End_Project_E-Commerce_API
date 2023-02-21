@@ -1,5 +1,6 @@
 package com.bnta.grechimomarketplace.services;
 
+import com.bnta.grechimomarketplace.models.*;
 import com.bnta.grechimomarketplace.models.Buyer;
 import com.bnta.grechimomarketplace.models.Order;
 import com.bnta.grechimomarketplace.models.Product;
@@ -26,6 +27,11 @@ public class BuyerService {
 
     @Autowired
     OrderRepository orderRepository;
+    public Buyer addNewBuyer(Buyer buyer){
+        buyerRepository.save(buyer);
+        return buyer;
+    }
+
 
     public ShoppingCartDTO addProductToCart(long buyerId, long productId) {
         Product product = productRepository.findById(productId).get();

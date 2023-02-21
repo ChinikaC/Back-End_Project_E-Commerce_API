@@ -16,7 +16,6 @@ public class SellerController {
     @Autowired
     SellerService sellerService;
 
-
     // register
     // would use the @PostMapping function to add a new user
     @PostMapping
@@ -26,14 +25,6 @@ public class SellerController {
     }
 
     // createProduct (post mapping) --> to create & add a new product to the seller's inventory
-//    @PostMapping(value ="/{sellerId}/product/")
-//    public ResponseEntity<Product> addProductToSellersInventory (@PathVariable Long sellerId,
-//                                                                 @RequestBody Product product){
-//        Product newProduct = productService.addNewProduct(product);
-//        return new ResponseEntity<>(product, HttpStatus.CREATED);
-//    }
-
-
     @PatchMapping(value = "/{id}")
     public ResponseEntity<Product> addProductToSellersInventory(@PathVariable long id,
                                                                @RequestBody Product product){
@@ -45,6 +36,11 @@ public class SellerController {
     // listProduct (@patchmapping)
     // Changing product listing from false to true
     //Have a @requestparam which will take in true or false depending on whether it is listed or not
+
+//    @PatchMapping(value = "/{id}")
+//    public ResponseEntity<Product>
+
+
 
     //deleteProduct (@DeleteMapping)
 
