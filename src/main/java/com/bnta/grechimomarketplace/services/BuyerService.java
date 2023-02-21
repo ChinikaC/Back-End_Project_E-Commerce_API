@@ -38,12 +38,30 @@ public class BuyerService {
         Buyer buyer = buyerRepository.findById(buyerId).get();
         buyer.getCart().add(product);
         buyerRepository.save(buyer);
-        return new ShoppingCartDTO(buyer.getCart(), buyer.getCartTotalValue(), buyer.getCart().size());
+
+        List<Product> products = buyer.getCart();
+
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        for (Product p : products) {
+            productDTOs.add(new ProductDTO(p.getId(), p.getName(), p.getPrice(), p.getDescription(), p.getSeller().getName()));
+        }
+
+
+        return new ShoppingCartDTO(productDTOs, buyer.getCartTotalValue(), buyer.getCart().size());
     }
 
     public ShoppingCartDTO getCart(long buyerId) {
-        Optional<Buyer> buyer = buyerRepository.findById(buyerId);
-        return new ShoppingCartDTO(buyer.get().getCart(), buyer.get().getCartTotalValue(), buyer.get().getCart().size());
+        Buyer buyer = buyerRepository.findById(buyerId).get();
+
+        List<Product> products = buyer.getCart();
+
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        for (Product p : products) {
+            productDTOs.add(new ProductDTO(p.getId(), p.getName(), p.getPrice(), p.getDescription(), p.getSeller().getName()));
+        }
+
+
+        return new ShoppingCartDTO(productDTOs, buyer.getCartTotalValue(), buyer.getCart().size());
     }
 
     public Order placeOrder(long buyerId, String address) {

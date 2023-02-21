@@ -1,5 +1,6 @@
 package com.bnta.grechimomarketplace.controllers;
 import com.bnta.grechimomarketplace.models.Product;
+import com.bnta.grechimomarketplace.models.ProductDTO;
 import com.bnta.grechimomarketplace.models.ShoppingCartDTO;
 import com.bnta.grechimomarketplace.services.BuyerService;
 import com.bnta.grechimomarketplace.services.ProductService;
@@ -27,16 +28,16 @@ public class ProductController {
     // return all products OR search for a specific product
     // 1 request param for a fuzzy match of the product category (EXTENSION)
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts(@RequestParam Optional<String> searchQuery) {
+    public ResponseEntity<List<ProductDTO>> getAllProducts(@RequestParam Optional<String> searchQuery) {
         if (searchQuery.isPresent()) {
-            List<Product> products = productService.getAllProductsContainingString(searchQuery.get());
+            List<ProductDTO> products = productService.getAllProductsContainingString(searchQuery.get());
             if (products.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             } else {
                 return new ResponseEntity<>(products, HttpStatus.OK);
             }
         } else {
-            List<Product> products = productService.getAllProducts();
+            List<ProductDTO> products = productService.getAllProducts();
             if (products.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
