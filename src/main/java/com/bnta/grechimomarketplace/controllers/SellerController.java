@@ -41,11 +41,6 @@ public class SellerController {
 //        return new ResponseEntity<>(updatedInventory, HttpStatus.OK);
 //    }
 
-    @PatchMapping(value = "/{id}")
-    public ResponseEntity<Seller> addProductToSellersInventory(@PathVariable long id,
-                                                               @RequestBody Product product){
-            Seller seller = sellerService.addProductToSellersInventory(id, id);
-            return new ResponseEntity<>(seller, HttpStatus.OK);
     }
 
 

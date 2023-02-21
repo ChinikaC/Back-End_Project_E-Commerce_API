@@ -23,15 +23,6 @@ public class SellerService {
         return seller;
     }
 
-    // AddProductToSellersInventory
-    public Seller addProductToSellersInventory(long sellerId, long productId){
-        Seller seller = sellerRepository.findById(sellerId).get();
-        Product product = productRepository.findById(productId).get();
-        List<Product> products = seller.getProducts();
-        products.add(product);
-        sellerRepository.save(seller);
-        return seller;
 
-    }
 
 }
