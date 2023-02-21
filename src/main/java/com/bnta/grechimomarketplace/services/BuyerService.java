@@ -1,14 +1,14 @@
 package com.bnta.grechimomarketplace.services;
 
+import com.bnta.grechimomarketplace.models.*;
 import com.bnta.grechimomarketplace.models.Buyer;
-import com.bnta.grechimomarketplace.models.Product;
-import com.bnta.grechimomarketplace.models.ShoppingCartDTO;
 import com.bnta.grechimomarketplace.repositories.BuyerRepository;
 import com.bnta.grechimomarketplace.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -19,6 +19,12 @@ public class BuyerService {
 
     @Autowired
     BuyerRepository buyerRepository;
+
+    public Buyer addNewBuyer(Buyer buyer){
+        buyerRepository.save(buyer);
+        return buyer;
+    }
+
 
     public ShoppingCartDTO addProductToCart(long buyerId, long productId) {
         Product product = productRepository.findById(productId).get();
