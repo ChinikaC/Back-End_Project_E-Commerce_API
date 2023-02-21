@@ -54,8 +54,6 @@ public class BuyerController {
     // @PutMapping
 
 
-    // addProductToCart --> move to buyer
-    // @PatchMapping --> add product from seller's inventory to cart so buyer can purchase it
 
     @PatchMapping(value = "/{buyerId}/product/{productId}")
     public ResponseEntity<ShoppingCartDTO> addProductToCart(@PathVariable Long buyerId,

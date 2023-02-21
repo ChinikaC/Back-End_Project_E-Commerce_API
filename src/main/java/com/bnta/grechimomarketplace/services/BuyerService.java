@@ -68,8 +68,8 @@ public class BuyerService {
         for (Product product : buyerCart) {
             long productValue = product.getPrice();
             BankCard sellerCard = product.getSeller().getCard();
-            buyerCard.addMoney(productValue);
-            sellerCard.reduceMoney(productValue);
+            buyerCard.reduceMoney(productValue);
+            sellerCard.addMoney(productValue);
         }
         Order order = new Order(buyer.get(), address);
         orderRepository.save(order);
