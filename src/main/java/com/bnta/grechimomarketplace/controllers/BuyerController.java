@@ -1,5 +1,7 @@
 package com.bnta.grechimomarketplace.controllers;
 
+
+import com.bnta.grechimomarketplace.models.Order;
 import com.bnta.grechimomarketplace.models.Buyer;
 import com.bnta.grechimomarketplace.models.Order;
 import com.bnta.grechimomarketplace.models.Seller;
@@ -30,11 +32,12 @@ public class BuyerController {
 
     // view all orders
     // @GetMapping to view all orders
-    @GetMapping
-    public ResponseEntity<List<Order>> getAllOrders(){
-        List<Order> orders = orderService.getAllOrders();
-        return new ResponseEntity<>(orders, HttpStatus.OK);
-    }
+
+//    @GetMapping
+//    public ResponseEntity<List<Order>> getAllOrders(){
+//        List<Order> orders = orderService.getAllOrders();
+//        return new ResponseEntity<>(orders, HttpStatus.OK);
+//    }
 
 
 
@@ -65,10 +68,10 @@ public class BuyerController {
 
     // viewCart() --> return shopping cart DTO --> move to buyer
 
-
-
-
-
+    @GetMapping(value = "/{buyerId}/cart")
+    public ResponseEntity<ShoppingCartDTO> viewCart(@PathVariable Long buyerId) {
+        return new ResponseEntity<>(buyerService.getCart(buyerId), HttpStatus.OK);
+    }
 
     // checkOut
     // @PostMapping
@@ -79,5 +82,10 @@ public class BuyerController {
     // transfer money from buyer card to sellerS CardsS
     //deduct quantity of items from seller
 
+    @PostMapping(value = "/{buyerId}")
+    public ResponseEntity<Order> placeOrder(@PathVariable Long buyerId,
+                                            @RequestParam String address) {
+        return new ResponseEntity<>(buyerService.placeOrder(buyerId, address), HttpStatus.OK);
+    }
 
 }
