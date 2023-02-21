@@ -21,13 +21,12 @@ ProductRepository productRepository;
 BuyerRepository buyerRepository;
 
     public List<ProductDTO> getAllProducts() {
-        List<Product> products = productRepository.findAll();
-        List<ProductDTO> productDTOs = new ArrayList<>();
+        List<Product> products = productRepository.findByListedTrue();
         return generateProductDTOs(products);
     }
 
     public List<ProductDTO> getAllProductsContainingString(String string) {
-        List<Product> products = productRepository.findByNameContainingIgnoreCase(string);
+        List<Product> products = productRepository.findByNameContainingIgnoreCaseAndListedIsTrue(string);
         return generateProductDTOs(products);
     }
 
