@@ -49,6 +49,14 @@ public class Buyer {
         
     }
 
+    public long getCartTotalValue() {
+        long totalValue = 0;
+        for (Product product : cart) {
+            totalValue += product.getPrice();
+        }
+        return totalValue;
+    }
+
     public long getId() {
         return id;
     }
@@ -105,11 +113,11 @@ public class Buyer {
         this.address = address;
     }
 
-//    public List<Product> getCart() {
-//        return cart;
-//    }
-//
-//    public void setCart(List<Product> cart) {
-//        this.cart = cart;
-//    }
+    public List<Product> getCart() {
+        return cart;
+    }
+
+    public void setCart(List<Product> cart) {
+        this.cart = cart;
+    }
 }
