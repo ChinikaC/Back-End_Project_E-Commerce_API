@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/sellers")
 public class SellerController {
@@ -45,6 +47,15 @@ public class SellerController {
     // listProduct (@patchmapping)
     // Changing product listing from false to true
     //Have a @requestparam which will take in true or false depending on whether it is listed or not
+
+//    @PatchMapping(value = "/{id}")
+//    public ResponseEntity<Product> changeProductListing(@RequestParam (required = false, name = "listing")
+//                                                            Boolean listing){
+//        List<Product> products;
+//        if (product.equals() == ){
+//
+//        }
+//    }
 
     //deleteProduct (@DeleteMapping)
 
