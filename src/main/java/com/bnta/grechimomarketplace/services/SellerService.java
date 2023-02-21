@@ -18,7 +18,7 @@ public class SellerService {
     @Autowired
     ProductRepository productRepository;
 
-    public Seller addNewSeller(Seller seller){
+    public Seller register (Seller seller){
         sellerRepository.save(seller);
         return seller;
     }

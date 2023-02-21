@@ -30,8 +30,8 @@ public class SellerController {
     // register
     // would use the @PostMapping function to add a new user
     @PostMapping
-    public ResponseEntity<Seller> addNewSeller (@RequestBody Seller seller){
-        Seller savedSeller = sellerService.addNewSeller(seller);
+    public ResponseEntity<Seller> register (@RequestBody Seller seller){
+        Seller savedSeller = sellerService.register(seller);
         return new ResponseEntity<>(seller, HttpStatus.CREATED);
     }
 
@@ -51,8 +51,6 @@ public class SellerController {
     // have a delist and list link
 
 
-
-
     @PatchMapping(value = "product/{productId}/list")
     public ResponseEntity<Product> changingListingToTrue(@PathVariable long productId){
         Product product = sellerService.getProductById(productId);
@@ -68,7 +66,6 @@ public class SellerController {
         product.setListed(false);
         productRepository.save(product);
         return new ResponseEntity<>(product, HttpStatus.OK);
-
     }
 
         //deleteProduct (@DeleteMapping)
