@@ -19,6 +19,8 @@ public class ProductController {
     // 1 request param for a fuzzy match of the product category (EXTENSION)
 
 
+
+
     // addProductToCart
     // @PostMapping --> add product from seller's inventory to cart so buyer can purchase it
 

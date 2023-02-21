@@ -16,7 +16,6 @@ public class BuyerController {
     // @GetMapping to view all orders
 
 
-
     // update your details
     // use @PatchMapping (probably)
     //USE REQUESTBODY - make sure you can either update some or all fields
