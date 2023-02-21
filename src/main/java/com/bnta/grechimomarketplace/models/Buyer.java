@@ -26,6 +26,7 @@ public class Buyer {
     private String password;
     
     @Transient
+    @JsonIgnoreProperties({"orders"})
     private List<Product> cart;
 
     @OneToOne
@@ -51,10 +52,12 @@ public class Buyer {
 
     public long getCartTotalValue() {
         long totalValue = 0;
-        for (Product product : cart) {
-            totalValue += product.getPrice();
-        }
-        return totalValue;
+        if (!(cart == null) && !(cart.isEmpty())) {
+            for (Product product : cart) {
+                totalValue += product.getPrice();
+            }
+            return totalValue;
+        } else return 0l;
     }
 
     public long getId() {
@@ -114,10 +117,17 @@ public class Buyer {
     }
 
     public List<Product> getCart() {
+        if (this.cart == null) {
+            this.cart = new ArrayList<>();
+        }
         return cart;
     }
 
     public void setCart(List<Product> cart) {
         this.cart = cart;
     }
+
+//    public void addToCart(Product product) {
+//        this.cart.add(product);
+//    }
 }

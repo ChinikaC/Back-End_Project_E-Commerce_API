@@ -7,6 +7,7 @@ import com.bnta.grechimomarketplace.repositories.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,11 +28,5 @@ BuyerRepository buyerRepository;
         return productRepository.findByNameContainingIgnoreCase(string);
     }
 
-    public ShoppingCartDTO addProductToCart(long productId, long buyerId) {
-        Product product = productRepository.findById(productId).get();
-        Buyer buyer = buyerRepository.findById(buyerId).get();
-        buyer.getCart().add(product);
-        return new ShoppingCartDTO(buyer.getCart(), buyer.getCartTotalValue(), buyer.getCart().size());
-    }
 
 }
