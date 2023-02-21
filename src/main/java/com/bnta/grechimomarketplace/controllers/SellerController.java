@@ -16,6 +16,9 @@ public class SellerController {
     @Autowired
     SellerService sellerService;
 
+    @Autowired
+    ProductService productService;
+
     // register
     // would use the @PostMapping function to add a new user
     @PostMapping
@@ -36,6 +39,7 @@ public class SellerController {
     // listProduct (@patchmapping)
     // Changing product listing from false to true
     //Have a @requestparam which will take in true or false depending on whether it is listed or not
+    // have a delist and list link
 
 
 
