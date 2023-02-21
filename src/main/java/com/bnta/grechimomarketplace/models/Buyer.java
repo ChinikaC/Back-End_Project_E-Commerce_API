@@ -25,8 +25,11 @@ public class Buyer {
     @Column
     private String password;
     
-    @Transient
-    @JsonIgnoreProperties({"orders"})
+    @ManyToMany
+    @JoinTable(name = "buyers_products",
+            joinColumns = @JoinColumn(name = "buyer_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    @JsonIgnoreProperties({"orders","buyers"})
     private List<Product> cart;
 
     @OneToOne
@@ -51,8 +54,8 @@ public class Buyer {
     }
 
     public long getCartTotalValue() {
-        long totalValue = 0;
-        if (!(cart == null) && !(cart.isEmpty())) {
+        long totalValue = 0l;
+        if (!cart.isEmpty()) {
             for (Product product : cart) {
                 totalValue += product.getPrice();
             }
@@ -117,9 +120,6 @@ public class Buyer {
     }
 
     public List<Product> getCart() {
-        if (this.cart == null) {
-            this.cart = new ArrayList<>();
-        }
         return cart;
     }
 
@@ -127,7 +127,7 @@ public class Buyer {
         this.cart = cart;
     }
 
-//    public void addToCart(Product product) {
-//        this.cart.add(product);
-//    }
+    public void addToCart(Product product) {
+        this.cart.add(product);
+    }
 }
