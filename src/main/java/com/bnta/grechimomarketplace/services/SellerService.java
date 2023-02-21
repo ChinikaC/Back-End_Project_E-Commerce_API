@@ -33,6 +33,10 @@ public class SellerService {
         return product;
     }
 
+    public Product getProductById(long productId){
+       return productRepository.findById(productId).get();
+    }
+
 
     }
 
