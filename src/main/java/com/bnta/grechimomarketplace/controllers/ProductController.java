@@ -1,6 +1,7 @@
 package com.bnta.grechimomarketplace.controllers;
 import com.bnta.grechimomarketplace.models.Product;
 import com.bnta.grechimomarketplace.models.ShoppingCartDTO;
+import com.bnta.grechimomarketplace.services.BuyerService;
 import com.bnta.grechimomarketplace.services.ProductService;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    
+    @Autowired
+    private BuyerService buyerService;
 
 
     // return all products OR search for a specific product
@@ -42,32 +46,5 @@ public class ProductController {
     }
     // TURN THIS INTO A DTO
 
-
-    // addProductToCart
-    // @PatchMapping --> add product from seller's inventory to cart so buyer can purchase it
-
-    @PatchMapping(value = "/{productId}/buyer/{buyerId}")
-    public ResponseEntity<ShoppingCartDTO> addProductToCart(@PathVariable Long productId,
-                                                            @PathVariable Long buyerId) {
-        return new ResponseEntity<>(productService.addProductToCart(productId, buyerId), HttpStatus.OK);
-    }
-
-
-
-    // viewCart() --> return shopping cart DTO
-
-
-
-
-
-
-    // checkOut
-    // @PostMapping
-    // buyer cart to be transferred to new Order object
-    // Order order = new Order();
-    // order.getProducts.set(cart)
-    // set cart to empty arraylist
-    // transfer money from buyer card to sellerS CardsS
-     //deduct quantity of items from seller
 
 }

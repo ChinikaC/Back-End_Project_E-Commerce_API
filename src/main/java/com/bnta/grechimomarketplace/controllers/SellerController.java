@@ -45,6 +45,29 @@ public class SellerController {
 
 
 
+
+//    @PatchMapping(value = "/{id}")
+//    public ResponseEntity<Seller> addProductToSellersInventory( @RequestBody Product product, @PathVariable long id){
+//        long sellerId = product.getId();
+//        Seller updatedInventory = sellerService.addProductToSellersInventory(id, product);
+//        return new ResponseEntity<>(updatedInventory, HttpStatus.OK);
+//    }
+
+//    @PatchMapping(value = "/{id}")
+//    public ResponseEntity<Seller> addProductToSellersInventory(@PathVariable long id,
+//                                                               @RequestBody Product product){
+//        Seller seller = sellerService.addProductToSellersInventory(id, product);
+//        return new ResponseEntity<>(seller, HttpStatus.OK);
+//    }
+
+
+
+
+
+
+
+
+
     // /seller/list/{id}
     // listProduct (@patchmapping)
     // Changing product listing from false to true
