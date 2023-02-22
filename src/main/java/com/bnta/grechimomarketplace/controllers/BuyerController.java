@@ -6,6 +6,7 @@ import com.bnta.grechimomarketplace.models.Order;
 import com.bnta.grechimomarketplace.repositories.BankCardRepository;
 import com.bnta.grechimomarketplace.services.BuyerService;
 import com.bnta.grechimomarketplace.services.OrderService;
+import com.bnta.grechimomarketplace.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/buyers")
 public class BuyerController {
+
+    @Autowired
+    ProductService productService;
 
     @Autowired
     BuyerService buyerService;
@@ -58,6 +62,9 @@ public class BuyerController {
     @PatchMapping(value = "/{buyerId}/product/{productId}")
     public ResponseEntity<ShoppingCartDTO> addProductToCart(@PathVariable Long buyerId,
                                                             @PathVariable Long productId) {
+        Buyer buyer = buyerService.getBuyerById(buyerId);
+        Product product = productService.getProductById(productId);
+        if (buyer == null || product == null ) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         ShoppingCartDTO dto = buyerService.addProductToCart(buyerId, productId);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
@@ -77,6 +84,8 @@ public class BuyerController {
     @PostMapping(value = "/{buyerId}")
     public ResponseEntity<Order> placeOrder(@PathVariable Long buyerId,
                                             @RequestParam String address) {
+        Buyer buyer = buyerService.getBuyerById(buyerId);
+        if (buyer == null) return new ResponseEntity<> (HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(buyerService.placeOrder(buyerId, address), HttpStatus.OK);
     }
 
