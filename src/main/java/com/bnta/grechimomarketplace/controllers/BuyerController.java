@@ -87,8 +87,9 @@ public class BuyerController {
     @GetMapping(value = "/{buyerId}/admin")
     public ResponseEntity<Buyer> getBuyerById(@PathVariable Long buyerId){
         Optional<Buyer> buyer = buyerService.getBuyerById(buyerId);
-        return new ResponseEntity(buyer, buyer != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
-    } // Check this is okay
+        if (buyer.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity(buyerService.getBuyerById(buyerId), HttpStatus.OK);
+    }
 
     @GetMapping(value = "/{buyerId}")
     public ResponseEntity<BuyerDTO> findBuyerDTOById(@PathVariable Long buyerId){
