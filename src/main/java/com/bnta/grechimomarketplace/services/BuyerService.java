@@ -37,12 +37,36 @@ public class BuyerService {
         return buyer;
     }
 
-
-    public Buyer getBuyerById(long buyerId){
-        return buyerRepository.findById(buyerId).get();
-
+    public List<Buyer> findAllBuyers() {
+        List<Buyer> buyers = buyerRepository.findAll();
+        return buyers;
     }
 
+
+    public Buyer getBuyerById(long buyerId){
+        Buyer buyer = buyerRepository.findById(buyerId).get();
+        return buyer;
+    }
+
+    public Buyer getBuyersById(long buyerId){
+        Buyer buyer = buyerRepository.findById(buyerId).get();
+        return buyer;
+    }
+
+    public BuyerDTO generateBuyerDTO(Buyer buyer){
+        return new BuyerDTO(buyer.getId(), buyer.getName(), buyer.getEmail(), buyer.getAddress(),
+                buyer.getBuyerShoppingCartDTO(), buyer.getBuyerOrderDTOs());
+    }
+
+    public List<BuyerDTO> generateBuyerDTOs(List<Buyer> buyers) {
+        List<BuyerDTO> buyerDTOs = new ArrayList<>();
+        for (Buyer buyer : buyers) {
+            buyerDTOs.add(new BuyerDTO(buyer.getId(), buyer.getName(), buyer.getEmail(), buyer.getAddress(),
+                    buyer.getBuyerShoppingCartDTO(),
+                    buyer.getBuyerOrderDTOs()));
+        }
+        return buyerDTOs;
+    }
 
     public ShoppingCartDTO addProductToCart(long buyerId, long productId) {
         Product product = productRepository.findById(productId).get();
@@ -77,19 +101,5 @@ public class BuyerService {
         buyer.get().emptyCart();
         orderRepository.save(order);
         return order;
-    }
-
-    public List<BuyerDTO> generateBuyerDTOs(List<Buyer> buyers) {
-        List<BuyerDTO> buyerDTOs = new ArrayList<>();
-        for (Buyer buyer : buyers) {
-            buyerDTOs.add(new BuyerDTO(buyer.getId(), buyer.getName(), buyer.getEmail(), buyer.getAddress(),
-                            buyer.getBuyerShoppingCartDTO(),
-                            buyer.getBuyerOrderDTOs()));
-        }
-        return buyerDTOs;
-    }
-
-    public List<Buyer> findAllBuyers() {
-        return buyerRepository.findAll();
     }
 }

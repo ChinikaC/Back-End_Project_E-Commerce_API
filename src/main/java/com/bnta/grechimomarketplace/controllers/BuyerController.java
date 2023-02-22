@@ -75,11 +75,21 @@ public class BuyerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Buyer>> getAllBuyers(){
+    public ResponseEntity<List<BuyerDTO>> getAllBuyers(){
         List<Buyer> buyers = buyerService.findAllBuyers();
         if(buyers.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        return new ResponseEntity(buyers, HttpStatus.OK);
+        return new ResponseEntity(buyerService.generateBuyerDTOs(buyers), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/{buyerId}/admin")
+    public ResponseEntity<Buyer> getBuyersById(@PathVariable Long buyerId){
+        Buyer buyer = buyerService.getBuyerById(buyerId);
+        return new ResponseEntity(buyer, buyer != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    } // Check this is okay
+
+    // buyers/id/admin
+
+    // buyers/id
 
     @PostMapping(value = "/{buyerId}")
     public ResponseEntity<Order> placeOrder(@PathVariable Long buyerId,
