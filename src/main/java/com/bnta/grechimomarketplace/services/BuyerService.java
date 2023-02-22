@@ -43,14 +43,14 @@ public class BuyerService {
     }
 
 // do not touch this method!!
-    public Buyer getBuyerById(long buyerId){
-        Buyer buyer = buyerRepository.findById(buyerId).get();
+    public Optional<Buyer> getBuyerById(long buyerId){
+        Optional <Buyer> buyer = buyerRepository.findById(buyerId);
         return buyer;
     }
 
-    public BuyerDTO searchBuyersById(long buyerId){
+    public BuyerDTO findBuyerDTOById(long buyerId){
         Buyer buyer = buyerRepository.findById(buyerId).get();
-        return generateBuyerDTO(buyer); // this method
+        return generateBuyerDTO(buyer);
     }
 
     public BuyerDTO generateBuyerDTO(Buyer buyer){
