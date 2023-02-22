@@ -1,5 +1,7 @@
 package com.bnta.grechimomarketplace.controllers;
 
+import com.bnta.grechimomarketplace.models.Buyer;
+import com.bnta.grechimomarketplace.models.BuyerDTO;
 import com.bnta.grechimomarketplace.models.Seller;
 import com.bnta.grechimomarketplace.models.SellerDTO;
 import com.bnta.grechimomarketplace.repositories.ProductRepository;
@@ -34,15 +36,19 @@ public class SellerController {
         return new ResponseEntity(sellerService.getAllSellers(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<SellerDTO> getSellerById(@PathVariable Long id){
-        Optional<Seller> seller = sellerService.getSellerById(id);
+    @GetMapping(value = "/{sellerId}/admin")
+    public ResponseEntity<Seller> getSellerById(@PathVariable Long sellerId) {
+        Optional<Seller> seller = sellerService.getSellerById(sellerId);
         if (seller.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity(sellerService.getSellerDTOById(id), HttpStatus.OK);
-    } // Find out why the not_found isn't working
-    
+        return new ResponseEntity(sellerService.getSellerById(sellerId), HttpStatus.OK);
+    }
 
-    // add in sellers/id/admin
+    @GetMapping(value = "/{sellerId}")
+    public ResponseEntity<SellerDTO> findSellerDTOById(@PathVariable Long sellerId){
+        Optional<Seller> seller = sellerService.getSellerById(sellerId);
+        if (seller.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity(sellerService.findSellerDTOById(sellerId), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<Seller> register (@RequestBody Seller seller){
@@ -64,6 +70,7 @@ public class SellerController {
         sellerService.deleteAccount(id);
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
+
 
 
 }

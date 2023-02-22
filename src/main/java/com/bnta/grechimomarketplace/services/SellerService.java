@@ -1,5 +1,7 @@
 package com.bnta.grechimomarketplace.services;
 
+import com.bnta.grechimomarketplace.models.Buyer;
+import com.bnta.grechimomarketplace.models.BuyerDTO;
 import com.bnta.grechimomarketplace.models.Seller;
 import com.bnta.grechimomarketplace.models.SellerDTO;
 import com.bnta.grechimomarketplace.repositories.ProductRepository;
@@ -31,14 +33,14 @@ public class SellerService {
         return generateSellerDTOs(sellers);
     }
 
-    public SellerDTO getSellerDTOById(long id){
-        Seller seller = sellerRepository.findById(id).get();
-        return generateSellerDTO(seller);
-    }
-
-    public Optional<Seller> getSellerById(long id){
-        Optional<Seller> seller = sellerRepository.findById(id);
+    public Optional<Seller> getSellerById(long sellerId){
+        Optional <Seller> seller = sellerRepository.findById(sellerId);
         return seller;
+    } //admin
+
+    public SellerDTO findSellerDTOById(long sellerId){
+        Seller seller = sellerRepository.findById(sellerId).get();
+        return generateSellerDTO(seller);
     }
 
     public SellerDTO generateSellerDTO(Seller seller){
@@ -80,7 +82,6 @@ public class SellerService {
         sellerRepository.deleteById(id);
 
     }
-
 
 
 
