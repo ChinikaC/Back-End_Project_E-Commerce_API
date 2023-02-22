@@ -2,11 +2,13 @@ package com.bnta.grechimomarketplace.services;
 
 import com.bnta.grechimomarketplace.models.Product;
 import com.bnta.grechimomarketplace.models.Seller;
+import com.bnta.grechimomarketplace.models.SellerDTO;
 import com.bnta.grechimomarketplace.repositories.ProductRepository;
 import com.bnta.grechimomarketplace.repositories.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,12 +26,28 @@ public class SellerService {
         return seller;
     }
 
-    public List<Seller> findAllSellers(){
-        return sellerRepository.findAll();
+    public List<SellerDTO> getAllSellers(){
+        List<Seller> sellers = sellerRepository.findAll();
+        return generateSellerDTOs(sellers);
     }
 
-    public Seller getSellerById(long id){
-        return sellerRepository.findById(id).get();
+    public SellerDTO getSellerById(long id){
+        Seller seller = sellerRepository.findById(id).get();
+        return generateSellerDTO(seller);
+    }
+
+    public SellerDTO generateSellerDTO(Seller seller){
+        return new SellerDTO(seller.getId(), seller.getName(), seller.getEmail(),
+                seller.getAddress(), seller.getSellerProductDTOs());
+    }
+
+    public List<SellerDTO> generateSellerDTOs(List<Seller> sellers){
+        List<SellerDTO> sellerDTOs = new ArrayList<>();
+        for (Seller seller : sellers) {
+            sellerDTOs.add(new SellerDTO(seller.getId(), seller.getName(), seller.getEmail(),
+                    seller.getAddress(), seller.getSellerProductDTOs()));
+        }
+        return sellerDTOs;
     }
 
     public Seller updateSeller(Seller updateSellerDetails){
