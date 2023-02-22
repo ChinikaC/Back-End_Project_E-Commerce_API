@@ -25,7 +25,6 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "seller_id")
     @JsonIgnoreProperties({"products"})
-    @JsonIgnore
     private Seller seller;
 
     @Column

@@ -60,7 +60,37 @@ public class ProductController {
     }
 
 
+    @PatchMapping(value = "/update/{productId}")
+    public ResponseEntity<Product> updateProduct(@PathVariable long productId,
+                                                 @RequestParam Optional<String> name,
+                                                 @RequestParam Optional<Long> price,
+                                                 @RequestParam Optional<String> description,
+                                                 @RequestParam Optional<Boolean> listed,
+                                                 @RequestParam Optional<Boolean> fulfilled,
+                                                 @RequestParam Optional<Long> stock) {
+        Product existingProduct = productService.getProductById(productId);
+        if (existingProduct == null) return new ResponseEntity(HttpStatus.NOT_FOUND);
 
+        if (name.isPresent()) existingProduct.setName(name.get());
+        if (price.isPresent()) existingProduct.setPrice(price.get());
+        if (description.isPresent()) existingProduct.setDescription(description.get());
+        if (listed.isPresent()) existingProduct.setListed(listed.get());
+        if (fulfilled.isPresent()) existingProduct.setFulfilled(fulfilled.get());
+        if (stock.isPresent()) existingProduct.setStock(stock.get());
 
+        productService.saveProduct(existingProduct);
+        return new ResponseEntity<>(existingProduct, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/{productId}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable long productId) {
+        Product product = productService.getProductById(productId);
+        if (product == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            productService.deleteProduct(productId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
 
 }

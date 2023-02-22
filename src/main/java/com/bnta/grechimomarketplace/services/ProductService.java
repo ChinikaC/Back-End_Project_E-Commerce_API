@@ -64,5 +64,11 @@ SellerRepository sellerRepository;
         return productRepository.findById(productId).get();
     }
 
+    public void saveProduct(Product product) {
+        productRepository.save(product);
+    }
 
+    public void deleteProduct(long productId) {
+        productRepository.deleteById(productId);
+    }
 }

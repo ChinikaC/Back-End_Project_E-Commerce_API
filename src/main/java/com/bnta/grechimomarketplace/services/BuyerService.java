@@ -37,9 +37,6 @@ public class BuyerService {
         return buyer;
     }
 
-    public List<Order> getAllOrders(){
-        return orderRepository.findAll();
-    }
 
     public Buyer getBuyerById(long buyerId){
         return buyerRepository.findById(buyerId).get();
