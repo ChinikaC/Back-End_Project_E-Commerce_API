@@ -43,7 +43,7 @@ public class DataLoader implements ApplicationRunner {
         for (int i = 0; i < buyerNames.length; i++) {
             BankCard card = new BankCard(10000l);
             bankCardRepository.save(card);
-            Buyer buyer = new Buyer(buyerNames[i], buyerNames[i] + "@bnta.com", (i + 1) + " Fake Street", "password" + (i + 1), card);
+            Buyer buyer = new Buyer(buyerNames[i], buyerNames[i] + "@bnta.com", "5th floor, " + (i+11) + " Middlesex St, London E1 7EZ", "password" + (i + 1), card);
             card.setAccountName(buyer.getName());
             bankCardRepository.save(card);
             buyerRepository.save(buyer);
@@ -93,7 +93,7 @@ public class DataLoader implements ApplicationRunner {
         // Load 30 Products & 10 Sellers
         for (int i = 0; i < sellerNames.length; i++) {
             BankCard card = new BankCard(1000l);
-            Seller seller = new Seller(sellerNames[i], card, sellerNames[i] + "@bnta.com", "5th floor, " + (i+1) + " Middlesex St, London E1 7EZ", "password" + (i + 1), new ArrayList<>());
+            Seller seller = new Seller(sellerNames[i], card, sellerNames[i] + "@bnta.com", "5th floor, " + (i+111) + " Middlesex St, London E1 7EZ", "password" + (i + 1), new ArrayList<>());
             card.setAccountName(seller.getName());
             bankCardRepository.save(card);
             sellerRepository.save(seller);
