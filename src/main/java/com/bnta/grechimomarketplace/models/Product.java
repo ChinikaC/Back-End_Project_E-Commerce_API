@@ -125,4 +125,8 @@ public class Product {
     public void setStock(long stock) {
         this.stock = stock;
     }
+
+    public void decrementStock() {
+        stock -= 1;
+    }
 }

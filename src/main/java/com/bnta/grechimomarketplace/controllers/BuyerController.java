@@ -102,6 +102,7 @@ public class BuyerController {
                                             @RequestParam String address) {
         Optional<Buyer> buyer = buyerService.getBuyerById(buyerId);
         if (buyer.isEmpty()) return new ResponseEntity<> (HttpStatus.NOT_FOUND);
+        if (buyer.get().getCart() == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(buyerService.placeOrder(buyerId, address), HttpStatus.OK);
     }
 

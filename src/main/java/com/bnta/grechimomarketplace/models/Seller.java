@@ -43,6 +43,7 @@ public class Seller {
     }
 
     public Seller() {
+        this.products = new ArrayList<>();
     }
 
     public long getId() {
@@ -105,7 +106,7 @@ public class Seller {
         List<ProductDTO> productDTOs = new ArrayList<>();
         for(Product product : products){
             productDTOs.add(new ProductDTO(product.getId(), product.getName(), product.getPrice(), product.getDescription(),
-                    product.getSeller().getName(), product.getSeller().getId()));
+                    product.getSeller().getName(), product.getSeller().getId(), product.getStock()));
         }
         return productDTOs;
     }
