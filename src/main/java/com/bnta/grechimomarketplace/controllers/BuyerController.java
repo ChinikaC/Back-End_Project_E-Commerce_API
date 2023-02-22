@@ -29,9 +29,9 @@ public class BuyerController {
     BankCardRepository bankCardRepository;
 
     @PostMapping
-    public ResponseEntity<Buyer> addNewBuyer (@RequestBody Buyer buyer) {
+    public ResponseEntity<Buyer> addNewBuyer (@RequestBody(required = true) Buyer buyer) {
         if (buyer.getCard() == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        // bankCardRepository.save(buyer.getCard());
+         bankCardRepository.save(buyer.getCard());
         return new ResponseEntity<>(buyerService.addNewBuyer(buyer), HttpStatus.CREATED);
     }
 
@@ -49,6 +49,7 @@ public class BuyerController {
         if (email.isPresent()) buyer.setEmail(email.get());
         if (address.isPresent()) buyer.setAddress(address.get());
         if (password.isPresent()) buyer.setPassword(name.get());
+        buyerService.saveBuyer(buyer);
         return new ResponseEntity<>(buyer, HttpStatus.OK);
     }
 
@@ -56,6 +57,8 @@ public class BuyerController {
     public ResponseEntity<BankCard> replaceBankCard(@PathVariable Long buyerId, @RequestBody BankCard newBankCard ){
         Buyer buyer = buyerService.getBuyerById(buyerId);
         buyer.setCard(newBankCard);
+        bankCardRepository.save(newBankCard);
+        buyerService.saveBuyer(buyer);
         return new ResponseEntity<>(buyer.getCard(), HttpStatus.CREATED);
     }
 
@@ -82,12 +85,17 @@ public class BuyerController {
     }
 
     @GetMapping(value = "/{buyerId}/admin")
-    public ResponseEntity<Buyer> getBuyersById(@PathVariable Long buyerId){
+    public ResponseEntity<Buyer> getBuyerById(@PathVariable Long buyerId){
         Buyer buyer = buyerService.getBuyerById(buyerId);
         return new ResponseEntity(buyer, buyer != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     } // Check this is okay
 
-    // buyers/id/admin
+    @GetMapping(value = "/{buyerId}")
+    public ResponseEntity<BuyerDTO> searchBuyersById(@PathVariable Long buyerId){
+        BuyerDTO buyer = buyerService.searchBuyersById(buyerId);
+        return new ResponseEntity(buyer, buyer!= null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        // is related to this method
+    }
 
     // buyers/id
 

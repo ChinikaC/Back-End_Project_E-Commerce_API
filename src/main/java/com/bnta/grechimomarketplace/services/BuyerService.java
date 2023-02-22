@@ -42,15 +42,15 @@ public class BuyerService {
         return buyers;
     }
 
-
+// do not touch this method!!
     public Buyer getBuyerById(long buyerId){
         Buyer buyer = buyerRepository.findById(buyerId).get();
         return buyer;
     }
 
-    public Buyer getBuyersById(long buyerId){
+    public BuyerDTO searchBuyersById(long buyerId){
         Buyer buyer = buyerRepository.findById(buyerId).get();
-        return buyer;
+        return generateBuyerDTO(buyer); // this method
     }
 
     public BuyerDTO generateBuyerDTO(Buyer buyer){
@@ -101,5 +101,9 @@ public class BuyerService {
         buyer.get().emptyCart();
         orderRepository.save(order);
         return order;
+    }
+
+    public void saveBuyer(Buyer buyer){
+        buyerRepository.save(buyer);
     }
 }
