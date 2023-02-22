@@ -39,6 +39,8 @@ public class SellerController {
         return new ResponseEntity(seller, seller != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     } // Find out why the not_found isn't working
 
+    // add in sellers/id/admin
+
     @PostMapping
     public ResponseEntity<Seller> register (@RequestBody Seller seller){
         Seller savedSeller = sellerService.register(seller);
