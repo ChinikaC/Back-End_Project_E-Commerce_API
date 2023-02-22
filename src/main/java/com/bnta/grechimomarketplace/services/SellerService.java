@@ -47,9 +47,7 @@ public class SellerService {
                 updateDetails.setEmail(updateSellerDetails.getEmail());
             } if (updateSellerDetails.getPassword() != null){
                 updateDetails.setPassword(updateSellerDetails.getPassword()); };
-//             if (updateSellerDetails.getProducts() != null){
-//                updateSellerDetails.setProducts(updateSellerDetails.getProducts());
-//            } // DO I NEED TO INCLUDE PRODUCTS??
+
             return sellerRepository.save(updateDetails);
         }
         return null;
