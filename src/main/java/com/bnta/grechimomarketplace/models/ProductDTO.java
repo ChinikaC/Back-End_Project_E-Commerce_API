@@ -24,20 +24,48 @@ public class ProductDTO {
         return productId;
     }
 
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public long getPrice() {
         return price;
     }
 
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getSellerName() {
         return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
+    }
+
+    public long getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(long sellerId) {
+        this.sellerId = sellerId;
     }
 }
 
