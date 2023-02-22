@@ -93,7 +93,7 @@ public class DataLoader implements ApplicationRunner {
         // Load 30 Products & 10 Sellers
         for (int i = 0; i < sellerNames.length; i++) {
             BankCard card = new BankCard(1000l);
-            Seller seller = new Seller(sellerNames[i], card, sellerNames[i] + "@bnta.com", (i + 1) + " Fake Street", "password" + (i + 1), new ArrayList<>());
+            Seller seller = new Seller(sellerNames[i], card, sellerNames[i] + "@bnta.com", "5th floor, " + (i+1) + " Middlesex St, London E1 7EZ", "password" + (i + 1), new ArrayList<>());
             card.setAccountName(seller.getName());
             bankCardRepository.save(card);
             sellerRepository.save(seller);
@@ -106,23 +106,23 @@ public class DataLoader implements ApplicationRunner {
         }
 
 
-        // Load 10 Orders
+        // Create 10 Orders
         for (long i = 1; i <= buyerNames.length; i++) {
             Buyer buyer = buyerRepository.findById(i).get();
-            Order order = new Order(buyer, i + " Mum's Place, Fake City");
+            Order order = new Order(buyer, i + " Mum's House, Fake City");
             orderRepository.save(order);
         }
 
-//        // Add Products to Orders
-//        for (long i = 0; i <= buyerNames.length; i++) {
-//            for (long j = (i * 2); j < (i + 1) * 2; j++) {
-//                if (j < 1 || j > 30) continue;
-//                Product product = productRepository.findById(j).get();
-//                Order order = orderRepository.findById(i).get();
-//                order.getProducts().add(product);
-//                orderRepository.save(order);
-//            }
-//        }
+        // Add Products to Orders
+        for (long i = 0; i < buyerNames.length; i++) {
+            for (long j = (i * 2); j < (i + 1) * 2; j++) {
+                if (j < 1 || j > 30) continue;
+                Product product = productRepository.findById(j).get();
+                Order order = orderRepository.findById(i+1).get();
+                order.getProducts().add(product);
+                orderRepository.save(order);
+            }
+        }
 
 
         GCMBMarketplace gcmbMarketplace = new GCMBMarketplace(10000000, "5th floor, 80 Middlesex St, London E1 7EZ");

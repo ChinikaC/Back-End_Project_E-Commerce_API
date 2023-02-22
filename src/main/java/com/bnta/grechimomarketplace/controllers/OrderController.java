@@ -25,13 +25,12 @@ public class OrderController {
 
     @GetMapping("/buyers/{buyerId}")
     public ResponseEntity<List<OrderDTO>> getOrdersRelevantToBuyer(@PathVariable long buyerId){
-        List<OrderDTO> orders = orderService.getAllOrders();
-        return new ResponseEntity<>(orders, HttpStatus.OK);
+        return new ResponseEntity<>(orderService.getOrdersByBuyer(buyerId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/sellers/{sellerId}")
-    public List<OrderDTO> getOrdersRelevantToSeller(@PathVariable long sellerId) {
-        return orderService.getOrderBySeller(sellerId);
+    public ResponseEntity<List<OrderDTO>> getOrdersRelevantToSeller(@PathVariable long sellerId) {
+        return new ResponseEntity<>(orderService.getOrdersBySeller(sellerId), HttpStatus.OK);
     }
 
 }

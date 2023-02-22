@@ -4,14 +4,14 @@ import java.util.List;
 
 public class SellerDTO {
 
-    private long id;
+    private long sellerId;
     private String name;
     private String email;
     private String address;
     private List<ProductDTO> productDTOs;
 
-    public SellerDTO(long id, String name, String email, String address, List<ProductDTO> productDTOs) {
-        this.id = id;
+    public SellerDTO(long sellerId, String name, String email, String address, List<ProductDTO> productDTOs) {
+        this.sellerId = sellerId;
         this.name = name;
         this.email = email;
         this.address = address;
@@ -21,12 +21,12 @@ public class SellerDTO {
     public SellerDTO() {
     }
 
-    public long getId() {
-        return id;
+    public long getSellerId() {
+        return sellerId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setSellerId(long sellerId) {
+        this.sellerId = sellerId;
     }
 
     public String getName() {

@@ -1,14 +1,14 @@
 package com.bnta.grechimomarketplace.models;
 
 public class ProductDTO {
-    private Long id;
+    private Long productId;
     private String name;
     private long price;
     private String description;
     private String sellerName;
 
-    public ProductDTO(Long id, String name, long price, String description, String sellerName) {
-        this.id = id;
+    public ProductDTO(Long productId, String name, long price, String description, String sellerName) {
+        this.productId = productId;
         this.name = name;
         this.price = price;
         this.description = description;
@@ -18,8 +18,8 @@ public class ProductDTO {
     public ProductDTO() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getProductId() {
+        return productId;
     }
 
     public String getName() {

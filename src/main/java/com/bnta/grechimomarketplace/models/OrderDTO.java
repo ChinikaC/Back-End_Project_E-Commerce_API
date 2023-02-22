@@ -3,28 +3,31 @@ package com.bnta.grechimomarketplace.models;
 import java.util.List;
 
 public class OrderDTO {
-    private Long id;
+    private Long orderId;
+    private String buyerName;
+    private long buyerId;
     private long orderValue;
-    private String sellerName;
     private String deliveryAddress;
     private List<ProductDTO> productDTOs;
 
-    public OrderDTO(Long id, long orderValue, String deliveryAddress, List<ProductDTO> productDTOs) {
-        this.id = id;
+    public OrderDTO(Long orderId, long orderValue, String deliveryAddress, List<ProductDTO> productDTOs, String buyerName, long buyerId) {
+        this.orderId = orderId;
         this.orderValue = orderValue;
         this.deliveryAddress = deliveryAddress;
         this.productDTOs = productDTOs;
+        this.buyerName = buyerName;
+        this.buyerId = buyerId;
     }
 
     public OrderDTO() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public long getOrderValue() {
@@ -35,12 +38,12 @@ public class OrderDTO {
         this.orderValue = orderValue;
     }
 
-    public String getSellerName() {
-        return sellerName;
+    public String getBuyerName() {
+        return buyerName;
     }
 
-    public void setSellerName(String sellerName) {
-        this.sellerName = sellerName;
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
     }
 
     public List<ProductDTO> getProductDTOs() {
@@ -57,5 +60,13 @@ public class OrderDTO {
 
     public void setDeliveryAddress(String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
+    }
+
+    public long getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(long buyerId) {
+        this.buyerId = buyerId;
     }
 }

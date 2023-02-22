@@ -140,7 +140,7 @@ public class Buyer {
     public List<OrderDTO> getBuyerOrderDTOs() {
         List<OrderDTO> orderDTOs = new ArrayList<>();
         for (Order order : orders) {
-            orderDTOs.add(new OrderDTO(order.getId(),order.getOrderValue(),order.getAddress(),order.getOrderProductDTOs()));
+            orderDTOs.add(new OrderDTO(order.getId(),order.getOrderValue(),order.getAddress(),order.getOrderProductDTOs(),order.getBuyer().getName(), order.getBuyer().getId()));
         }
         return orderDTOs;
     }
