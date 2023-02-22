@@ -44,6 +44,7 @@ public class SellerController {
     @PostMapping
     public ResponseEntity<Seller> register (@RequestBody Seller seller){
         Seller savedSeller = sellerService.register(seller);
+        if (seller.getCard() == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(seller, HttpStatus.CREATED);
     }
 
