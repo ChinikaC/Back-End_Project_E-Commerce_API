@@ -23,7 +23,7 @@ public class Order {
     @JoinColumn(name = "buyer_id")
     @JsonIgnoreProperties({"orders"})
     private Buyer buyer;
-    
+
     @ManyToMany
     @JoinTable(name = "orders_products",
     joinColumns = @JoinColumn(name = "order_id"),

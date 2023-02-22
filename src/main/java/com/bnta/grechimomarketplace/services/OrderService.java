@@ -42,6 +42,10 @@ public class OrderService {
         return orderDTOList;
     }
 
+    public OrderDTO generateorderDTO(Order order) {
+        return new OrderDTO(order.getId(),order.getOrderValue(),order.getAddress(),order.getOrderProductDTOs(), order.getBuyer().getName(),order.getBuyer().getId());
+    }
+
 //    public void distributeOrders() {
 //        List<Order> orders = orderRepository.findAll();
 //        for (Order order : orders) {

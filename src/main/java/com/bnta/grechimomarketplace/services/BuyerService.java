@@ -32,6 +32,9 @@ public class BuyerService {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    OrderService orderService;
+
     public Buyer addNewBuyer(Buyer buyer){
         buyerRepository.save(buyer);
         return buyer;
@@ -85,7 +88,7 @@ public class BuyerService {
         return new ShoppingCartDTO(productDTOs, buyer.getCartTotalValue(), buyer.getCart().size(), buyer.getName(), buyer.getId());
     }
 
-    public Order placeOrder(long buyerId, String address) {
+    public OrderDTO placeOrder(long buyerId, String address) {
         Optional<Buyer> buyer = buyerRepository.findById(buyerId);
         List<Product> buyerCart = buyer.get().getCart();
         BankCard buyerCard = buyer.get().getCard();
@@ -97,9 +100,12 @@ public class BuyerService {
             product.decrementStock();
         }
         Order order = new Order(buyer.get(), address);
+        List<Product> buyerCartCopy = new ArrayList<>(buyerCart);
+        // had to create a copy of the buyer cart as I was getting an error when trying to persist
+        order.setProducts(buyerCartCopy);
         buyer.get().emptyCart();
         orderRepository.save(order);
-        return order;
+        return orderService.generateorderDTO(order);
     }
 
     public void saveBuyer(Buyer buyer){

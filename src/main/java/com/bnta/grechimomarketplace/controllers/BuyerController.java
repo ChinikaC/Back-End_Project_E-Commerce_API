@@ -99,11 +99,11 @@ public class BuyerController {
     }
 
     @PostMapping(value = "/{buyerId}")
-    public ResponseEntity<Order> placeOrder(@PathVariable Long buyerId,
+    public ResponseEntity<OrderDTO> placeOrder(@PathVariable Long buyerId,
                                             @RequestParam String address) {
         Optional<Buyer> buyer = buyerService.getBuyerById(buyerId);
         if (buyer.isEmpty()) return new ResponseEntity<> (HttpStatus.NOT_FOUND);
-        if (buyer.get().getCart() == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (buyer.get().getCart().isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(buyerService.placeOrder(buyerId, address), HttpStatus.OK);
     }
 
