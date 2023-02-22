@@ -66,14 +66,4 @@ public class SellerController {
     }
 
 
-
-
-
-
-    // displayOrders (@GetMapping)
-        // get all orders
-        // use id to get the id for the specific seller who's orders we want to get
-
-
-        // extension fulfilOrder
 }

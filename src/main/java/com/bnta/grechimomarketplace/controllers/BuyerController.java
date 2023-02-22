@@ -5,7 +5,6 @@ import com.bnta.grechimomarketplace.models.*;
 import com.bnta.grechimomarketplace.models.Order;
 import com.bnta.grechimomarketplace.repositories.BankCardRepository;
 import com.bnta.grechimomarketplace.services.BuyerService;
-import com.bnta.grechimomarketplace.services.OrderService;
 import com.bnta.grechimomarketplace.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,9 +28,9 @@ public class BuyerController {
     BankCardRepository bankCardRepository;
 
     @PostMapping
-    public ResponseEntity<Buyer> addNewBuyer (@RequestBody Buyer buyer) {
+    public ResponseEntity<Buyer> addNewBuyer (@RequestBody(required = true) Buyer buyer) {
         if (buyer.getCard() == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        // bankCardRepository.save(buyer.getCard());
+         bankCardRepository.save(buyer.getCard());
         return new ResponseEntity<>(buyerService.addNewBuyer(buyer), HttpStatus.CREATED);
     }
 
@@ -43,26 +42,30 @@ public class BuyerController {
                                                     @RequestParam Optional<String> address,
                                                     @RequestParam Optional<String> password
     ){
-        Buyer buyer = buyerService.getBuyerById(buyerId);
-        if (buyer == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        if (name.isPresent()) buyer.setName(name.get());
-        if (email.isPresent()) buyer.setEmail(email.get());
-        if (address.isPresent()) buyer.setAddress(address.get());
-        if (password.isPresent()) buyer.setPassword(name.get());
-        return new ResponseEntity<>(buyer, HttpStatus.OK);
+        Optional<Buyer> buyer = buyerService.getBuyerById(buyerId);
+        if (buyer.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (name.isPresent()) buyer.get().setName(name.get());
+        if (email.isPresent()) buyer.get().setEmail(email.get());
+        if (address.isPresent()) buyer.get().setAddress(address.get());
+        if (password.isPresent()) buyer.get().setPassword(name.get());
+        buyerService.saveBuyer(buyer.get());
+        return new ResponseEntity<>(buyer.get(), HttpStatus.OK);
     }
 
     @PutMapping(value = "/{buyerId}")
     public ResponseEntity<BankCard> replaceBankCard(@PathVariable Long buyerId, @RequestBody BankCard newBankCard ){
-        Buyer buyer = buyerService.getBuyerById(buyerId);
-        buyer.setCard(newBankCard);
-        return new ResponseEntity<>(buyer.getCard(), HttpStatus.CREATED);
+        Optional<Buyer> buyer = buyerService.getBuyerById(buyerId);
+        if (buyer.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        buyer.get().setCard(newBankCard);
+        bankCardRepository.save(newBankCard);
+        buyerService.saveBuyer(buyer.get());
+        return new ResponseEntity<>(buyer.get().getCard(), HttpStatus.CREATED);
     }
 
     @PatchMapping(value = "/{buyerId}/product/{productId}")
     public ResponseEntity<ShoppingCartDTO> addProductToCart(@PathVariable Long buyerId,
                                                             @PathVariable Long productId) {
-        Buyer buyer = buyerService.getBuyerById(buyerId);
+        Optional<Buyer> buyer = buyerService.getBuyerById(buyerId);
         Product product = productService.getProductById(productId);
         if (buyer == null || product == null ) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         ShoppingCartDTO dto = buyerService.addProductToCart(buyerId, productId);
@@ -82,20 +85,23 @@ public class BuyerController {
     }
 
     @GetMapping(value = "/{buyerId}/admin")
-    public ResponseEntity<Buyer> getBuyersById(@PathVariable Long buyerId){
-        Buyer buyer = buyerService.getBuyerById(buyerId);
+    public ResponseEntity<Buyer> getBuyerById(@PathVariable Long buyerId){
+        Optional<Buyer> buyer = buyerService.getBuyerById(buyerId);
         return new ResponseEntity(buyer, buyer != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     } // Check this is okay
 
-    // buyers/id/admin
-
-    // buyers/id
+    @GetMapping(value = "/{buyerId}")
+    public ResponseEntity<BuyerDTO> findBuyerDTOById(@PathVariable Long buyerId){
+        Optional<Buyer> buyer = buyerService.getBuyerById(buyerId);
+        if (buyer.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity(buyerService.findBuyerDTOById(buyerId), HttpStatus.OK);
+    }
 
     @PostMapping(value = "/{buyerId}")
     public ResponseEntity<Order> placeOrder(@PathVariable Long buyerId,
                                             @RequestParam String address) {
-        Buyer buyer = buyerService.getBuyerById(buyerId);
-        if (buyer == null) return new ResponseEntity<> (HttpStatus.NOT_FOUND);
+        Optional<Buyer> buyer = buyerService.getBuyerById(buyerId);
+        if (buyer.isEmpty()) return new ResponseEntity<> (HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(buyerService.placeOrder(buyerId, address), HttpStatus.OK);
     }
 
