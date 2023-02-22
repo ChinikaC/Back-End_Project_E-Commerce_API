@@ -1,5 +1,6 @@
 package com.bnta.grechimomarketplace.services;
 
+import com.bnta.grechimomarketplace.models.Product;
 import com.bnta.grechimomarketplace.models.Seller;
 import com.bnta.grechimomarketplace.models.SellerDTO;
 import com.bnta.grechimomarketplace.repositories.ProductRepository;
@@ -77,12 +78,12 @@ public class SellerService {
     }
 
     public void deleteAccount(Long id){
+        List <Product> products = productRepository.findBySellerId(id);
+        for (Product product : products) {
+            productRepository.delete(product);
+        }
         sellerRepository.deleteById(id);
-
     }
-
-
-
 
 }
 

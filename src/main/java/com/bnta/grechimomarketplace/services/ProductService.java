@@ -44,6 +44,10 @@ SellerRepository sellerRepository;
         return productDTOs;
     }
 
+    public ProductDTO generateProductDTO(Product product) {
+        return new ProductDTO(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getSeller().getName(), product.getSeller().getId(), product.getStock());
+    }
+
     public Product addNewProductToSellersInventory(long sellerId, Product product) {
         Seller seller = sellerRepository.findById(sellerId).get();
         List<Product> products = seller.getProducts();
