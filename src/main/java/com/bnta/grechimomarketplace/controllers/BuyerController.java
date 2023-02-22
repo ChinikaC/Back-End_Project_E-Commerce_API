@@ -63,6 +63,11 @@ public class BuyerController {
         return new ResponseEntity<>(buyerService.getCart(buyerId), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Buyer>> getAllSellers(){
+        return new ResponseEntity(buyerService.findAllBuyers(), HttpStatus.OK);
+    }
+
     @PostMapping(value = "/{buyerId}")
     public ResponseEntity<Order> placeOrder(@PathVariable Long buyerId,
                                             @RequestParam String address) {

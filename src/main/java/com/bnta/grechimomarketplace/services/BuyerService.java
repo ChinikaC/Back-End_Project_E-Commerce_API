@@ -79,4 +79,7 @@ public class BuyerService {
         return order;
     }
 
+    public List<Buyer> findAllBuyers() {
+        return buyerRepository.findAll();
+    }
 }
