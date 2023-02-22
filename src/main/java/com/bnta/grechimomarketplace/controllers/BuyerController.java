@@ -3,6 +3,7 @@ package com.bnta.grechimomarketplace.controllers;
 
 import com.bnta.grechimomarketplace.models.*;
 import com.bnta.grechimomarketplace.models.Order;
+import com.bnta.grechimomarketplace.repositories.BankCardRepository;
 import com.bnta.grechimomarketplace.services.BuyerService;
 import com.bnta.grechimomarketplace.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,15 @@ public class BuyerController {
 
     @Autowired
     BuyerService buyerService;
-    OrderService orderService;
+
+    @Autowired
+    BankCardRepository bankCardRepository;
 
     @PostMapping
-    public ResponseEntity<Buyer> addNewBuyer (@RequestBody Buyer buyer){
-        Buyer savedBuyer = buyerService.addNewBuyer(buyer);
-        return new ResponseEntity<>(buyer, HttpStatus.CREATED);
+    public ResponseEntity<Buyer> addNewBuyer (@RequestBody Buyer buyer) {
+        if (buyer.getCard() == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        // bankCardRepository.save(buyer.getCard());
+        return new ResponseEntity<>(buyerService.addNewBuyer(buyer), HttpStatus.CREATED);
     }
 
 
@@ -64,8 +68,10 @@ public class BuyerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Buyer>> getAllSellers(){
-        return new ResponseEntity(buyerService.findAllBuyers(), HttpStatus.OK);
+    public ResponseEntity<List<Buyer>> getAllBuyers(){
+        List<Buyer> buyers = buyerService.findAllBuyers();
+        if(buyers.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity(buyers, HttpStatus.OK);
     }
 
     @PostMapping(value = "/{buyerId}")

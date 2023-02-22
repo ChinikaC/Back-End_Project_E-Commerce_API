@@ -4,14 +4,14 @@ import java.util.List;
 
 public class ShoppingCartDTO {
 
-    private List<ProductDTO> products;
+    private List<ProductDTO> shoppingCartProducts;
 
     private long totalValue;
 
     private long itemQuantity;
 
     public ShoppingCartDTO(List<ProductDTO> products, long totalValue, long itemQuantity) {
-        this.products = products;
+        this.shoppingCartProducts = products;
         this.totalValue = totalValue;
         this.itemQuantity = itemQuantity;
     }
@@ -19,12 +19,12 @@ public class ShoppingCartDTO {
     public ShoppingCartDTO() {
     }
 
-    public List<ProductDTO> getProducts() {
-        return products;
+    public List<ProductDTO> getShoppingCartProducts() {
+        return shoppingCartProducts;
     }
 
-    public void setProducts(List<ProductDTO> products) {
-        this.products = products;
+    public void setShoppingCartProducts(List<ProductDTO> shoppingCartProducts) {
+        this.shoppingCartProducts = shoppingCartProducts;
     }
 
     public long getTotalValue() {

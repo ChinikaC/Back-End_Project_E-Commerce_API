@@ -2,6 +2,7 @@ package com.bnta.grechimomarketplace.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.aspectj.weaver.ast.Or;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +50,9 @@ public class Buyer {
         this.orders = new ArrayList<>();
     }
 
-    public Buyer(){
-        
+    public Buyer() {
+        this.cart = new ArrayList<>();
+        this.orders = new ArrayList<>();
     }
 
     public void emptyCart() {
@@ -134,4 +136,26 @@ public class Buyer {
     public void addToCart(Product product) {
         this.cart.add(product);
     }
+
+    public List<OrderDTO> getBuyerOrderDTOs() {
+        List<OrderDTO> orderDTOs = new ArrayList<>();
+        for (Order order : orders) {
+            orderDTOs.add(new OrderDTO(order.getId(),order.getOrderValue(),order.getAddress(),order.getOrderProductDTOs()));
+        }
+        return orderDTOs;
+    }
+
+    public List<ProductDTO> getBuyerCartDTOs() {
+        List<ProductDTO> cartProductDTOs = new ArrayList<>();
+        for (Product product : cart) {
+            cartProductDTOs.add(new ProductDTO(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getSeller().getName()));
+        }
+        return cartProductDTOs;
+    }
+
+    public ShoppingCartDTO getBuyerShoppingCartDTO() {
+        return new ShoppingCartDTO(this.getBuyerCartDTOs(),this.getCartTotalValue(),this.getCart().size());
+    }
+
+
 }

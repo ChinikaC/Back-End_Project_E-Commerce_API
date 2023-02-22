@@ -79,6 +79,16 @@ public class BuyerService {
         return order;
     }
 
+    public List<BuyerDTO> generateBuyerDTOs(List<Buyer> buyers) {
+        List<BuyerDTO> buyerDTOs = new ArrayList<>();
+        for (Buyer buyer : buyers) {
+            buyerDTOs.add(new BuyerDTO(buyer.getId(), buyer.getName(), buyer.getEmail(), buyer.getAddress(),
+                            buyer.getBuyerShoppingCartDTO(),
+                            buyer.getBuyerOrderDTOs()));
+        }
+        return buyerDTOs;
+    }
+
     public List<Buyer> findAllBuyers() {
         return buyerRepository.findAll();
     }
