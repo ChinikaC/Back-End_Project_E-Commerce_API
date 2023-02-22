@@ -4,6 +4,7 @@ import com.bnta.grechimomarketplace.models.ProductDTO;
 import com.bnta.grechimomarketplace.models.ShoppingCartDTO;
 import com.bnta.grechimomarketplace.services.BuyerService;
 import com.bnta.grechimomarketplace.services.ProductService;
+import com.bnta.grechimomarketplace.services.SellerService;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,9 @@ public class ProductController {
     
     @Autowired
     private BuyerService buyerService;
+
+    @Autowired
+    private SellerService sellerService;
 
     // 1 request param for a fuzzy match of the product category (EXTENSION)
     @GetMapping
@@ -47,6 +51,7 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Product> addNewProductToSellersInventory(@RequestParam long sellerId,
                                                                    @RequestBody Product product){
+        if (sellerService.getSellerById(sellerId).isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         productService.addNewProductToSellersInventory(sellerId, product);
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }

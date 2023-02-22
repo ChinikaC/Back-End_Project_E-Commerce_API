@@ -1,5 +1,6 @@
 package com.bnta.grechimomarketplace.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -102,6 +103,7 @@ public class Seller {
         this.address = address;
     }
 
+    @JsonIgnore
     public List<ProductDTO> getSellerProductDTOs(){
         List<ProductDTO> productDTOs = new ArrayList<>();
         for(Product product : products){
