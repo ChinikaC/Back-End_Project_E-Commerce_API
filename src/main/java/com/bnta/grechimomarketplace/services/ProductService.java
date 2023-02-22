@@ -50,14 +50,7 @@ SellerRepository sellerRepository;
         products.add(product);
         product.setSeller(seller);
         productRepository.save(product);
-//        sellerRepository.save(seller);
         return product;
-    }
-
-    public Product updateListing(long productId, boolean isListed){
-        Product product = productRepository.findById(productId).get();
-        product.setListed(isListed);
-        return productRepository.save(product);
     }
 
     public Product getProductById(long productId){

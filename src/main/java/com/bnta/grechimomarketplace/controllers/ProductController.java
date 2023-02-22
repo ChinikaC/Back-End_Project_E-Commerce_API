@@ -51,15 +51,6 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
 
-    @PatchMapping(value = "/{productId}")
-    public ResponseEntity<Product> changeListing(@PathVariable long productId,
-                                                         @RequestParam boolean isListed){
-        Product product = productService.updateListing(productId, isListed);
-        return new ResponseEntity<>(product, HttpStatus.OK);
-
-    }
-
-
     @PatchMapping(value = "/update/{productId}")
     public ResponseEntity<Product> updateProduct(@PathVariable long productId,
                                                  @RequestParam Optional<String> name,

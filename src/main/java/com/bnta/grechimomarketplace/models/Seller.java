@@ -3,6 +3,7 @@ package com.bnta.grechimomarketplace.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "sellers")
@@ -98,5 +99,14 @@ public class Seller {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<ProductDTO> getSellerProductDTOs(){
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        for(Product product : products){
+            productDTOs.add(new ProductDTO(product.getId(), product.getName(), product.getPrice(), product.getDescription(),
+                    product.getSeller().getName()));
+        }
+        return productDTOs;
     }
 }
