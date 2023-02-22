@@ -1,22 +1,27 @@
 package com.bnta.grechimomarketplace.models;
 
+import java.util.Date;
 import java.util.List;
 
 public class OrderDTO {
     private Long orderId;
     private String buyerName;
+
+    private Date timestamp;
     private long buyerId;
     private long orderValue;
     private String deliveryAddress;
     private List<ProductDTO> productDTOs;
 
-    public OrderDTO(Long orderId, long orderValue, String deliveryAddress, List<ProductDTO> productDTOs, String buyerName, long buyerId) {
+
+    public OrderDTO(Long orderId, long orderValue, String deliveryAddress, List<ProductDTO> productDTOs, String buyerName, long buyerId, Date timestamp) {
         this.orderId = orderId;
         this.orderValue = orderValue;
         this.deliveryAddress = deliveryAddress;
         this.productDTOs = productDTOs;
         this.buyerName = buyerName;
         this.buyerId = buyerId;
+        this.timestamp = timestamp;
     }
 
     public OrderDTO() {
@@ -68,5 +73,13 @@ public class OrderDTO {
 
     public void setBuyerId(long buyerId) {
         this.buyerId = buyerId;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 }

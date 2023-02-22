@@ -19,7 +19,7 @@ public class OrderService {
         List<Order> orderList = orderRepository.findAll();
         List<OrderDTO> orderDTOList = new ArrayList<>();
         for (Order order : orderList) {
-            orderDTOList.add(new OrderDTO(order.getId(),order.getOrderValue(),order.getAddress(),order.getOrderProductDTOs(), order.getBuyer().getName(),order.getBuyer().getId()));
+            orderDTOList.add(new OrderDTO(order.getId(),order.getOrderValue(),order.getAddress(),order.getOrderProductDTOs(), order.getBuyer().getName(),order.getBuyer().getId(), order.getTimestamp()));
         }
         return orderDTOList;
     }
@@ -28,7 +28,7 @@ public class OrderService {
         List<Order> orderList = orderRepository.findByProducts_Seller_Id(sellerId);
         List<OrderDTO> orderDTOList = new ArrayList<>();
         for (Order order : orderList) {
-            orderDTOList.add(new OrderDTO(order.getId(),order.getOrderValue(),order.getAddress(),order.getOrderProductDTOs(), order.getBuyer().getName(),order.getBuyer().getId()));
+            orderDTOList.add(new OrderDTO(order.getId(),order.getOrderValue(),order.getAddress(),order.getOrderProductDTOs(), order.getBuyer().getName(),order.getBuyer().getId(), order.getTimestamp()));
         }
         return orderDTOList;
     }
@@ -37,13 +37,13 @@ public class OrderService {
         List<Order> orderList = orderRepository.findByBuyerId(buyerId);
         List<OrderDTO> orderDTOList = new ArrayList<>();
         for (Order order : orderList) {
-            orderDTOList.add(new OrderDTO(order.getId(),order.getOrderValue(),order.getAddress(),order.getOrderProductDTOs(), order.getBuyer().getName(),order.getBuyer().getId()));
+            orderDTOList.add(new OrderDTO(order.getId(),order.getOrderValue(),order.getAddress(),order.getOrderProductDTOs(), order.getBuyer().getName(),order.getBuyer().getId(), order.getTimestamp()));
         }
         return orderDTOList;
     }
 
     public OrderDTO generateorderDTO(Order order) {
-        return new OrderDTO(order.getId(),order.getOrderValue(),order.getAddress(),order.getOrderProductDTOs(), order.getBuyer().getName(),order.getBuyer().getId());
+        return new OrderDTO(order.getId(),order.getOrderValue(),order.getAddress(),order.getOrderProductDTOs(), order.getBuyer().getName(),order.getBuyer().getId(), order.getTimestamp());
     }
 
 //    public void distributeOrders() {

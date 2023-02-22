@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -18,6 +19,9 @@ public class Order {
 
     @Column
     private String address;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date timestamp;
 
     @ManyToOne
     @JoinColumn(name = "buyer_id")
@@ -35,6 +39,7 @@ public class Order {
         this.buyer = buyer;
         this.address = address;
         this.products = new ArrayList<>();
+        this.timestamp = new Date();
     }
 
     public Order(){
@@ -79,6 +84,14 @@ public class Order {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 
     public long getOrderValue() {

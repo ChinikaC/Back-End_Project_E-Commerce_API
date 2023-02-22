@@ -68,6 +68,7 @@ public class BuyerController {
         Optional<Buyer> buyer = buyerService.getBuyerById(buyerId);
         Product product = productService.getProductById(productId);
         if (buyer == null || product == null ) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (product.getStock() < 1) return new ResponseEntity<>(HttpStatus.CONFLICT);
         ShoppingCartDTO dto = buyerService.addProductToCart(buyerId, productId);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
