@@ -1,6 +1,5 @@
 package com.bnta.grechimomarketplace.controllers;
 
-import com.bnta.grechimomarketplace.models.Product;
 import com.bnta.grechimomarketplace.models.Seller;
 import com.bnta.grechimomarketplace.models.SellerDTO;
 import com.bnta.grechimomarketplace.repositories.ProductRepository;
@@ -30,14 +29,18 @@ public class SellerController {
 
     @GetMapping
     public ResponseEntity<List<SellerDTO>> getAllSellers(){
+        List<SellerDTO> sellers = sellerService.getAllSellers();
+        if(sellers.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         return new ResponseEntity(sellerService.getAllSellers(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<SellerDTO> getSellerById(@PathVariable Long id){
-        SellerDTO seller = sellerService.getSellerById(id);
-        return new ResponseEntity(seller, seller != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        Optional<Seller> seller = sellerService.getSellerById(id);
+        if (seller.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity(sellerService.getSellerDTOById(id), HttpStatus.OK);
     } // Find out why the not_found isn't working
+    
 
     // add in sellers/id/admin
 
