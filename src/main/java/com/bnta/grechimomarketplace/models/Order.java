@@ -2,6 +2,7 @@ package com.bnta.grechimomarketplace.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +34,11 @@ public class Order {
     public Order(Buyer buyer, String address) {
         this.buyer = buyer;
         this.address = address;
+        this.products = new ArrayList<>();
     }
 
     public Order(){
-
+        this.products = new ArrayList<>();
     }
 
     public long getId() {
@@ -81,8 +83,10 @@ public class Order {
 
     public long getOrderValue() {
         long orderValue = 0l;
-        for (Product product : products) {
-            orderValue += product.getPrice();
+        if (products != null) {
+            for (Product product : products) {
+                orderValue += product.getPrice();
+            }
         }
         return orderValue;
     }
@@ -90,7 +94,7 @@ public class Order {
     public List<ProductDTO> getOrderProductDTOs() {
         List<ProductDTO> productDTOs = new ArrayList<>();
         for (Product product : products) {
-            productDTOs.add(new ProductDTO(product.getId(),product.getName(),product.getPrice(),product.getDescription(),product.getSeller().getName(), product.getSeller().getId()));
+            productDTOs.add(new ProductDTO(product.getId(),product.getName(),product.getPrice(),product.getDescription(),product.getSeller().getName(), product.getSeller().getId(), product.getStock()));
         }
         return productDTOs;
     }

@@ -7,14 +7,16 @@ public class ProductDTO {
     private String description;
     private String sellerName;
     private long sellerId;
+    private long stockLevel;
 
-    public ProductDTO(Long productId, String name, long price, String description, String sellerName, long sellerId) {
+    public ProductDTO(Long productId, String name, long price, String description, String sellerName, long sellerId, long stockLevel) {
         this.productId = productId;
         this.name = name;
         this.price = price;
         this.description = description;
         this.sellerName = sellerName;
         this.sellerId = sellerId;
+        this.stockLevel = stockLevel;
     }
 
     public ProductDTO() {
@@ -66,6 +68,14 @@ public class ProductDTO {
 
     public void setSellerId(long sellerId) {
         this.sellerId = sellerId;
+    }
+
+    public long getStockLevel() {
+        return stockLevel;
+    }
+
+    public void setStockLevel(long stockLevel) {
+        this.stockLevel = stockLevel;
     }
 }
 

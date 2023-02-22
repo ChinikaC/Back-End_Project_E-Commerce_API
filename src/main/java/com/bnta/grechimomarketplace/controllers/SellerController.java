@@ -3,6 +3,7 @@ package com.bnta.grechimomarketplace.controllers;
 import com.bnta.grechimomarketplace.models.Product;
 import com.bnta.grechimomarketplace.models.Seller;
 import com.bnta.grechimomarketplace.models.SellerDTO;
+import com.bnta.grechimomarketplace.repositories.BankCardRepository;
 import com.bnta.grechimomarketplace.repositories.ProductRepository;
 import com.bnta.grechimomarketplace.services.ProductService;
 import com.bnta.grechimomarketplace.services.SellerService;
@@ -22,10 +23,7 @@ public class SellerController {
     SellerService sellerService;
 
     @Autowired
-    ProductService productService;
-
-    @Autowired
-    ProductRepository productRepository;
+    BankCardRepository cardRepository;
 
 
     @GetMapping
@@ -43,8 +41,9 @@ public class SellerController {
 
     @PostMapping
     public ResponseEntity<Seller> register (@RequestBody Seller seller){
-        Seller savedSeller = sellerService.register(seller);
         if (seller.getCard() == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        cardRepository.save(seller.getCard());
+        Seller savedSeller = sellerService.register(seller);
         return new ResponseEntity<>(seller, HttpStatus.CREATED);
     }
 

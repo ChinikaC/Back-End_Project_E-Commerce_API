@@ -31,7 +31,7 @@ public class BuyerController {
     @PostMapping
     public ResponseEntity<Buyer> addNewBuyer (@RequestBody Buyer buyer) {
         if (buyer.getCard() == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        // bankCardRepository.save(buyer.getCard());
+        bankCardRepository.save(buyer.getCard());
         return new ResponseEntity<>(buyerService.addNewBuyer(buyer), HttpStatus.CREATED);
     }
 
@@ -96,6 +96,7 @@ public class BuyerController {
                                             @RequestParam String address) {
         Buyer buyer = buyerService.getBuyerById(buyerId);
         if (buyer == null) return new ResponseEntity<> (HttpStatus.NOT_FOUND);
+        if (buyer.getCart() == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(buyerService.placeOrder(buyerId, address), HttpStatus.OK);
     }
 

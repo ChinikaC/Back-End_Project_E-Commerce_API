@@ -51,6 +51,14 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
 
+//    @PostMapping
+//    public ResponseEntity<ProductDTO> changeProductStockLevel(@RequestParam long productId,
+//                                                            @RequestParam long stockLevel) {
+//        Product product = productService.getProductById(productId);
+//        product.setStock(stockLevel);
+//        return productService.generateProductDTO(product);
+//    }
+
     @PatchMapping(value = "/update/{productId}")
     public ResponseEntity<Product> updateProduct(@PathVariable long productId,
                                                  @RequestParam Optional<String> name,

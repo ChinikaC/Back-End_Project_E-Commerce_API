@@ -76,15 +76,13 @@ public class BuyerService {
 
         List<ProductDTO> productDTOs = productService.generateProductDTOs(buyer.getCart());
 
-        return new ShoppingCartDTO(productDTOs, buyer.getCartTotalValue(), buyer.getCart().size());
+        return new ShoppingCartDTO(productDTOs, buyer.getCartTotalValue(), buyer.getCart().size(), buyer.getName(), buyer.getId());
     }
 
     public ShoppingCartDTO getCart(long buyerId) {
         Buyer buyer = buyerRepository.findById(buyerId).get();
-
         List<ProductDTO> productDTOs = productService.generateProductDTOs(buyer.getCart());
-
-        return new ShoppingCartDTO(productDTOs, buyer.getCartTotalValue(), buyer.getCart().size());
+        return new ShoppingCartDTO(productDTOs, buyer.getCartTotalValue(), buyer.getCart().size(), buyer.getName(), buyer.getId());
     }
 
     public Order placeOrder(long buyerId, String address) {
@@ -96,6 +94,7 @@ public class BuyerService {
             BankCard sellerCard = product.getSeller().getCard();
             buyerCard.reduceMoney(productValue);
             sellerCard.addMoney(productValue);
+            product.decrementStock();
         }
         Order order = new Order(buyer.get(), address);
         buyer.get().emptyCart();

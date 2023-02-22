@@ -148,13 +148,13 @@ public class Buyer {
     public List<ProductDTO> getBuyerCartDTOs() {
         List<ProductDTO> cartProductDTOs = new ArrayList<>();
         for (Product product : cart) {
-            cartProductDTOs.add(new ProductDTO(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getSeller().getName(), product.getSeller().getId()));
+            cartProductDTOs.add(new ProductDTO(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getSeller().getName(), product.getSeller().getId(), product.getStock()));
         }
         return cartProductDTOs;
     }
 
     public ShoppingCartDTO getBuyerShoppingCartDTO() {
-        return new ShoppingCartDTO(this.getBuyerCartDTOs(),this.getCartTotalValue(),this.getCart().size());
+        return new ShoppingCartDTO(this.getBuyerCartDTOs(),this.getCartTotalValue(),this.getCart().size(), this.getName(), this.getId());
     }
 
 
