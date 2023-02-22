@@ -24,7 +24,7 @@ public class OrderController {
     }
 
     @GetMapping("/buyers/{buyerId}")
-    public ResponseEntity<List<OrderDTO>> getAllOrders(@PathVariable long buyerId){
+    public ResponseEntity<List<OrderDTO>> getOrdersRelevantToBuyer(@PathVariable long buyerId){
         List<OrderDTO> orders = orderService.getAllOrders();
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
