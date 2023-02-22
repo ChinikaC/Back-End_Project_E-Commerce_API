@@ -148,7 +148,7 @@ public class Buyer {
     public List<ProductDTO> getBuyerCartDTOs() {
         List<ProductDTO> cartProductDTOs = new ArrayList<>();
         for (Product product : cart) {
-            cartProductDTOs.add(new ProductDTO(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getSeller().getName()));
+            cartProductDTOs.add(new ProductDTO(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getSeller().getName(), product.getSeller().getId()));
         }
         return cartProductDTOs;
     }

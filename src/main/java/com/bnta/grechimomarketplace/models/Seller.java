@@ -105,7 +105,7 @@ public class Seller {
         List<ProductDTO> productDTOs = new ArrayList<>();
         for(Product product : products){
             productDTOs.add(new ProductDTO(product.getId(), product.getName(), product.getPrice(), product.getDescription(),
-                    product.getSeller().getName()));
+                    product.getSeller().getName(), product.getSeller().getId()));
         }
         return productDTOs;
     }

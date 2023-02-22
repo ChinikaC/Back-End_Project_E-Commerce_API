@@ -6,13 +6,15 @@ public class ProductDTO {
     private long price;
     private String description;
     private String sellerName;
+    private long sellerId;
 
-    public ProductDTO(Long productId, String name, long price, String description, String sellerName) {
+    public ProductDTO(Long productId, String name, long price, String description, String sellerName, long sellerId) {
         this.productId = productId;
         this.name = name;
         this.price = price;
         this.description = description;
         this.sellerName = sellerName;
+        this.sellerId = sellerId;
     }
 
     public ProductDTO() {

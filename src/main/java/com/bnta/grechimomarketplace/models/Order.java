@@ -90,7 +90,7 @@ public class Order {
     public List<ProductDTO> getOrderProductDTOs() {
         List<ProductDTO> productDTOs = new ArrayList<>();
         for (Product product : products) {
-            productDTOs.add(new ProductDTO(product.getId(),product.getName(),product.getPrice(),product.getDescription(),product.getSeller().getName()));
+            productDTOs.add(new ProductDTO(product.getId(),product.getName(),product.getPrice(),product.getDescription(),product.getSeller().getName(), product.getSeller().getId()));
         }
         return productDTOs;
     }
