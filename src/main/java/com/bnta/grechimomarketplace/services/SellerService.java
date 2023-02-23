@@ -62,16 +62,11 @@ public class SellerService {
 
         if(updateSeller.isPresent()){
             Seller updateDetails = updateSeller.get();
-            if(updateSellerDetails.getName() != null) {
-                updateDetails.setName(updateSellerDetails.getName());
-            } if(updateSellerDetails.getAddress() != null){
-                updateDetails.setAddress(updateSellerDetails.getAddress());
-            } if(updateSellerDetails.getCard() != null){
-                updateDetails.setCard(updateSellerDetails.getCard());
-            } if (updateSellerDetails.getEmail() != null){
-                updateDetails.setEmail(updateSellerDetails.getEmail());
-            } if (updateSellerDetails.getPassword() != null){
-                updateDetails.setPassword(updateSellerDetails.getPassword()); };
+            if(updateSellerDetails.getName() != null) updateDetails.setName(updateSellerDetails.getName());
+            if(updateSellerDetails.getAddress() != null) updateDetails.setAddress(updateSellerDetails.getAddress());
+            if(updateSellerDetails.getCard() != null) updateDetails.setCard(updateSellerDetails.getCard());
+            if (updateSellerDetails.getEmail() != null) updateDetails.setEmail(updateSellerDetails.getEmail());
+            if (updateSellerDetails.getPassword() != null) updateDetails.setPassword(updateSellerDetails.getPassword());
 
             return sellerRepository.save(updateDetails);
         }
