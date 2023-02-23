@@ -6,7 +6,6 @@ import java.util.List;
 public class OrderDTO {
     private Long orderId;
     private String buyerName;
-
     private Date timestamp;
     private long buyerId;
     private double orderValue;
