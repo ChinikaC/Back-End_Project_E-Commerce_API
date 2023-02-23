@@ -4,7 +4,6 @@ import com.bnta.grechimomarketplace.models.Buyer;
 import com.bnta.grechimomarketplace.models.Order;
 import com.bnta.grechimomarketplace.models.OrderDTO;
 import com.bnta.grechimomarketplace.models.OrderRequest;
-import com.bnta.grechimomarketplace.repositories.OrderRepository;
 import com.bnta.grechimomarketplace.services.BuyerService;
 import com.bnta.grechimomarketplace.services.OrderService;
 import com.bnta.grechimomarketplace.services.SellerService;
@@ -34,7 +33,7 @@ public class OrderController {
     public ResponseEntity<OrderDTO> getOrderById(@PathVariable long orderId){
         Optional<Order> order = orderService.getOrderById(orderId);
         if (order.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(orderService.generateorderDTO(order.get()), HttpStatus.OK);
+        return new ResponseEntity<>(orderService.generateOrderDTO(order.get()), HttpStatus.OK);
     }
 
     @GetMapping
