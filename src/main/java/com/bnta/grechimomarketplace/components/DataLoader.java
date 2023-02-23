@@ -58,7 +58,7 @@ public class DataLoader implements ApplicationRunner {
                 "Kaleidoscope", "Lava Lamp", "Mousetrap", "Nerf Gun", "Oil Diffuser",
                 "Pencil Sharpener", "Quadcopter", "Rubik's Cube", "Soda Maker", "Treadmill",
                 "Ukulele", "Virtual Reality Headset", "Waterproof Camera", "Xylophone", "Yo-yo",
-                "Zamboni", "Air Fryer", "Blender", "Crockpot", "Dehydrator", "BNTAPhone"};
+                "Air Fryer", "Blender", "Crockpot", "Dehydrator", "BNTAPhone"};
 
         String[] productDescriptions = {
                 "Underwater excitement for your home!",

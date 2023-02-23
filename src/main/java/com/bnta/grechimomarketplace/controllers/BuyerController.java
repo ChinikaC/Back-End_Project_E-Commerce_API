@@ -73,6 +73,15 @@ public class BuyerController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+    @DeleteMapping(value = "/{buyerId}/product/{productId}/remove")
+    public ResponseEntity<ShoppingCartDTO> removeProductFromCart(@PathVariable Long buyerId,
+                                                            @PathVariable Long productId) {
+        Optional<Buyer> buyer = buyerService.getBuyerById(buyerId);
+        Product product = productService.getProductById(productId);
+        if (buyer.isEmpty() || product == null ) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        ShoppingCartDTO dto = buyerService.removeProductFromCart(buyerId, productId);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
     @GetMapping(value = "/{buyerId}/cart")
     public ResponseEntity<ShoppingCartDTO> viewCart(@PathVariable Long buyerId) {
         return new ResponseEntity<>(buyerService.getCart(buyerId), HttpStatus.OK);
@@ -97,16 +106,6 @@ public class BuyerController {
         Optional<Buyer> buyer = buyerService.getBuyerById(buyerId);
         if (buyer.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity(buyerService.findBuyerDTOById(buyerId), HttpStatus.OK);
-    }
-
-    @PostMapping(value = "/{buyerId}")
-    public ResponseEntity<OrderDTO> placeOrder(@PathVariable Long buyerId,
-                                            @RequestParam String address) {
-        Optional<Buyer> buyer = buyerService.getBuyerById(buyerId);
-        if (buyer.isEmpty()) return new ResponseEntity<> (HttpStatus.NOT_FOUND);
-        if (buyer.get().getCart().isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        if (buyer.get().getCard().getAccountBalance() < buyer.get().getCartTotalValue()) return new ResponseEntity<>(HttpStatus.PAYMENT_REQUIRED);
-        return new ResponseEntity<>(buyerService.placeOrder(buyerId, address), HttpStatus.OK);
     }
 
 }

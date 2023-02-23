@@ -81,6 +81,14 @@ public class BuyerService {
 
         return new ShoppingCartDTO(productDTOs, buyer.getCartTotalValue(), buyer.getCart().size(), buyer.getName(), buyer.getId());
     }
+    public ShoppingCartDTO removeProductFromCart(long buyerId, long productId) {
+        Product product = productRepository.findById(productId).get();
+        Buyer buyer = buyerRepository.findById(buyerId).get();
+        if (buyer.getCart().contains(product)) buyer.getCart().remove(product);
+        buyerRepository.save(buyer);
+        List<ProductDTO> productDTOs = productService.generateProductDTOs(buyer.getCart());
+        return new ShoppingCartDTO(productDTOs, buyer.getCartTotalValue(), buyer.getCart().size(), buyer.getName(), buyer.getId());
+    }
 
     public ShoppingCartDTO getCart(long buyerId) {
         Buyer buyer = buyerRepository.findById(buyerId).get();
@@ -88,25 +96,7 @@ public class BuyerService {
         return new ShoppingCartDTO(productDTOs, buyer.getCartTotalValue(), buyer.getCart().size(), buyer.getName(), buyer.getId());
     }
 
-    public OrderDTO placeOrder(long buyerId, String address) {
-        Optional<Buyer> buyer = buyerRepository.findById(buyerId);
-        List<Product> buyerCart = buyer.get().getCart();
-        BankCard buyerCard = buyer.get().getCard();
-        for (Product product : buyerCart) {
-            double productValue = product.getPrice();
-            BankCard sellerCard = product.getSeller().getCard();
-            buyerCard.reduceMoney(productValue);
-            sellerCard.addMoney(productValue);
-            product.decrementStock();
-        }
-        Order order = new Order(buyer.get(), address);
-        List<Product> buyerCartCopy = new ArrayList<>(buyerCart);
-        // had to create a copy of the buyer cart as I was getting an error when trying to persist
-        order.setProducts(buyerCartCopy);
-        buyer.get().emptyCart();
-        orderRepository.save(order);
-        return orderService.generateorderDTO(order);
-    }
+
 
     public void saveBuyer(Buyer buyer){
         buyerRepository.save(buyer);

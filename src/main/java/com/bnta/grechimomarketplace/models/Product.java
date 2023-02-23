@@ -36,7 +36,7 @@ public class Product {
     @Column
     private long stock;
 
-    @ManyToMany(mappedBy = "products")
+    @ManyToMany(mappedBy = "products", cascade = CascadeType.DETACH)
     @JsonIgnoreProperties("products")
     private List<Order> orders;
 
