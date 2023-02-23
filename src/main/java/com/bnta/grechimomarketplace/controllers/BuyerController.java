@@ -105,6 +105,7 @@ public class BuyerController {
         Optional<Buyer> buyer = buyerService.getBuyerById(buyerId);
         if (buyer.isEmpty()) return new ResponseEntity<> (HttpStatus.NOT_FOUND);
         if (buyer.get().getCart().isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (buyer.get().getCard().getAccountBalance() < buyer.get().getCartTotalValue()) return new ResponseEntity<>(HttpStatus.PAYMENT_REQUIRED);
         return new ResponseEntity<>(buyerService.placeOrder(buyerId, address), HttpStatus.OK);
     }
 
