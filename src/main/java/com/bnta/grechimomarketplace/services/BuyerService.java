@@ -32,9 +32,6 @@ public class BuyerService {
     @Autowired
     ProductService productService;
 
-    @Autowired
-    OrderService orderService;
-
     public Buyer addNewBuyer(Buyer buyer){
         buyerRepository.save(buyer);
         return buyer;
