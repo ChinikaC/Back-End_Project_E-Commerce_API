@@ -9,12 +9,12 @@ public class OrderDTO {
 
     private Date timestamp;
     private long buyerId;
-    private long orderValue;
+    private double orderValue;
     private String deliveryAddress;
     private List<ProductDTO> productDTOs;
 
 
-    public OrderDTO(Long orderId, long orderValue, String deliveryAddress, List<ProductDTO> productDTOs, String buyerName, long buyerId, Date timestamp) {
+    public OrderDTO(Long orderId, double orderValue, String deliveryAddress, List<ProductDTO> productDTOs, String buyerName, long buyerId, Date timestamp) {
         this.orderId = orderId;
         this.orderValue = orderValue;
         this.deliveryAddress = deliveryAddress;
@@ -35,8 +35,12 @@ public class OrderDTO {
         this.orderId = orderId;
     }
 
-    public long getOrderValue() {
-        return orderValue;
+//    public long getOrderValue() {
+//        return orderValue;
+//    }
+
+    public String getOrderValue() {
+        return String.format("%.2f", orderValue);
     }
 
     public void setOrderValue(long orderValue) {

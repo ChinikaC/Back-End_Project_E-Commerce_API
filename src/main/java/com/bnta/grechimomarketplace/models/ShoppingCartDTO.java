@@ -6,7 +6,7 @@ public class ShoppingCartDTO {
 
     private List<ProductDTO> shoppingCartProducts;
 
-    private long totalValue;
+    private double totalValue;
 
     private long itemQuantity;
 
@@ -14,7 +14,7 @@ public class ShoppingCartDTO {
 
     private long buyerId;
 
-    public ShoppingCartDTO(List<ProductDTO> products, long totalValue, long itemQuantity, String buyerName, long buyerId) {
+    public ShoppingCartDTO(List<ProductDTO> products, double totalValue, long itemQuantity, String buyerName, long buyerId) {
         this.shoppingCartProducts = products;
         this.totalValue = totalValue;
         this.itemQuantity = itemQuantity;
@@ -33,8 +33,13 @@ public class ShoppingCartDTO {
         this.shoppingCartProducts = shoppingCartProducts;
     }
 
-    public long getTotalValue() {
-        return totalValue;
+
+//    public double getTotalValue() {
+//        return totalValue;
+//    }
+
+    public String getTotalValue() {
+        return String.format("%.2f", totalValue);
     }
 
     public void setTotalValue(long totalValue) {

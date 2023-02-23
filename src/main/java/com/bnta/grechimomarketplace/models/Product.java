@@ -17,7 +17,7 @@ public class Product {
     private String name;
 
     @Column
-    private long price;
+    private double price;
 
     @Column
     private String description;
@@ -40,7 +40,7 @@ public class Product {
     @JsonIgnoreProperties("products")
     private List<Order> orders;
 
-    public Product(String name, long price, String description, Seller seller, long stock, boolean listed, boolean fulfilled) {
+    public Product(String name, double price, String description, Seller seller, long stock, boolean listed, boolean fulfilled) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -70,11 +70,11 @@ public class Product {
         this.name = name;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

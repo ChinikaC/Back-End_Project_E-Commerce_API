@@ -94,8 +94,8 @@ public class Order {
         this.timestamp = timestamp;
     }
 
-    public long getOrderValue() {
-        long orderValue = 0l;
+    public double getOrderValue() {
+        double orderValue = 0;
         if (products != null) {
             for (Product product : products) {
                 orderValue += product.getPrice();

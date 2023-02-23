@@ -9,6 +9,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.sql.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -36,12 +37,14 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
+        DecimalFormat df = new DecimalFormat("#.00");
+
         String[] buyerNames = {"Aya", "Chinika", "Diana", "Mati", "Greg", "Hansine", "James", "Leah", "Mo", "Ramiro", "Ryder", "Samra", "Thinesan", "Wilson", "Xixian"};
         String[] sellerNames = {"Colin", "Richard", "Zsolt", "Ed", "Anna", "Phil", "Joe", "Lewis", "Eoan", "Iain"};
 
         // Load 10 Buyers
         for (int i = 0; i < buyerNames.length; i++) {
-            BankCard card = new BankCard(10000l);
+            BankCard card = new BankCard(10000.00);
             bankCardRepository.save(card);
             Buyer buyer = new Buyer(buyerNames[i], buyerNames[i] + "@bnta.com", "5th floor, " + (i+11) + " Middlesex St, London E1 7EZ", "password" + (i + 1), card);
             card.setAccountName(buyer.getName());
@@ -92,13 +95,13 @@ public class DataLoader implements ApplicationRunner {
 
         // Load 30 Products & 10 Sellers
         for (int i = 0; i < sellerNames.length; i++) {
-            BankCard card = new BankCard(1000l);
+            BankCard card = new BankCard(1000.00);
             Seller seller = new Seller(sellerNames[i], card, sellerNames[i] + "@bnta.com", "5th floor, " + (i+111) + " Middlesex St, London E1 7EZ", "password" + (i + 1), new ArrayList<>());
             card.setAccountName(seller.getName());
             bankCardRepository.save(card);
             sellerRepository.save(seller);
             for (int j = i * 3; j < (i + 1) * 3; j++) {
-                Product product = new Product(products[j], (long) (Math.random() * 5000) + 1, productDescriptions[j], seller, (long) (Math.random() * 100) + 1, true, false);
+                Product product = new Product(products[j], Double.parseDouble(df.format(Math.random() * 5000 + 1)) , productDescriptions[j], seller, (long) (Math.random() * 100) + 1, true, false);
                 productRepository.save(product);
                 seller.getProducts().add(product);
             }
@@ -125,7 +128,7 @@ public class DataLoader implements ApplicationRunner {
         }
 
 
-        GCMBMarketplace gcmbMarketplace = new GCMBMarketplace(10000000, "5th floor, 80 Middlesex St, London E1 7EZ");
+        GCMBMarketplace gcmbMarketplace = new GCMBMarketplace(1000000.00, "5th floor, 80 Middlesex St, London E1 7EZ");
         gcmbRepository.save(gcmbMarketplace);
 
     }

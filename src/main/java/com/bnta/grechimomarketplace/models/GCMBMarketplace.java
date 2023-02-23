@@ -8,12 +8,12 @@ public class GCMBMarketplace {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long balance;
+    private double balance;
     
     @Column
     private String address;
 
-    public GCMBMarketplace(long balance, String address) {
+    public GCMBMarketplace(double balance, String address) {
         this.balance = balance;
         this.address = address;
     }
@@ -29,7 +29,7 @@ public class GCMBMarketplace {
         this.id = id;
     }
 
-    public long getBalance() {
+    public double getBalance() {
         return balance;
     }
 

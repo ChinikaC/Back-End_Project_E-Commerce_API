@@ -93,7 +93,7 @@ public class BuyerService {
         List<Product> buyerCart = buyer.get().getCart();
         BankCard buyerCard = buyer.get().getCard();
         for (Product product : buyerCart) {
-            long productValue = product.getPrice();
+            double productValue = product.getPrice();
             BankCard sellerCard = product.getSeller().getCard();
             buyerCard.reduceMoney(productValue);
             sellerCard.addMoney(productValue);

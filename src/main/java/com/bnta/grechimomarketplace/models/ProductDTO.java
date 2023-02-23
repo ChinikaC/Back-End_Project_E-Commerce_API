@@ -1,15 +1,17 @@
 package com.bnta.grechimomarketplace.models;
 
+import java.text.DecimalFormat;
+
 public class ProductDTO {
     private Long productId;
     private String name;
-    private long price;
+    private double price;
     private String description;
     private String sellerName;
     private long sellerId;
     private long stockLevel;
 
-    public ProductDTO(Long productId, String name, long price, String description, String sellerName, long sellerId, long stockLevel) {
+    public ProductDTO(Long productId, String name, double price, String description, String sellerName, long sellerId, long stockLevel) {
         this.productId = productId;
         this.name = name;
         this.price = price;
@@ -38,11 +40,15 @@ public class ProductDTO {
         this.name = name;
     }
 
-    public long getPrice() {
-        return price;
+//    public double getPrice() {
+//        return price;
+//    }
+
+    public String getPrice() {
+        return String.format("%.2f", price);
     }
 
-    public void setPrice(long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

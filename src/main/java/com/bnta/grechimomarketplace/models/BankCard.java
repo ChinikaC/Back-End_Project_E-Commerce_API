@@ -13,7 +13,7 @@ public class BankCard {
   private String accountName;
 
   @Column
-  private long accountBalance;
+  private double accountBalance;
 
   @OneToOne(mappedBy = "card")
   private Buyer buyer;
@@ -21,7 +21,7 @@ public class BankCard {
   @OneToOne(mappedBy = "card")
   private Seller seller;
 
-  public BankCard(long accountBalance) {
+  public BankCard(double accountBalance) {
         this.accountBalance = accountBalance;
     }
 
@@ -36,7 +36,7 @@ public class BankCard {
         this.accountName = accountName;
     }
 
-    public long getAccountBalance() {
+    public double getAccountBalance() {
         return accountBalance;
     }
 
@@ -44,11 +44,11 @@ public class BankCard {
         this.accountBalance = accountBalance;
     }
 
-    public void addMoney(long money) {
+    public void addMoney(double money) {
       this.accountBalance += money;
     }
 
-    public void reduceMoney(long money) {
+    public void reduceMoney(double money) {
       this.accountBalance -= money;
     }
 }

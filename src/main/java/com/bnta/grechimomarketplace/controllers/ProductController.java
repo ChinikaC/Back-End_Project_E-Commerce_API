@@ -67,7 +67,7 @@ public class ProductController {
     @PatchMapping(value = "/update/{productId}")
     public ResponseEntity<ProductDTO> updateProduct(@PathVariable long productId,
                                                  @RequestParam Optional<String> name,
-                                                 @RequestParam Optional<Long> price,
+                                                 @RequestParam Optional<Double> price,
                                                  @RequestParam Optional<String> description,
                                                  @RequestParam Optional<Boolean> listed,
                                                  @RequestParam Optional<Boolean> fulfilled,
