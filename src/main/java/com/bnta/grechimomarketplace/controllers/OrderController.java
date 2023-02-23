@@ -7,6 +7,7 @@ import com.bnta.grechimomarketplace.models.OrderRequest;
 import com.bnta.grechimomarketplace.repositories.OrderRepository;
 import com.bnta.grechimomarketplace.services.BuyerService;
 import com.bnta.grechimomarketplace.services.OrderService;
+import com.bnta.grechimomarketplace.services.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,19 +26,32 @@ public class OrderController {
     @Autowired
     BuyerService buyerService;
 
+    @Autowired
+    SellerService sellerService;
+
+
+    @GetMapping(value = "/{orderId}")
+    public ResponseEntity<OrderDTO> getOrderById(@PathVariable long orderId){
+        Optional<Order> order = orderService.getOrderById(orderId);
+        if (order.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(orderService.generateorderDTO(order.get()), HttpStatus.OK);
+    }
+
     @GetMapping
-    public List<OrderDTO> getAllOrders() {
-        return orderService.getAllOrders();
-    }
+    public ResponseEntity<List<OrderDTO>> getOrders(@RequestParam Optional<Long> buyerId,
+                                                    @RequestParam Optional<Long> sellerId) {
+        if (buyerId.isPresent()) {
+            if (buyerService.getBuyerById(buyerId.get()).isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(orderService.getOrdersByBuyer(buyerId.get()), HttpStatus.OK);
+        }
+        if (sellerId.isPresent()) {
+            if (sellerService.getSellerById(sellerId.get()).isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(orderService.getOrdersBySeller(sellerId.get()), HttpStatus.OK);
+        } else {
+            if (orderService.getAllOrders().isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(orderService.getAllOrders(), HttpStatus.OK);
+        }
 
-    @GetMapping("/buyers/{buyerId}")
-    public ResponseEntity<List<OrderDTO>> getOrdersRelevantToBuyer(@PathVariable long buyerId){
-        return new ResponseEntity<>(orderService.getOrdersByBuyer(buyerId), HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/sellers/{sellerId}")
-    public ResponseEntity<List<OrderDTO>> getOrdersRelevantToSeller(@PathVariable long sellerId) {
-        return new ResponseEntity<>(orderService.getOrdersBySeller(sellerId), HttpStatus.OK);
     }
 
     @PostMapping
@@ -48,6 +62,15 @@ public class OrderController {
         if (buyer.get().getCard().getAccountBalance() < buyer.get().getCartTotalValue()) return new ResponseEntity<>(HttpStatus.PAYMENT_REQUIRED);
         return new ResponseEntity<>(orderService.placeOrder(orderRequest), HttpStatus.CREATED);
     }
+
+    @DeleteMapping(value = "{orderId}")
+    public ResponseEntity deleteOrderById(@PathVariable long orderId){
+        if(orderService.getOrderById(orderId).isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        orderService.deleteOrderById(orderId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+
+    }
+
 
 
 }

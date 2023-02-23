@@ -42,7 +42,7 @@ public class ShoppingCartDTO {
         return String.format("%.2f", totalValue);
     }
 
-    public void setTotalValue(long totalValue) {
+    public void setTotalValue(double totalValue) {
         this.totalValue = totalValue;
     }
 
