@@ -45,7 +45,6 @@ public class BuyerService {
         return buyers;
     }
 
-// do not touch this method!!
     public Optional<Buyer> getBuyerById(long buyerId){
         Optional <Buyer> buyer = buyerRepository.findById(buyerId);
         return buyer;
@@ -96,9 +95,15 @@ public class BuyerService {
         return new ShoppingCartDTO(productDTOs, buyer.getCartTotalValue(), buyer.getCart().size(), buyer.getName(), buyer.getId());
     }
 
-
-
     public void saveBuyer(Buyer buyer){
         buyerRepository.save(buyer);
     }
+
+    public void deleteBuyerById(Long buyerId){
+        List<Order> orders = orderRepository.findByBuyerId(buyerId);
+        for (Order order : orders) orderRepository.delete(order);
+        buyerRepository.deleteById(buyerId);
+    }
+
+
 }

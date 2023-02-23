@@ -108,4 +108,11 @@ public class BuyerController {
         return new ResponseEntity(buyerService.findBuyerDTOById(buyerId), HttpStatus.OK);
     }
 
+    @DeleteMapping(value = "/{buyerId}")
+    public ResponseEntity deleteBuyerById(@PathVariable Long buyerId){
+        if(buyerService.getBuyerById(buyerId).isEmpty()) return new ResponseEntity(HttpStatus.NOT_FOUND);
+        buyerService.deleteBuyerById(buyerId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
 }

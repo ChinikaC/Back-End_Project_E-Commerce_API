@@ -59,14 +59,14 @@ public class Buyer {
         cart.clear();
     }
 
-    public long getCartTotalValue() {
-        long totalValue = 0l;
+    public double getCartTotalValue() {
+        double totalValue = 0;
         if (!cart.isEmpty()) {
             for (Product product : cart) {
                 totalValue += product.getPrice();
             }
             return totalValue;
-        } else return 0l;
+        } else return 0;
     }
 
     public long getId() {

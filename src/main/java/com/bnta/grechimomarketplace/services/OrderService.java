@@ -30,6 +30,10 @@ public class OrderService {
         return orderDTOList;
     }
 
+    public Optional<Order> getOrderById(long orderId){
+        return orderRepository.findById(orderId);
+    }
+
     public List<OrderDTO> getOrdersBySeller(long sellerId) {
         List<Order> orderList = orderRepository.findByProducts_Seller_Id(sellerId);
         List<OrderDTO> orderDTOList = new ArrayList<>();
@@ -72,10 +76,9 @@ public class OrderService {
         return generateorderDTO(order);
     }
 
-//    public void distributeOrders() {
-//        List<Order> orders = orderRepository.findAll();
-//        for (Order order : orders) {
-//
-//        }
-//    }
+    public void deleteOrderById(long orderId){
+        orderRepository.deleteById(orderId);
+    }
+
+
 }
