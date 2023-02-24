@@ -96,12 +96,15 @@ public class DataLoader implements ApplicationRunner {
         // Load 30 Products & 10 Sellers
         for (int i = 0; i < sellerNames.length; i++) {
             BankCard card = new BankCard(1000.00);
-            Seller seller = new Seller(sellerNames[i], card, sellerNames[i] + "@bnta.com", "5th floor, " + (i+111) + " Middlesex St, London E1 7EZ", "password" + (i + 1), new ArrayList<>());
+            Seller seller = new Seller(sellerNames[i], card, sellerNames[i] + "@bnta.com",
+                    "5th floor, " + (i+111) + " Middlesex St, London E1 7EZ", "password" + (i + 1), new ArrayList<>());
             card.setAccountName(seller.getName());
             bankCardRepository.save(card);
             sellerRepository.save(seller);
             for (int j = i * 3; j < (i + 1) * 3; j++) {
-                Product product = new Product(products[j], Double.parseDouble(df.format(Math.random() * 5000 + 1)) , productDescriptions[j], seller, (long) (Math.random() * 100) + 1, true, false);
+                Product product = new Product(products[j],
+                        Double.parseDouble(df.format(Math.random() * 5000 + 1)) ,
+                        productDescriptions[j], seller, (long) (Math.random() * 100) + 1, true, false);
                 productRepository.save(product);
                 seller.getProducts().add(product);
             }

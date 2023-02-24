@@ -30,7 +30,7 @@ public class BuyerController {
     @PostMapping
     public ResponseEntity<Buyer> addNewBuyer (@RequestBody(required = true) Buyer buyer) {
         if (buyer.getCard() == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-         bankCardRepository.save(buyer.getCard());
+        bankCardRepository.save(buyer.getCard());
         return new ResponseEntity<>(buyerService.addNewBuyer(buyer), HttpStatus.CREATED);
     }
 
@@ -84,6 +84,7 @@ public class BuyerController {
     }
     @GetMapping(value = "/{buyerId}/cart")
     public ResponseEntity<ShoppingCartDTO> viewCart(@PathVariable Long buyerId) {
+        if (buyerService.getBuyerById(buyerId).isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(buyerService.getCart(buyerId), HttpStatus.OK);
     }
 

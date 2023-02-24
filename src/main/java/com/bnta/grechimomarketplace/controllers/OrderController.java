@@ -39,11 +39,11 @@ public class OrderController {
     @GetMapping
     public ResponseEntity<List<OrderDTO>> getOrders(@RequestParam Optional<Long> buyerId,
                                                     @RequestParam Optional<Long> sellerId) {
-        if (buyerId.isPresent()) {
+        if (buyerId.isPresent() && sellerId.isEmpty()) {
             if (buyerService.getBuyerById(buyerId.get()).isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             return new ResponseEntity<>(orderService.getOrdersByBuyer(buyerId.get()), HttpStatus.OK);
         }
-        if (sellerId.isPresent()) {
+        if (sellerId.isPresent() && buyerId.isEmpty()) {
             if (sellerService.getSellerById(sellerId.get()).isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             return new ResponseEntity<>(orderService.getOrdersBySeller(sellerId.get()), HttpStatus.OK);
         } else {
@@ -58,7 +58,8 @@ public class OrderController {
         Optional<Buyer> buyer = buyerService.getBuyerById(orderRequest.getBuyerId());
         if (buyer.isEmpty()) return new ResponseEntity<> (HttpStatus.NOT_FOUND);
         if (buyer.get().getCart().isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        if (buyer.get().getCard().getAccountBalance() < buyer.get().getCartTotalValue()) return new ResponseEntity<>(HttpStatus.PAYMENT_REQUIRED);
+        if (buyer.get().getCard().getAccountBalance() < buyer.get().getCartTotalValue())
+            return new ResponseEntity<>(HttpStatus.PAYMENT_REQUIRED);
         return new ResponseEntity<>(orderService.placeOrder(orderRequest), HttpStatus.CREATED);
     }
 
