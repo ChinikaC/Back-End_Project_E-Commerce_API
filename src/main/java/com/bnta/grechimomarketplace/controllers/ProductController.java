@@ -34,14 +34,14 @@ public class ProductController {
         if (searchQuery.isPresent()) {
             List<ProductDTO> products = productService.getAllProductsContainingString(searchQuery.get());
             if (products.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             } else {
                 return new ResponseEntity<>(products, HttpStatus.OK);
             }
         } else {
             List<ProductDTO> products = productService.getAllProducts();
             if (products.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             } else {
                 return new ResponseEntity<>(products, HttpStatus.OK);
             }
