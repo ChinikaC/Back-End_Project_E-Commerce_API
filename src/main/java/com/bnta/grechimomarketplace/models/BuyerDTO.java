@@ -1,21 +1,19 @@
 package com.bnta.grechimomarketplace.models;
 
-import jakarta.persistence.Column;
-
 import java.util.List;
 
 public class BuyerDTO {
 
-    private long id;
+    private long buyerId;
     private String name;
     private String email;
     private String address;
     private ShoppingCartDTO shoppingCart;
     private List<OrderDTO> orders;
 
-    public BuyerDTO(long id, String name, String email, String address,
+    public BuyerDTO(long buyerId, String name, String email, String address,
                     ShoppingCartDTO shoppingCart, List<OrderDTO> orders) {
-        this.id = id;
+        this.buyerId = buyerId;
         this.name = name;
         this.email = email;
         this.address = address;
@@ -23,12 +21,12 @@ public class BuyerDTO {
         this.orders = orders;
     }
 
-    public long getId() {
-        return id;
+    public long getBuyerId() {
+        return buyerId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setBuyerId(long buyerId) {
+        this.buyerId = buyerId;
     }
 
     public String getName() {

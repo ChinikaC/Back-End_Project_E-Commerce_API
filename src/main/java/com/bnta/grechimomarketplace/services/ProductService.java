@@ -68,4 +68,19 @@ SellerRepository sellerRepository;
     public void deleteProduct(long productId) {
         productRepository.deleteById(productId);
     }
+
+    public List<ProductDTO> getAllProductsSortedByPriceAsc() {
+        return generateProductDTOs(productRepository.findByListedTrueOrderByPriceAsc());
+    }
+    public List<ProductDTO> getAllProductsSortedByPriceDesc() {
+        return generateProductDTOs(productRepository.findByListedTrueOrderByPriceDesc());
+    }
+    public List<ProductDTO> getAllProductsSortedByNameAsc() {
+        return generateProductDTOs(productRepository.findByListedTrueOrderByNameAsc());
+    }
+
+    public List<ProductDTO> getAllProductsSortedByNameDesc() {
+        return generateProductDTOs(productRepository.findByListedTrueOrderByNameDesc());
+    }
+
 }

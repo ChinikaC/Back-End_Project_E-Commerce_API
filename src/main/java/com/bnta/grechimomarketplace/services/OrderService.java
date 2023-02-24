@@ -6,7 +6,6 @@ import com.bnta.grechimomarketplace.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +29,10 @@ public class OrderService {
         return orderDTOList;
     }
 
+    public Optional<Order> getOrderById(long orderId){
+        return orderRepository.findById(orderId);
+    }
+
     public List<OrderDTO> getOrdersBySeller(long sellerId) {
         List<Order> orderList = orderRepository.findByProducts_Seller_Id(sellerId);
         List<OrderDTO> orderDTOList = new ArrayList<>();
@@ -48,7 +51,7 @@ public class OrderService {
         return orderDTOList;
     }
 
-    public OrderDTO generateorderDTO(Order order) {
+    public OrderDTO generateOrderDTO(Order order) {
         return new OrderDTO(order.getId(),order.getOrderValue(),order.getAddress(),order.getOrderProductDTOs(), order.getBuyer().getName(),order.getBuyer().getId(), order.getTimestamp());
     }
 
@@ -69,13 +72,12 @@ public class OrderService {
         order.setProducts(buyerCartCopy);
         buyer.get().emptyCart();
         orderRepository.save(order);
-        return generateorderDTO(order);
+        return generateOrderDTO(order);
     }
 
-//    public void distributeOrders() {
-//        List<Order> orders = orderRepository.findAll();
-//        for (Order order : orders) {
-//
-//        }
-//    }
+    public void deleteOrderById(long orderId){
+        orderRepository.deleteById(orderId);
+    }
+
+
 }
