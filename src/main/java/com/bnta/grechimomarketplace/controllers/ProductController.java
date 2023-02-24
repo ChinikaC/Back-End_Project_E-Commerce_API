@@ -48,6 +48,46 @@ public class ProductController {
         }
     }
 
+    @GetMapping(params = "sort=price-asc")
+    public ResponseEntity<List<ProductDTO>> getAllProductsSortedByPriceAsc() {
+        List<ProductDTO> products = productService.getAllProductsSortedByPriceAsc();
+        if (products.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(params = "sort=price-desc")
+    public ResponseEntity<List<ProductDTO>> getAllProductsSortedByPriceDesc() {
+        List<ProductDTO> products = productService.getAllProductsSortedByPriceDesc();
+        if (products.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(params = "sort=name-asc")
+    public ResponseEntity<List<ProductDTO>> getAllProductsSortedByNameAsc() {
+        List<ProductDTO> products = productService.getAllProductsSortedByNameAsc();
+        if (products.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(params = "sort=name-desc")
+    public ResponseEntity<List<ProductDTO>> getAllProductsSortedByNameDesc() {
+        List<ProductDTO> products = productService.getAllProductsSortedByNameDesc();
+        if (products.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        }
+    }
+
     @PostMapping
     public ResponseEntity<Product> addNewProductToSellersInventory(@RequestParam long sellerId,
                                                                    @RequestBody Product product){
