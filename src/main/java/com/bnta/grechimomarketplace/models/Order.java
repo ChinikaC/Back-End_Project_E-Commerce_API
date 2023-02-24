@@ -15,7 +15,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long order_value;
+    private double order_value;
 
     @Column
     private String address;
@@ -54,11 +54,11 @@ public class Order {
         this.id = id;
     }
 
-    public long getOrder_value() {
+    public double getOrder_value() {
         return order_value;
     }
 
-    public void setOrder_value(long order_value) {
+    public void setOrder_value(double order_value) {
         this.order_value = order_value;
     }
 
@@ -111,6 +111,17 @@ public class Order {
         }
         return productDTOs;
     }
+
+    public void updateOrderValue() {
+        double orderValue = 0;
+        if (products != null) {
+            for (Product product : products) {
+                orderValue += product.getPrice();
+            }
+        }
+        this.order_value = orderValue;
+    }
+
 
 
 }

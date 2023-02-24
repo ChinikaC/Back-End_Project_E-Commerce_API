@@ -70,6 +70,7 @@ public class OrderService {
         List<Product> buyerCartCopy = new ArrayList<>(buyerCart);
         // had to create a copy of the buyer cart as I was getting an error when trying to persist
         order.setProducts(buyerCartCopy);
+        order.updateOrderValue();
         buyer.get().emptyCart();
         orderRepository.save(order);
         return generateOrderDTO(order);

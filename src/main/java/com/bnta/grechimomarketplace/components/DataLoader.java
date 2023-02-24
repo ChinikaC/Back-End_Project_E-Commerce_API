@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Component
@@ -130,6 +131,11 @@ public class DataLoader implements ApplicationRunner {
             }
         }
 
+        List<Order> orders = orderRepository.findAll();
+        for (Order order : orders) {
+            order.updateOrderValue();
+            orderRepository.save(order);
+        }
 
         GCMBMarketplace gcmbMarketplace = new GCMBMarketplace(1000000.00, "5th floor, 80 Middlesex St, London E1 7EZ");
         gcmbRepository.save(gcmbMarketplace);
