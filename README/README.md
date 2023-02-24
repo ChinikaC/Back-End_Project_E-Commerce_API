@@ -28,14 +28,13 @@
 
 - 
 
-- 
 
-#### ***Future*** 🔑
+#### ***Future*** 
 If granted more time, we would like to develop more functions to create more features. These include:
 
 - Bidding functionality = giving sellers the opportunity to list products to be bidded on amongst buyers with a time scale in mind for when bids will no longer be taken.
-- 
-- 
+
+-
 
 
 <br />
@@ -48,3 +47,11 @@ If granted more time, we would like to develop more functions to create more fea
 > 3. Dependencies
 > 4. Commands
 > 5. Instructions
+
+### ***1. Project Timeline*** 
+
+- Monday 20/02/2023 - Met with the team to discuss ideas and started UML and ERD diagrams.
+- Tuesday 21/02/2023 - Started on our set MVP using IntelliJ and Git. 
+- Wednesday 22/02/2023 - Alot of debugging and started working in our extension tasks.
+- Thursday 23/02/2023 - Completed MVP, Fixed errors and preparing presentation.
+- Friday 24/02/2023 - Presentation.
