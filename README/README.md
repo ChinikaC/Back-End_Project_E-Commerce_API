@@ -46,7 +46,7 @@ ERD:
 ![my screenshot](../Screenshot%202023-03-04%20at%2021.06.57.png)
 
 This displays what are MVP was. The 'categories' and join table 'products_categories' was an extension that we did not manage to get onto (hence why they are in grey). 
-- There are two joins table: orders_products and buyers_products
+- There are two join tables: orders_products and buyers_products
 - 'Marketplaces' was included and was set up as 'GCMBMarketplace.java' but did was not used. Please see 'Seller fees' under the 'Future' section to find out what we wanted to do with this model
 
 
