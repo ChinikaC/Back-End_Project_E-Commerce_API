@@ -279,8 +279,44 @@ If granted more time, we would like to develop more functions to create addition
 
 ### ***3. Dependencies***
 
+- spring-boot-starter-data-jpa: This dependency enabled us to use Java Persistence API (JPA) to interact with our relational database and perform various operations on the data. It provided us with an easy-to-use, high-level API for managing our data.
+
+- spring-boot-starter-web: This dependency enabled us to build a RESTful web API using the Spring framework. It provided us with the necessary components to handle HTTP requests and responses, and to implement controllers, services, and other components that make up the API.
+
+- spring-boot-devtools: This dependency provided us with additional tools for development, such as automatic restart of the application when code changes are detected, and live reloading of static resources.
+
+- postgresql: This dependency provided us with the necessary components to interact with a PostgreSQL database, including the JDBC driver and other utilities.
+
+- spring-boot-starter-test: This dependency provided us with a suite of testing tools and frameworks for testing our application, including JUnit, Mockito, and Spring Test. It enabled us to write and run tests for our API to ensure that it was functioning correctly and that changes did not introduce regressions. Unfortunately, due to time limitations, we were unable to perform JUnit testing on this occasion.
 
 
+```
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-devtools</artifactId>
+  <scope>runtime</scope>
+  <optional>true</optional>
+</dependency>
+<dependency>
+  <groupId>org.postgresql</groupId>
+  <artifactId>postgresql</artifactId>
+  <scope>runtime</scope>
+</dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-test</artifactId>
+  <scope>test</scope>
+</dependency>
+
+```
 
 <br />
 
