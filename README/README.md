@@ -41,7 +41,7 @@ To establish a sense of identity, we named our team GRECHIMO BAY, which relates 
 
 ### ***3. Diagrams***
 
-ERD Diagram:
+ERD:
 
 ![my screenshot](../Screenshot%202023-03-04%20at%2021.06.57.png)
 
@@ -50,7 +50,7 @@ This displays what are MVP was. The 'categories' and join table 'products_catego
 - 'Marketplaces' was included and was set up as 'GCMBMarketplace.java' but did was not used. Please see 'Seller fees' under the 'Future' section to find out what we wanted to do with this model
 
 
-UML Diagram:
+UML:
 
 ![my screenshot](../Screenshot%202023-03-04%20at%2021.07.22.png)
 
@@ -335,7 +335,7 @@ These platforms allowed us to test our code and import a variety of functions to
 
 
 ### ***8. Future*** 
-If granted more time, we would like to develop more functions to create additional features. These include:
+If granted more time, we would have liked to develop more functions to create additional features. These include:
 
 - Bidding functionality: Giving sellers the opportunity to list products to be bid on among buyers with a specified timescale for when bids will no longer be accepted.
 - Categories: An ENUM for categories would enable the buyer to have greater control over which products are displayed to them.
