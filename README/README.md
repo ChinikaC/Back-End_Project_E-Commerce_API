@@ -102,12 +102,12 @@ If granted more time, we would like to develop more functions to create addition
   </tr>
   <tr>
     <td>GET</td>
-    <td>/products?searchQuery=</td>
+    <td>/products?searchQuery=...</td>
     <td>Returns a list of all products (via ProductDTOs) available to purchase on the marketplace containing a specified search term</td>
   </tr>
   <tr>
     <td>POST</td>
-    <td>/products?sellerId=</td>
+    <td>/products?sellerId=:id</td>
     <td>Allows a specific seller to create a new product. Product variables to be passed through via requestBody in JSON. No properties are mandatory (can create a product with as little as a single property).</td>
     <td>
     <pre><code>{
@@ -121,6 +121,7 @@ If granted more time, we would like to develop more functions to create addition
     <td>PATCH</td>
     <td>/products/update/:id?...</td>
     <td>Enables updating of exisitng product listings, allowing modification of any property via requestParams</td>
+    <td>/products/update/1?price=3645.22</td>
   </tr>
   <tr>
     <td>DEL</td>
@@ -189,6 +190,7 @@ If granted more time, we would like to develop more functions to create addition
     <td>PATCH</td>
     <td>/buyers/:id?...</td>
     <td>Allows buyer to update their details via RequestParams</td>
+    <td>/buyers/1?name=john</td>
   </tr>
   <tr>
     <td>DEL</td>
