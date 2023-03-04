@@ -49,6 +49,7 @@ This displays what are MVP was. The 'categories' and join table 'products_catego
 - There are two joins table: orders_products and buyers_products
 - 'Marketplaces' was included and was set up as 'GCMBMarketplace.java' but did was not used. Please see 'Seller fees' under the 'Future' section to find out what we wanted to do with this model
 
+
 UML Diagram:
 
 ![my screenshot](../Screenshot%202023-03-04%20at%2021.07.22.png)
@@ -57,11 +58,13 @@ We included all of our models, DTOs and the service layer with lines to indicate
 
 <br />
  
-#### ***4. Technologies*** 
+### ***4. Technologies*** 
 
 We utilized Java to code our API and Git to commit changes and store our code on GitHub, along with UML and ERD diagrams. The platform proved to be very helpful in keeping track of our modifications and allowing us to revert to previous versions of the code if needed.
 
-Spring Initializr was an essential tool that allowed us to implement dependencies to utilize particular functions and commands. For instance, we utilized Spring Boot to implement the Spring framework, JPA to convert JSON and Java, and SQL to manage our relational databases and perform various operations on the data in them. We collaborated in IntelliJ using the Git framework to work on separate branches and later combine and collaborate on each other's code. Finally, we used Postman to test our functions. These platforms allowed us to test our code and import a variety of functions to create our tables and extend our beans (Examples: @JPARepositories, @Component, etc.).
+Spring Initializr was an essential tool that allowed us to implement dependencies to utilize particular functions and commands. For instance, we utilized Spring Boot to implement the Spring framework, JPA to convert JSON and Java, and SQL to manage our relational databases and perform various operations on the data in them. We collaborated in IntelliJ using the Git framework to work on separate branches and later combine and collaborate on each other's code. Finally, we used Postman to test our functions and used Postico to view our database table. 
+
+These platforms allowed us to test our code and import a variety of functions to create our tables and extend our beans (examples: @JPARepositories, @Component, etc.).
 
 <br />
 
@@ -321,7 +324,7 @@ Spring Initializr was an essential tool that allowed us to implement dependencie
 
 <br />
 
-#### ***7. Challenges*** 
+### ***7. Challenges*** 
 - One of our challenges was familiarizing ourselves with new beans (@Transient) and functionalities we included to assist with CRUD tasks, specifically allowing users to delete products from their cart. We researched how to resolve the issue and soon completely understood and were able to effectively execute a working MVP we could build on.
 
 - Another challenge was with our @DELETE requests. Having many-to-many and one-to-many relationships meant there were a lot of associations so it was hard to simply delete one thing, for example, deleting a product as it was included in an order. We ended up using 'cascade = CascadeType.ALL' in the @ManyToMany annotation in the 'Product.java' which solved our issues with the @DELETE requests. However, when we delete a product now, it also deletes the whole order that the product was in, which is something we did not know how to resolve.
@@ -331,7 +334,7 @@ Spring Initializr was an essential tool that allowed us to implement dependencie
 <br />
 
 
-#### ***8. Future*** 
+### ***8. Future*** 
 If granted more time, we would like to develop more functions to create additional features. These include:
 
 - Bidding functionality: Giving sellers the opportunity to list products to be bid on among buyers with a specified timescale for when bids will no longer be accepted.
