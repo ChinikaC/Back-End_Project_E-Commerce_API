@@ -25,7 +25,7 @@
 
 Our team took a keen interest in online marketplaces such as eBay and Amazon, which allow individuals and businesses to buy and sell a wide variety of goods and services. We specifically chose this task as we wanted our API to encompass a range of our learning with the potential to further extend it.
 
-To establish a sense of identity, we named our team GRECHIMO, which relates to each of our three first names and incorporates the "bay" terminology commonly used for marketplaces such as eBay.
+To establish a sense of identity, we named our team GRECHIMO BAY, which relates to each of our three first names and incorporates the "bay" terminology commonly used for marketplaces such as eBay.
 
 <br />
 
