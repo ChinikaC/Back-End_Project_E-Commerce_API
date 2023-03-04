@@ -8,37 +8,43 @@
 - GitHub: [Chinika Charles](https://github.com/ChinikaC)
 - GitHub: [Mohamed Abdi](https://github.com/mohincode)
 
+<br />
+
 ### ***Project Overview*** 
 
- Our team had taken interest particularly in eBay and Amazon who are both online marketplaces that allow individuals and businesses to buy and sell a wide variety of goods and services. We deliberately chose this task as we wanted our API to encompass a range of our learning and extend it, incorporating ideas such as....
- 
- <br />
+Our team took a keen interest in online marketplaces such as eBay and Amazon, which allow individuals and businesses to buy and sell a wide variety of goods and services. We specifically chose this task as we wanted our API to encompass a range of our learning with the potential to further extend it.
 
- Our team name, *GRECHIMO*, relates to each of our three first names, and also a slight play on words when including the "bay" terminology added commonly to marketplaces such as eBay. 
+To establish a sense of identity, we named our team GRECHIMO, which relates to each of our three first names and incorporates the "bay" terminology commonly used for marketplaces such as eBay.
+
+<br />
  
 #### ***Technologies*** 
 
- - We used Java to code our API and utilized Git to commit changes and store our code on GitHub, along with UML and ERD diagrams. The platform proved to be very helpful in keeping track of our modifications and allowing us to revert to previous versions of the code if needed.
+We utilized Java to code our API and Git to commit changes and store our code on GitHub, along with UML and ERD diagrams. The platform proved to be very helpful in keeping track of our modifications and allowing us to revert to previous versions of the code if needed.
+
+Spring Initializr was an essential tool that allowed us to implement dependencies to utilize particular functions and commands. For instance, we utilized Spring Boot to implement the Spring framework, JPA to convert JSON and Java, and SQL to manage our relational databases and perform various operations on the data in them. We collaborated in IntelliJ using the Git framework to work on separate branches and later combine and collaborate on each other's code. Finally, we used Postman to test our functions. These platforms allowed us to test our code and import a variety of functions to create our tables and extend our beans (Examples: @JPARepositories, @Component, etc.).
+
 <br />
 
--  SpringIntializr was imperative for us to use as we were able to implement dependencies which allowed us to utilise particular functions and commands. For instance, we utilised SpringBoot to implement the Spring framework, JPA to convert JSON and Java, and SQL to manage our relational databases and perform various operations on the data in them. We group coded in IntellliJ using the the GIT framework to work on seperate branches, to later combine and collaborate on eachtohers code. Finally, we used postman to test our functions. These platforms allowed us to test our code and import a variety of functions to create our tables and extend our beans (Examples: @JPARepositories, @Component etc).
-
-#### ***Drawbacks*** 
-- One of our issues was familiarising ourselves with new beans (@Tranzient) and also new functionalities we included to assist with CRUD tasks, specifically allowing users to delete products from their cart. We researched how to resolve the issue and soon completely understood and were able to effectively execute a working MVP we could build on.
+#### ***Challenges*** 
+- One of our challenges was familiarizing ourselves with new beans (@Transient) and functionalities we included to assist with CRUD tasks, specifically allowing users to delete products from their cart. We researched how to resolve the issue and soon completely understood and were able to effectively execute a working MVP we could build on.
 
 - 
 
-
-#### ***Future*** 
-If granted more time, we would like to develop more functions to create more features. These include:
-
-- Bidding functionality = giving sellers the opportunity to list products to be bidded on amongst buyers with a time scale in mind for when bids will no longer be taken.
-
--
-
-
 <br />
 
+
+#### ***Future*** 
+If granted more time, we would like to develop more functions to create additional features. These include:
+
+- Bidding functionality: giving sellers the opportunity to list products to be bid on among buyers with a specified timescale for when bids will no longer be accepted.
+- Categories: an ENUM for categories would enable the buyer to have greater control over which products are displayed to them.
+- More robust deletion: currently, when a product is deleted, any order that it is associated with is also deleted. Given more time, we would have removed the association with the order prior to deletion.
+- Add "quantity" field to orders: currently, when an order is placed, if there are multiple of the same item, they are each added as their own object. We would like to add a "quantity" counter to order products to avoid duplication of items.
+- Seller fees: letting the marketplace take a cut of seller revenue would be advisable in order to make the marketplace profitable.
+ 
+
+<br />
 
 
 ## **TABLE OF CONTENTS** 📖
@@ -48,6 +54,8 @@ If granted more time, we would like to develop more functions to create more fea
 > 4. Commands
 > 5. Instructions
 
+<br />
+
 ### ***1. Project Timeline*** 
 
 - Monday 20/02/2023 - Met with the team to discuss ideas and started UML and ERD diagrams.
@@ -55,3 +63,232 @@ If granted more time, we would like to develop more functions to create more fea
 - Wednesday 22/02/2023 - Alot of debugging and started working in our extension tasks.
 - Thursday 23/02/2023 - Completed MVP, Fixed errors and preparing presentation.
 - Friday 24/02/2023 - Presentation.
+
+<br />
+
+### ***2. The API***
+
+<table>
+  <tr>
+    <th>Request Type</th>
+    <th>PATH</th>
+    <th>Description</th>
+    <th>Sample Input</th>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/products</td>
+    <td>Returns a list of all products (via ProductDTOs) available to purchase on the marketplace</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/products?sort=price-asc</td>
+    <td>Returns a list of all products (via ProductDTOs) available to purchase on the marketplace, sorted by price ascending</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/products?sort=price-desc</td>
+    <td>Returns a list of all products (via ProductDTOs) available to purchase on the marketplace, sorted by price descending</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/products?sort=name-asc</td>
+    <td>Returns a list of all products (via ProductDTOs) available to purchase on the marketplace, sorted by name ascending</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/products?sort=name-desc</td>
+    <td>Returns a list of all products (via ProductDTOs) available to purchase on the marketplace, sorted by name descending</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/products?searchQuery=</td>
+    <td>Returns a list of all products (via ProductDTOs) available to purchase on the marketplace containing a specified search term</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/products?sellerId=</td>
+    <td>Allows a specific seller to create a new product. Product variables to be passed through via requestBody in JSON. No properties are mandatory (can create a product with as little as a single property).</td>
+    <td>
+    <pre><code>{
+    "name": "testName",
+    "stock": 500,
+    "price": 49.99
+}</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>PATCH</td>
+    <td>/products/update/:id?...</td>
+    <td>Enables updating of exisitng product listings, allowing modification of any property via requestParams</td>
+  </tr>
+  <tr>
+    <td>DEL</td>
+    <td>/products/:id</td>
+    <td>Deletes specified product. Warning - in its current implementation, any related orders that contain product to delete will also be deleted.</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/buyers</td>
+    <td>Returns a list of all buyers (via BuyerDTOs) currently registered on the marketplace</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/buyers/:id</td>
+    <td>Returns a BuyerDTO for the specified buyerId</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/buyers/:id/admin</td>
+    <td>Returns the entire Buyer object for the specified buyerId</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/buyers/:id/cart</td>
+    <td>Returns a ShoppingCartDTO for the specified buyerId</td>
+  </tr>
+  <tr>
+    <td>PUT</td>
+    <td>/buyers/:id</td>
+    <td>Allows a buyer to replace their account bank card witha new one - accountName and accountBalance must be passed through via JSON</td>
+    <td>
+    <pre><code>{
+    "accountName": "jimmy",
+    "accountBalance": 100
+}</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/buyers</td>
+    <td>Register a new buyer - parameters must be passed through via JSON. Card required</td>
+    <td>
+    <pre><code>{
+    "name": "jimmy",
+    "email": "jimmy@test.com",
+    "address": "123 fake street",
+    "password": "secretpassword123",
+    "card": {
+            "accountName": "jimmy",
+            "accountBalance": 10000
+        }
+}</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>PATCH</td>
+    <td>/buyers/:id/product/:id</td>
+    <td>add a specific product to a specific buyer's cart - returns a ShoppingCartDTO</td>
+  </tr>
+  <tr>
+    <td>DEL</td>
+    <td>/buyers/:id/product/:id/remove</td>
+    <td>remove a specifid product from a specifi buyer's cart - returns a ShoppingCartDTO</td>
+  </tr>
+  <tr>
+    <td>PATCH</td>
+    <td>/buyers/:id?...</td>
+    <td>Allows buyer to update their details via RequestParams</td>
+  </tr>
+  <tr>
+    <td>DEL</td>
+    <td>/buyers/:id</td>
+    <td>Deletes a buyer from the database</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/orders</td>
+    <td>Returns a list of all marketplace orders (via OrderDTOs)</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/orders?sellerId=:id</td>
+    <td>Returns a list of all marketplace orders (via OrderDTOs) that contains items sold by a specified seller</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/orders?buyerId=:id</td>
+    <td>Returns a list of all marketplace orders (via OrderDTOs) placed by a specific buyer</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/orders</td>
+    <td>Place an order - buyerId and deliveryAddress must be passed through via JSON. Takes cart items from specified buyer's cart and creates a new order with those items and the specified delivery address.</td>
+        <td>
+    <pre><code>{
+    "buyerId": 1,
+    "deliveryAddress": "50 Fake Street"
+}</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>DEL</td>
+    <td>/orders:id</td>
+    <td>Delete an order</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/sellers</td>
+    <td>Returns a list of all registered sellers via SellerDTOs</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/sellers/:id</td>
+    <td>Returns a SellerDTO for the specified seller</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/sellers/:id/admin</td>
+    <td>Returns the entire Seller object for the specified seller</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/sellers</td>
+    <td>Create a new seller. Seller properties to be passed through via JSON. Card required</td>
+    <td>
+    <pre><code>{
+    "name": "jimmy",
+    "email": "jimmy@test.com",
+    "address": "123 fake street",
+    "password": "secretpassword123",
+    "card": {
+            "accountName": "jimmy",
+            "accountBalance": 10000
+        }
+}</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>PATCH</td>
+    <td>/sellers/:id</td>
+    <td>Update a seller's details Properties to be passed through via JSON</td>
+    <td>
+        <pre><code>{
+    "name" : "Aaliyah"
+}</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>DEL</td>
+    <td>/sellers/:id</td>
+    <td>Delete a specific seller</td>
+  </tr>
+</table>
+
+<br />
+
+### ***3. Dependencies***
+
+
+
+
+<br />
+
+### ***4. Commands***
+
+
+
+
+<br />
+
+### ***5. Instructions***
