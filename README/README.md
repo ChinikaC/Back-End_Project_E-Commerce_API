@@ -40,7 +40,18 @@ To establish a sense of identity, we named our team GRECHIMO, which relates to e
 
 ### ***3. Diagrams***
 
+ERD Diagram:
+
 ![my screenshot](../Screenshot%202023-03-04%20at%2021.06.57.png)
+
+This displays what are MVP was. The 'categories' and join table 'products_categories' was an extension that we did not manage to get onto (hence why they are in grey). 
+- There are two joins table: orders_products and buyers_products
+- 'Marketplaces' was included and was set up as 'GCMBMarketplace.java' but did was not used. Please see 'Seller fees' under the 'Future' section to find out what we wanted to do with this model
+
+UML Diagram:
+![my screenshot](../Screenshot%202023-03-04%20at%2021.07.22.png)
+
+We included all of our models, DTOs and the service layer with lines to indicate which models have a relationship with one another. All of our properties and methods can be found in the above diagram.
  
 #### ***2. Technologies*** 
 
@@ -63,11 +74,11 @@ Spring Initializr was an essential tool that allowed us to implement dependencie
 #### ***4. Future*** 
 If granted more time, we would like to develop more functions to create additional features. These include:
 
-- Bidding functionality: giving sellers the opportunity to list products to be bid on among buyers with a specified timescale for when bids will no longer be accepted.
-- Categories: an ENUM for categories would enable the buyer to have greater control over which products are displayed to them.
-- More robust deletion: currently, when a product is deleted, any order that it is associated with is also deleted. Given more time, we would have removed the association with the order prior to deletion.
-- Add "quantity" field to orders: currently, when an order is placed, if there are multiple of the same item, they are each added as their own object. We would like to add a "quantity" counter to order products to avoid duplication of items.
-- Seller fees: letting the marketplace take a cut of seller revenue would be advisable in order to make the marketplace profitable.
+- Bidding functionality: Giving sellers the opportunity to list products to be bid on among buyers with a specified timescale for when bids will no longer be accepted.
+- Categories: An ENUM for categories would enable the buyer to have greater control over which products are displayed to them.
+- More robust deletion: Currently, when a product is deleted, any order that it is associated with is also deleted. Given more time, we would have removed the association with the order prior to deletion.
+- Add "quantity" field to orders: Currently, when an order is placed, if there are multiple of the same item, they are each added as their own object. We would like to add a "quantity" counter to order products to avoid duplication of items.
+- Seller fees: Letting the marketplace take a cut of seller revenue would be advisable in order to make the marketplace profitable.
  
 
 <br />
