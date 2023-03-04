@@ -10,6 +10,15 @@
 
 <br />
 
+## **TABLE OF CONTENTS** 📖
+> 1. Project Overview
+> 2. Technologies
+> 3. Challenges
+> 4. Future
+> 5. Project Timeline
+> 6. The API
+> 7. Dependencies
+
 ### ***Project Overview*** 
 
 Our team took a keen interest in online marketplaces such as eBay and Amazon, which allow individuals and businesses to buy and sell a wide variety of goods and services. We specifically chose this task as we wanted our API to encompass a range of our learning with the potential to further extend it.
@@ -29,7 +38,7 @@ Spring Initializr was an essential tool that allowed us to implement dependencie
 #### ***Challenges*** 
 - One of our challenges was familiarizing ourselves with new beans (@Transient) and functionalities we included to assist with CRUD tasks, specifically allowing users to delete products from their cart. We researched how to resolve the issue and soon completely understood and were able to effectively execute a working MVP we could build on.
 
-- 
+- Another challenge 
 
 <br />
 
@@ -43,16 +52,6 @@ If granted more time, we would like to develop more functions to create addition
 - Add "quantity" field to orders: currently, when an order is placed, if there are multiple of the same item, they are each added as their own object. We would like to add a "quantity" counter to order products to avoid duplication of items.
 - Seller fees: letting the marketplace take a cut of seller revenue would be advisable in order to make the marketplace profitable.
  
-
-<br />
-
-
-## **TABLE OF CONTENTS** 📖
-> 1. Project Timeline
-> 2. The API
-> 3. Dependencies
-> 4. Commands
-> 5. Instructions
 
 <br />
 
