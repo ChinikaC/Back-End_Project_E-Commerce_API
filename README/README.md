@@ -12,13 +12,14 @@
 
 ## **TABLE OF CONTENTS** 📖
 > 1. Project Overview
-> 5. Project Timeline
+> 2. Project Timeline
 > 3. Diagrams
-> 2. Technologies
-> 3. Challenges
-> 4. Future
+> 4. Technologies
+> 5. Dependencies
 > 6. The API
-> 7. Dependencies
+> 7. Challenges
+> 8. Future
+
 
 ### ***1. Project Overview*** 
 
@@ -28,7 +29,7 @@ To establish a sense of identity, we named our team GRECHIMO, which relates to e
 
 <br />
 
-### ***5. Project Timeline*** 
+### ***2. Project Timeline*** 
 
 - Monday 20/02/2023 - Met with the team to discuss ideas and started UML and ERD diagrams.
 - Tuesday 21/02/2023 - Started on our set MVP using IntelliJ and Git. 
@@ -49,11 +50,14 @@ This displays what are MVP was. The 'categories' and join table 'products_catego
 - 'Marketplaces' was included and was set up as 'GCMBMarketplace.java' but did was not used. Please see 'Seller fees' under the 'Future' section to find out what we wanted to do with this model
 
 UML Diagram:
+
 ![my screenshot](../Screenshot%202023-03-04%20at%2021.07.22.png)
 
 We included all of our models, DTOs and the service layer with lines to indicate which models have a relationship with one another. All of our properties and methods can be found in the above diagram.
+
+<br />
  
-#### ***2. Technologies*** 
+#### ***4. Technologies*** 
 
 We utilized Java to code our API and Git to commit changes and store our code on GitHub, along with UML and ERD diagrams. The platform proved to be very helpful in keeping track of our modifications and allowing us to revert to previous versions of the code if needed.
 
@@ -61,25 +65,46 @@ Spring Initializr was an essential tool that allowed us to implement dependencie
 
 <br />
 
-#### ***3. Challenges*** 
-- One of our challenges was familiarizing ourselves with new beans (@Transient) and functionalities we included to assist with CRUD tasks, specifically allowing users to delete products from their cart. We researched how to resolve the issue and soon completely understood and were able to effectively execute a working MVP we could build on.
+### ***5. Dependencies***
 
-- Another challenge was with our @DELETE requests. Having many-to-many and one-to-many relationships meant there were a lot of associations so it was hard to simply delete one thing, for example, deleting a product as it was included in an order. We ended up using 'cascade = CascadeType.ALL' in the @ManyToMany annotation in the 'Product.java' which solved our issues with the @DELETE requests. However, when we delete a product now, it also deletes the whole order that the product was in, which is something we did not know how to resolve.
+- spring-boot-starter-data-jpa: This dependency enabled us to use Java Persistence API (JPA) to interact with our relational database and perform various operations on the data. It provided us with an easy-to-use, high-level API for managing our data.
 
-- We also encountered issues when attempting to create a new buyer due to the cart. When a new buyer is created, they have an empty cart, but when we were trying to create the buyer an error appeared which stated that the cart was null. To resolve this, we had to pass the cart into the default constructor in buyer.java and this initialised the empty cart ArrayList. 
+- spring-boot-starter-web: This dependency enabled us to build a RESTful web API using the Spring framework. It provided us with the necessary components to handle HTTP requests and responses, and to implement controllers, services, and other components that make up the API.
 
-<br />
+- spring-boot-devtools: This dependency provided us with additional tools for development, such as automatic restart of the application when code changes are detected, and live reloading of static resources.
+
+- postgresql: This dependency provided us with the necessary components to interact with a PostgreSQL database, including the JDBC driver and other utilities.
+
+- spring-boot-starter-test: This dependency provided us with a suite of testing tools and frameworks for testing our application, including JUnit, Mockito, and Spring Test. It enabled us to write and run tests for our API to ensure that it was functioning correctly and that changes did not introduce regressions. Unfortunately, due to time limitations, we were unable to perform JUnit testing on this occasion.
 
 
-#### ***4. Future*** 
-If granted more time, we would like to develop more functions to create additional features. These include:
+```
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-devtools</artifactId>
+  <scope>runtime</scope>
+  <optional>true</optional>
+</dependency>
+<dependency>
+  <groupId>org.postgresql</groupId>
+  <artifactId>postgresql</artifactId>
+  <scope>runtime</scope>
+</dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-test</artifactId>
+  <scope>test</scope>
+</dependency>
 
-- Bidding functionality: Giving sellers the opportunity to list products to be bid on among buyers with a specified timescale for when bids will no longer be accepted.
-- Categories: An ENUM for categories would enable the buyer to have greater control over which products are displayed to them.
-- More robust deletion: Currently, when a product is deleted, any order that it is associated with is also deleted. Given more time, we would have removed the association with the order prior to deletion.
-- Add "quantity" field to orders: Currently, when an order is placed, if there are multiple of the same item, they are each added as their own object. We would like to add a "quantity" counter to order products to avoid duplication of items.
-- Seller fees: Letting the marketplace take a cut of seller revenue would be advisable in order to make the marketplace profitable.
- 
+```
 
 <br />
 
@@ -296,43 +321,22 @@ If granted more time, we would like to develop more functions to create addition
 
 <br />
 
-### ***7. Dependencies***
+#### ***7. Challenges*** 
+- One of our challenges was familiarizing ourselves with new beans (@Transient) and functionalities we included to assist with CRUD tasks, specifically allowing users to delete products from their cart. We researched how to resolve the issue and soon completely understood and were able to effectively execute a working MVP we could build on.
 
-- spring-boot-starter-data-jpa: This dependency enabled us to use Java Persistence API (JPA) to interact with our relational database and perform various operations on the data. It provided us with an easy-to-use, high-level API for managing our data.
+- Another challenge was with our @DELETE requests. Having many-to-many and one-to-many relationships meant there were a lot of associations so it was hard to simply delete one thing, for example, deleting a product as it was included in an order. We ended up using 'cascade = CascadeType.ALL' in the @ManyToMany annotation in the 'Product.java' which solved our issues with the @DELETE requests. However, when we delete a product now, it also deletes the whole order that the product was in, which is something we did not know how to resolve.
 
-- spring-boot-starter-web: This dependency enabled us to build a RESTful web API using the Spring framework. It provided us with the necessary components to handle HTTP requests and responses, and to implement controllers, services, and other components that make up the API.
+- We also encountered issues when attempting to create a new buyer due to the cart. When a new buyer is created, they have an empty cart, but when we were trying to create the buyer an error appeared which stated that the cart was null. To resolve this, we had to pass the cart into the default constructor in buyer.java and this initialised the empty cart ArrayList. 
 
-- spring-boot-devtools: This dependency provided us with additional tools for development, such as automatic restart of the application when code changes are detected, and live reloading of static resources.
-
-- postgresql: This dependency provided us with the necessary components to interact with a PostgreSQL database, including the JDBC driver and other utilities.
-
-- spring-boot-starter-test: This dependency provided us with a suite of testing tools and frameworks for testing our application, including JUnit, Mockito, and Spring Test. It enabled us to write and run tests for our API to ensure that it was functioning correctly and that changes did not introduce regressions. Unfortunately, due to time limitations, we were unable to perform JUnit testing on this occasion.
+<br />
 
 
-```
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-data-jpa</artifactId>
-</dependency>
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-web</artifactId>
-</dependency>
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-devtools</artifactId>
-  <scope>runtime</scope>
-  <optional>true</optional>
-</dependency>
-<dependency>
-  <groupId>org.postgresql</groupId>
-  <artifactId>postgresql</artifactId>
-  <scope>runtime</scope>
-</dependency>
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-test</artifactId>
-  <scope>test</scope>
-</dependency>
+#### ***8. Future*** 
+If granted more time, we would like to develop more functions to create additional features. These include:
 
-```
+- Bidding functionality: Giving sellers the opportunity to list products to be bid on among buyers with a specified timescale for when bids will no longer be accepted.
+- Categories: An ENUM for categories would enable the buyer to have greater control over which products are displayed to them.
+- More robust deletion: Currently, when a product is deleted, any order that it is associated with is also deleted. Given more time, we would have removed the association with the order prior to deletion.
+- Add "quantity" field to orders: Currently, when an order is placed, if there are multiple of the same item, they are each added as their own object. We would like to add a "quantity" counter to order products to avoid duplication of items.
+- Seller fees: Letting the marketplace take a cut of seller revenue would be advisable in order to make the marketplace profitable.
+ 
