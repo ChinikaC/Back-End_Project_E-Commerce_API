@@ -1,4 +1,4 @@
-# **E-commerce platform backend project (BNTA COHORT 8)**
+# **E-Commerce Platform Backend Project (BNTA COHORT 8)**
 
 ## **GRECHIMO code team**
 
@@ -12,22 +12,37 @@
 
 ## **TABLE OF CONTENTS** 📖
 > 1. Project Overview
+> 5. Project Timeline
+> 3. Diagrams
 > 2. Technologies
 > 3. Challenges
 > 4. Future
-> 5. Project Timeline
 > 6. The API
 > 7. Dependencies
 
-### ***Project Overview*** 
+### ***1. Project Overview*** 
 
 Our team took a keen interest in online marketplaces such as eBay and Amazon, which allow individuals and businesses to buy and sell a wide variety of goods and services. We specifically chose this task as we wanted our API to encompass a range of our learning with the potential to further extend it.
 
 To establish a sense of identity, we named our team GRECHIMO, which relates to each of our three first names and incorporates the "bay" terminology commonly used for marketplaces such as eBay.
 
 <br />
+
+### ***5. Project Timeline*** 
+
+- Monday 20/02/2023 - Met with the team to discuss ideas and started UML and ERD diagrams.
+- Tuesday 21/02/2023 - Started on our set MVP using IntelliJ and Git. 
+- Wednesday 22/02/2023 - Alot of debugging and started working in our extension tasks.
+- Thursday 23/02/2023 - Completed MVP, Fixed errors and preparing presentation.
+- Friday 24/02/2023 - Presentation.
+
+<br />
+
+### ***3. Diagrams***
+
+![my screenshot](../Screenshot%202023-03-04%20at%2021.06.57.png)
  
-#### ***Technologies*** 
+#### ***2. Technologies*** 
 
 We utilized Java to code our API and Git to commit changes and store our code on GitHub, along with UML and ERD diagrams. The platform proved to be very helpful in keeping track of our modifications and allowing us to revert to previous versions of the code if needed.
 
@@ -35,15 +50,17 @@ Spring Initializr was an essential tool that allowed us to implement dependencie
 
 <br />
 
-#### ***Challenges*** 
+#### ***3. Challenges*** 
 - One of our challenges was familiarizing ourselves with new beans (@Transient) and functionalities we included to assist with CRUD tasks, specifically allowing users to delete products from their cart. We researched how to resolve the issue and soon completely understood and were able to effectively execute a working MVP we could build on.
 
-- Another challenge 
+- Another challenge was with our @DELETE requests. Having many-to-many and one-to-many relationships meant there were a lot of associations so it was hard to simply delete one thing, for example, deleting a product as it was included in an order. We ended up using 'cascade = CascadeType.ALL' in the @ManyToMany annotation in the 'Product.java' which solved our issues with the @DELETE requests. However, when we delete a product now, it also deletes the whole order that the product was in, which is something we did not know how to resolve.
+
+- We also encountered issues when attempting to create a new buyer due to the cart. When a new buyer is created, they have an empty cart, but when we were trying to create the buyer an error appeared which stated that the cart was null. To resolve this, we had to pass the cart into the default constructor in buyer.java and this initialised the empty cart ArrayList. 
 
 <br />
 
 
-#### ***Future*** 
+#### ***4. Future*** 
 If granted more time, we would like to develop more functions to create additional features. These include:
 
 - Bidding functionality: giving sellers the opportunity to list products to be bid on among buyers with a specified timescale for when bids will no longer be accepted.
@@ -55,17 +72,7 @@ If granted more time, we would like to develop more functions to create addition
 
 <br />
 
-### ***1. Project Timeline*** 
-
-- Monday 20/02/2023 - Met with the team to discuss ideas and started UML and ERD diagrams.
-- Tuesday 21/02/2023 - Started on our set MVP using IntelliJ and Git. 
-- Wednesday 22/02/2023 - Alot of debugging and started working in our extension tasks.
-- Thursday 23/02/2023 - Completed MVP, Fixed errors and preparing presentation.
-- Friday 24/02/2023 - Presentation.
-
-<br />
-
-### ***2. The API***
+### ***6. The API***
 
 <table>
   <tr>
@@ -278,7 +285,7 @@ If granted more time, we would like to develop more functions to create addition
 
 <br />
 
-### ***3. Dependencies***
+### ***7. Dependencies***
 
 - spring-boot-starter-data-jpa: This dependency enabled us to use Java Persistence API (JPA) to interact with our relational database and perform various operations on the data. It provided us with an easy-to-use, high-level API for managing our data.
 
@@ -318,14 +325,3 @@ If granted more time, we would like to develop more functions to create addition
 </dependency>
 
 ```
-
-<br />
-
-### ***4. Commands***
-
-
-
-
-<br />
-
-### ***5. Instructions***
