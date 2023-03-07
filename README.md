@@ -2,7 +2,7 @@
 
 ## **GRECHIMO code team**
 
-## ***Collaborators*** 
+## **_Collaborators_**
 
 - GitHub: [Greg Court](https://github.com/Greg-Court)
 - GitHub: [Chinika Charles](https://github.com/ChinikaC)
@@ -11,6 +11,7 @@
 <br />
 
 ## **TABLE OF CONTENTS** 📖
+
 > 1. Project Overview
 > 2. Project Timeline
 > 3. Diagrams
@@ -20,8 +21,7 @@
 > 7. Challenges
 > 8. Future
 
-
-### ***1. Project Overview*** 
+### **_1. Project Overview_**
 
 Our team took a keen interest in online marketplaces such as eBay and Amazon, which allow individuals and businesses to buy and sell a wide variety of goods and services. We specifically chose this task as we wanted our API to encompass a range of our learning with the potential to further extend it.
 
@@ -29,46 +29,46 @@ To establish a sense of identity, we named our team GRECHIMO BAY, which relates 
 
 <br />
 
-### ***2. Project Timeline*** 
+### **_2. Project Timeline_**
 
 - Monday 20/02/2023 - Met with the team to discuss ideas and started UML and ERD diagrams.
-- Tuesday 21/02/2023 - Started on our set MVP using IntelliJ and Git. 
+- Tuesday 21/02/2023 - Started on our set MVP using IntelliJ and Git.
 - Wednesday 22/02/2023 - Alot of debugging and started working in our extension tasks.
 - Thursday 23/02/2023 - Completed MVP, Fixed errors and preparing presentation.
 - Friday 24/02/2023 - Presentation.
 
 <br />
 
-### ***3. Diagrams***
+### **_3. Diagrams_**
 
 ERD:
 
-![my screenshot](../Screenshot%202023-03-04%20at%2021.06.57.png)
+![ERD](images/ERD.png)
 
-This displays what are MVP was. The 'categories' and join table 'products_categories' was an extension that we did not manage to get onto (hence why they are in grey). 
+This displays what are MVP was. The 'categories' and join table 'products_categories' was an extension that we did not manage to get onto (hence why they are in grey).
+
 - There are two join tables: orders_products and buyers_products
 - 'Marketplaces' was included and was set up as 'GCMBMarketplace.java' but did was not used. Please see 'Seller fees' under the 'Future' section to find out what we wanted to do with this model
 
-
 UML:
 
-![my screenshot](../Screenshot%202023-03-04%20at%2021.07.22.png)
+![UML](images/UML.png)
 
 We included all of our models, DTOs and the service layer with lines to indicate which models have a relationship with one another. All of our properties and methods can be found in the above diagram.
 
 <br />
  
-### ***4. Technologies*** 
+### ***4. Technologies***
 
 We utilized Java to code our API and Git to commit changes and store our code on GitHub, along with UML and ERD diagrams. The platform proved to be very helpful in keeping track of our modifications and allowing us to revert to previous versions of the code if needed.
 
-Spring Initializr was an essential tool that allowed us to implement dependencies to utilize particular functions and commands. For instance, we utilized Spring Boot to implement the Spring framework, JPA to convert JSON and Java, and SQL to manage our relational databases and perform various operations on the data in them. We collaborated in IntelliJ using the Git framework to work on separate branches and later combine and collaborate on each other's code. Finally, we used Postman to test our functions and used Postico to view our database table. 
+Spring Initializr was an essential tool that allowed us to implement dependencies to utilize particular functions and commands. For instance, we utilized Spring Boot to implement the Spring framework, JPA to convert JSON and Java, and SQL to manage our relational databases and perform various operations on the data in them. We collaborated in IntelliJ using the Git framework to work on separate branches and later combine and collaborate on each other's code. Finally, we used Postman to test our functions and used Postico to view our database table.
 
 These platforms allowed us to test our code and import a variety of functions to create our tables and extend our beans (examples: @JPARepositories, @Component, etc.).
 
 <br />
 
-### ***5. Dependencies***
+### **_5. Dependencies_**
 
 - spring-boot-starter-data-jpa: This dependency enabled us to use Java Persistence API (JPA) to interact with our relational database and perform various operations on the data. It provided us with an easy-to-use, high-level API for managing our data.
 
@@ -79,7 +79,6 @@ These platforms allowed us to test our code and import a variety of functions to
 - postgresql: This dependency provided us with the necessary components to interact with a PostgreSQL database, including the JDBC driver and other utilities.
 
 - spring-boot-starter-test: This dependency provided us with a suite of testing tools and frameworks for testing our application, including JUnit, Mockito, and Spring Test. It enabled us to write and run tests for our API to ensure that it was functioning correctly and that changes did not introduce regressions. Unfortunately, due to time limitations, we were unable to perform JUnit testing on this occasion.
-
 
 ```
 <dependency>
@@ -111,7 +110,7 @@ These platforms allowed us to test our code and import a variety of functions to
 
 <br />
 
-### ***6. The API***
+### **_6. The API_**
 
 <table>
   <tr>
@@ -324,17 +323,18 @@ These platforms allowed us to test our code and import a variety of functions to
 
 <br />
 
-### ***7. Challenges*** 
+### **_7. Challenges_**
+
 - One of our challenges was familiarizing ourselves with new beans (@Transient) and functionalities we included to assist with CRUD tasks, specifically allowing users to delete products from their cart. We researched how to resolve the issue and soon completely understood and were able to effectively execute a working MVP we could build on.
 
 - Another challenge was with our @DELETE requests. Having many-to-many and one-to-many relationships meant there were a lot of associations so it was hard to simply delete one thing, for example, deleting a product as it was included in an order. We ended up using 'cascade = CascadeType.ALL' in the @ManyToMany annotation in the 'Product.java' which solved our issues with the @DELETE requests. However, when we delete a product now, it also deletes the whole order that the product was in, which is something we did not know how to resolve.
 
-- We also encountered issues when attempting to create a new buyer due to the cart. When a new buyer is created, they have an empty cart, but when we were trying to create the buyer an error appeared which stated that the cart was null. To resolve this, we had to pass the cart into the default constructor in buyer.java and this initialised the empty cart ArrayList. 
+- We also encountered issues when attempting to create a new buyer due to the cart. When a new buyer is created, they have an empty cart, but when we were trying to create the buyer an error appeared which stated that the cart was null. To resolve this, we had to pass the cart into the default constructor in buyer.java and this initialised the empty cart ArrayList.
 
 <br />
 
+### **_8. Future_**
 
-### ***8. Future*** 
 If granted more time, we would have liked to develop more functions to create additional features. These include:
 
 - Bidding functionality: Giving sellers the opportunity to list products to be bid on among buyers with a specified timescale for when bids will no longer be accepted.
@@ -342,4 +342,3 @@ If granted more time, we would have liked to develop more functions to create ad
 - More robust deletion: Currently, when a product is deleted, any order that it is associated with is also deleted. Given more time, we would have removed the association with the order prior to deletion.
 - Add "quantity" field to orders: Currently, when an order is placed, if there are multiple of the same item, they are each added as their own object. We would like to add a "quantity" counter to order products to avoid duplication of items.
 - Seller fees: Letting the marketplace take a cut of seller revenue would be advisable in order to make the marketplace profitable.
- 
