@@ -7,7 +7,8 @@ import org.aspectj.weaver.ast.Or;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "buyers")
+@Entity
+@Table(name = "buyers")
 public class Buyer {
 
     @Id

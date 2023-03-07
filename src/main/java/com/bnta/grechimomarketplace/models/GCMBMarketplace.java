@@ -2,7 +2,8 @@ package com.bnta.grechimomarketplace.models;
 import jakarta.persistence.*;
 
 
-@Entity(name = "marketplaces")
+@Entity
+@Table(name = "marketplaces")
 public class GCMBMarketplace {
 
     @Id

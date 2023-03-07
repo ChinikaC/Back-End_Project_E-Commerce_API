@@ -2,7 +2,8 @@ package com.bnta.grechimomarketplace.models;
 
 import jakarta.persistence.*;
 
-@Entity (name = "bank_cards")
+@Entity
+@Table(name = "bank_cards")
 public class BankCard {
 
   @Id
