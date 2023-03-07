@@ -27,6 +27,7 @@ public class BankCard {
     }
 
     public BankCard() {
+      this.accountBalance = 0;
     }
 
     public String getAccountName() {
