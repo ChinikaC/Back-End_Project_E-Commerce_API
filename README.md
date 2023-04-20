@@ -1,14 +1,14 @@
-# **E-Commerce Platform Backend Project (BNTA)**
+# **E-Commerce Platform Backend Project (BNTA) 🛍**
 
 ## **GRECHIMO code team**
 
 ## **_Collaborators_**
 
-- GitHub: [Greg Court](https://github.com/Greg-Court)
-- GitHub: [Chinika Charles](https://github.com/ChinikaC)
-- GitHub: [Mohamed Abdi](https://github.com/mohincode)
+- Greg Court (GitHub: [Greg Court](https://github.com/Greg-Court))
+- Chinika Charles (GitHub: [Greg-Court](https://github.com/ChinikaC))
+- Mohamed Abdi (GitHub: [mohincode](https://github.com/mohincode))
 
-<br />
+<hr />
 
 ## **TABLE OF CONTENTS** 📖
 
@@ -21,13 +21,15 @@
 > 7. Challenges
 > 8. Future
 
+<hr />
+
 ### **_1. Project Overview_**
 
 Our team took a keen interest in online marketplaces such as eBay and Amazon, which allow individuals and businesses to buy and sell a wide variety of goods and services. We specifically chose this task as we wanted our API to encompass a range of our learning with the potential to further extend it.
 
 To establish a sense of identity, we named our team GRECHIMO BAY, which relates to each of our three first names and incorporates the "bay" terminology commonly used for marketplaces such as eBay.
 
-<br />
+<hr />
 
 ### **_2. Project Timeline_**
 
@@ -37,7 +39,7 @@ To establish a sense of identity, we named our team GRECHIMO BAY, which relates 
 - Thursday 23/02/2023 - Completed MVP, Fixed errors and preparing presentation.
 - Friday 24/02/2023 - Presentation.
 
-<br />
+<hr />
 
 ### **_3. Diagrams_**
 
@@ -56,7 +58,7 @@ UML:
 
 We included all of our models, DTOs and the service layer with lines to indicate which models have a relationship with one another. All of our properties and methods can be found in the above diagram.
 
-<br />
+<hr />
  
 ### ***4. Technologies***
 
@@ -66,7 +68,7 @@ Spring Initializr was an essential tool that allowed us to implement dependencie
 
 These platforms allowed us to test our code and import a variety of functions to create our tables and extend our beans (examples: @JPARepositories, @Component, etc.).
 
-<br />
+<hr />
 
 ### **_5. Dependencies_**
 
@@ -108,7 +110,7 @@ These platforms allowed us to test our code and import a variety of functions to
 
 ```
 
-<br />
+<hr />
 
 ### **_6. The API_**
 
@@ -321,7 +323,7 @@ These platforms allowed us to test our code and import a variety of functions to
   </tr>
 </table>
 
-<br />
+<hr />
 
 ### **_7. Challenges_**
 
@@ -331,7 +333,7 @@ These platforms allowed us to test our code and import a variety of functions to
 
 - We also encountered issues when attempting to create a new buyer due to the cart. When a new buyer is created, they have an empty cart, but when we were trying to create the buyer an error appeared which stated that the cart was null. To resolve this, we had to pass the cart into the default constructor in buyer.java and this initialised the empty cart ArrayList.
 
-<br />
+<hr />
 
 ### **_8. Future_**
 

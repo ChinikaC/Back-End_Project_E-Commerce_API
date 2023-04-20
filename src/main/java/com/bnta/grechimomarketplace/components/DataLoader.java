@@ -139,7 +139,10 @@ public class DataLoader implements ApplicationRunner {
 
         GCMBMarketplace gcmbMarketplace = new GCMBMarketplace(1000000.00, "5th floor, 80 Middlesex St, London E1 7EZ");
         gcmbRepository.save(gcmbMarketplace);
-
     }
+
+
+
+
 
 }
