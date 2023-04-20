@@ -1,4 +1,4 @@
-# **E-Commerce Platform Backend Project (BNTA) 🛍**
+# **E-Commerce Platform Backend Project 🛍**
 
 ## **GRECHIMO code team**
 
