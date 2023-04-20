@@ -4,8 +4,8 @@
 
 ## **_Collaborators_**
 
-- Greg Court (GitHub: [Greg Court](https://github.com/Greg-Court))
-- Chinika Charles (GitHub: [Greg-Court](https://github.com/ChinikaC))
+- Greg Court (GitHub: [Greg-Court](https://github.com/Greg-Court))
+- Chinika Charles (GitHub: [ChinikaC](https://github.com/ChinikaC))
 - Mohamed Abdi (GitHub: [mohincode](https://github.com/mohincode))
 
 <hr />
