@@ -1,4 +1,4 @@
-# **E-Commerce Platform Backend Project 🛍**
+# **E-Commerce Platform Back-End Project 🛍**
 
 ## **GRECHIMO code team**
 
@@ -25,9 +25,9 @@
 
 ### **_1. Project Overview_**
 
-Our team took a keen interest in online marketplaces such as eBay and Amazon, which allow individuals and businesses to buy and sell a wide variety of goods and services. We specifically chose this task as we wanted our API to encompass a range of our learning with the potential to further extend it.
+For this project, we had to create an API. Our team took a keen interest in online marketplaces, such as eBay and Amazon, which allow individuals and businesses to buy and sell a wide variety of goods and services. We specifically chose this task as we wanted our API to encompass a range of our learning with the potential to further extend it.
 
-To establish a sense of identity, we named our team GRECHIMO BAY, which relates to each of our three first names and incorporates the "bay" terminology commonly used for marketplaces such as eBay.
+To establish a sense of identity, we named our team GRECHIMO BAY. This relates to each of our three first names and incorporates the "bay" terminology commonly used for marketplaces, such as eBay.
 
 <hr />
 
